@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Common.fs" />
+    <Compile Include="CanopyExtensions.fs" />
+    <Compile Include="CompositeControls/Header.fs" />
+    <Compile Include="CompositeControls/Signup.fs" />
+    <Compile Include="Pages.fs" />
+    <Compile Include="Tests/SignupTests.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="canopy" Version="2.1.0" />
+  </ItemGroup>
+
+</Project>
+
