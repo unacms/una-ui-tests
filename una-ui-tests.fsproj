@@ -1,12 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>una_ui_tests</RootNamespace>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Common.fs" />
+    <Compile Include="CanopyExtensions.fs" />
+    <Compile Include="CompositeControls/Header.fs" />
+    <Compile Include="CompositeControls/Signup.fs" />
+    <Compile Include="Pages.fs" />
+    <Compile Include="Tests/SignupTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -15,3 +20,4 @@
   </ItemGroup>
 
 </Project>
+
