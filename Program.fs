@@ -1,6 +1,22 @@
-﻿open canopy
+﻿open System
+
+open canopy
 open canopy.classic
 open canopy.runner.classic
+open types
+open configuration
+open reporters
+
+let rec retry times fn = 
+    if times > 1 then
+        try
+            fn()
+        with 
+        | _ -> 
+            Threading.Thread.Sleep 1000
+            retry (times - 1) fn
+    else
+        fn()
 
 [<EntryPoint>]
 let main _ =
@@ -17,10 +33,19 @@ let main _ =
 //   configuration.firefoxDir <- @"c:\Users\alex\AppData\Local\Mozilla Firefox\firefox.exe"
 //   configuration.showInfoDiv <- false
 
+  reporter <- JUnitReporter("./results.xml") //:> IReporter
+
   
+  let capability = OpenQA.Selenium.Remote.DesiredCapabilities()
+  capability.SetCapability("browserName", "chrome")      
+
   try
 
-    start chrome
+    let debugBrowser = chrome
+
+    let browserUrl = "" //"http://testbrowser:4444/wd/hub/" 
+    let browser = if browserUrl.Length>0 then Remote(browserUrl, capability) else debugBrowser    
+    retry 30 (fun() -> start browser)
   
     SignupTests.all()
 

@@ -1,0 +1,20 @@
+---
+
+version: '3.6'
+services:
+  test:
+    build: .
+    depends_on:
+      - testbrowser
+    volumes:
+      - './TestResults:/tests/TestResults'      
+    networks:
+      - selenium-test      
+
+  testbrowser:
+    image: selenium/standalone-chrome 
+    networks:
+      - selenium-test      
+
+networks:
+  selenium-test:      
