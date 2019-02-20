@@ -33,7 +33,7 @@ let main _ =
 //   configuration.firefoxDir <- @"c:\Users\alex\AppData\Local\Mozilla Firefox\firefox.exe"
 //   configuration.showInfoDiv <- false
 
-  reporter <- JUnitReporter("./results.xml") //:> IReporter
+  reporter <- JUnitReporter("./TestResult.xml") //:> IReporter
 
   
   let capability = OpenQA.Selenium.Remote.DesiredCapabilities()
