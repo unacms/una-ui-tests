@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="TestTypes.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="CanopyExtensions.fs" />
     <Compile Include="CompositeControls/Header.fs" />
     <Compile Include="CompositeControls/Signup.fs" />
+    <Compile Include="CompositeControls/Login.fs" />
     <Compile Include="Pages.fs" />
     <Compile Include="Tests/SignupTests.fs" />
+    <Compile Include="Tests/PostToFeedTests.fs" />
+    <Compile Include="Tests/LoginTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

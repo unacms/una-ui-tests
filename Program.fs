@@ -46,7 +46,9 @@ let main _ =
     let browserUrl = "" //"http://testbrowser:4444/wd/hub/" 
     let browser = if browserUrl.Length>0 then Remote(browserUrl, capability) else debugBrowser    
     retry 30 (fun() -> start browser)
-  
+
+
+    LoginTests.all()
     SignupTests.all()
 
     run()
