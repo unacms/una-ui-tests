@@ -31,7 +31,7 @@ let main _ =
   configuration.chromeDir <- "/usr/bin"
 //   configuration.firefoxDriverDir <- "c:\work"
 //   configuration.firefoxDir <- @"c:\Users\alex\AppData\Local\Mozilla Firefox\firefox.exe"
-//   configuration.showInfoDiv <- false
+  configuration.showInfoDiv <- false
 
   reporter <- JUnitReporter("./TestResult.xml") //:> IReporter
 
@@ -47,9 +47,9 @@ let main _ =
     let browser = if browserUrl.Length>0 then Remote(browserUrl, capability) else debugBrowser    
     retry 30 (fun() -> start browser)
 
-
     LoginTests.all()
     SignupTests.all()
+    PostToFeedTests.all()
 
     run()
 

@@ -12,6 +12,7 @@
     <Compile Include="CompositeControls/Header.fs" />
     <Compile Include="CompositeControls/Signup.fs" />
     <Compile Include="CompositeControls/Login.fs" />
+    <Compile Include="CompositeControls/PostToFeed.fs" />
     <Compile Include="Pages.fs" />
     <Compile Include="Tests/SignupTests.fs" />
     <Compile Include="Tests/PostToFeedTests.fs" />
