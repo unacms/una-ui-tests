@@ -4,6 +4,7 @@ open CanopyExtensions
 open canopy.runner.classic
 open canopy.classic
 open Common
+open Header
 
 
 let all () =
@@ -19,5 +20,6 @@ let all () =
         Login._password << defaultAdmin.userPassword
         click Login._loginButton
         //verify that we logged as admin
-        Header._loggedAccount == "admin"
-    
+        _loggedAccountName == "admin"
+        click _accountButton
+        click _accountLogout
