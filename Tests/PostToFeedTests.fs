@@ -13,23 +13,7 @@ let all () =
     context "PostToFeedtests"  
 
     once (fun _ -> 
-        goto Pages.Login.uri
-        Login._email << defaultAdmin.userName
-        Login._password << defaultAdmin.userPassword
-        click Login._loginButton
-        waitForElement _loggedAccountName // this is just to make sure we're on the profile page & we have logged
-
-        // It might fail here on those 2 clicks as it may not show these messages for the user after user is no longer a new starter of this app
-        click _hintButton
-        click _hintButton
-        // elementsWithText "footer ul li a.shepherd-button-primary" "NEXT" |> List.iter (fun element -> 
-        //     printfn "clicked....."
-        //     click element
-        //     )
-        // elementsWithText "footer ul li a.shepherd-button-primary" "DONE" |> List.iter (fun element -> 
-        //     printfn "clicked....."
-        //     click element
-        //     )
+        Login.userLogin defaultAdmin
     )
 
     "Post 'Hello yyyyMMdd-hhmmss' to Feed -> adds 'Hello yyyyMMdd-hhmmss' message to feed" &&& fun _ ->        
@@ -42,7 +26,6 @@ let all () =
         _postedMessage == messageToPost
     
     lastly( fun _ -> 
-        click _accountButton
-        click _accountLogout
+        Login.userLogout()
     )
 
