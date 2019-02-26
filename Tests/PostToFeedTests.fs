@@ -40,7 +40,7 @@ let all () =
         _postedMessage == "😂"
     )
 
-    "Add link into Post to Feed" &&&& fun _ ->        
+    "Add link into Post to Feed" &&& fun _ ->        
         click _addLinkButton
         _addLink << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
