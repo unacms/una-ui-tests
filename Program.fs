@@ -32,6 +32,7 @@ let main _ =
 //   configuration.firefoxDriverDir <- "c:\work"
 //   configuration.firefoxDir <- @"c:\Users\alex\AppData\Local\Mozilla Firefox\firefox.exe"
   configuration.showInfoDiv <- false
+  configuration.failScreenshotPath <- "./TestResults"
 
   reporter <- JUnitReporter("./TestResult.xml") //:> IReporter
 
