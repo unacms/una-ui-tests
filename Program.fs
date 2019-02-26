@@ -25,6 +25,7 @@ let main _ =
   configuration.elementTimeout <- 10.0
   configuration.pageTimeout <- 10.0
   configuration.autoPinBrowserRightOnLaunch <- false
+  configuration.failIfAnyWipTests <- false
   //configuration.failFast := true
 
 
@@ -32,6 +33,7 @@ let main _ =
 //   configuration.firefoxDriverDir <- "c:\work"
 //   configuration.firefoxDir <- @"c:\Users\alex\AppData\Local\Mozilla Firefox\firefox.exe"
   configuration.showInfoDiv <- false
+  configuration.failScreenshotPath <- "./TestResults"
 
   reporter <- JUnitReporter("./TestResult.xml") //:> IReporter
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Make sure you have set the password in environment variable adminexamplepassword. Current value is $adminexamplepassword"
 
 mkdir ./TestResults -p
 
