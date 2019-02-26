@@ -4,8 +4,9 @@ RUN apt-get update && apt-get install -y libc6-dev libgdiplus
 
 COPY / ./tests
 
-RUN sed -i 's/let browserUrl = /let browserUrl = "http:\/\/testbrowser:4444\/wd\/hub\/" \/\/ /g' tests/Program.fs
-RUN sed -i 's/.\/TestResult.xml/\/tests\/TestResults\/results.xml/g' tests/Program.fs
+RUN sed -i 's/let browserUrl = /let browserUrl = "http:\/\/testbrowser:4444\/wd\/hub\/" \/\/ /g' tests/Program.fs && \
+    sed -i 's/.\/TestResult.xml/\/tests\/TestResults\/results.xml/g' tests/Program.fs && \
+    sed -i 's/".\/TestResults"/"\/tests\/TestResults"/g' tests/Program.fs
 
 RUN dotnet build tests/una-ui-tests.fsproj
 
