@@ -9,7 +9,9 @@ services:
     volumes:
       - './TestResults:/tests/TestResults'      
     networks:
-      - selenium-test      
+      - selenium-test 
+    environment:
+      - adminexamplepassword     
 
   testbrowser:
     image: selenium/standalone-chrome 
