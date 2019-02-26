@@ -25,6 +25,7 @@ let main _ =
   configuration.elementTimeout <- 10.0
   configuration.pageTimeout <- 10.0
   configuration.autoPinBrowserRightOnLaunch <- false
+  configuration.failIfAnyWipTests <- false
   //configuration.failFast := true
 
 
