@@ -7,29 +7,18 @@ open canopy.classic
 open Common
 open Header
 open PostToFeed
+open canopy
 
 let all () =
 
     context "PostToFeedtests"  
 
     once (fun _ -> 
-        goto Pages.Login.uri
-        Login._email << defaultAdmin.userName
-        Login._password << defaultAdmin.userPassword
-        click Login._loginButton
-        waitForElement _loggedAccountName // this is just to make sure we're on the profile page & we have logged
+        Login.userLogin defaultAdmin
+    )
 
-        // It might fail here on those 2 clicks as it may not show these messages for the user after user is no longer a new starter of this app
-        click _hintButton
-        click _hintButton
-        // elementsWithText "footer ul li a.shepherd-button-primary" "NEXT" |> List.iter (fun element -> 
-        //     printfn "clicked....."
-        //     click element
-        //     )
-        // elementsWithText "footer ul li a.shepherd-button-primary" "DONE" |> List.iter (fun element -> 
-        //     printfn "clicked....."
-        //     click element
-        //     )
+    lastly( fun _ -> 
+        Login.userLogout()
     )
 
     "Post 'Hello yyyyMMdd-hhmmss' to Feed -> adds 'Hello yyyyMMdd-hhmmss' message to feed" &&& fun _ ->        
@@ -41,8 +30,21 @@ let all () =
         click _postButton
         _postedMessage == messageToPost
     
-    lastly( fun _ -> 
-        click _accountButton
-        click _accountLogout
+    "Add emoji into Post to Feed" &&& (fun _ ->        
+        scrollTo _postToFeedHeader
+        Threading.Thread.Sleep 3000 //it might happen that it needs some time to scroll and may fail 1 in 5 attempts
+        clickEmojiButton ":joy:"
+        _visibility << "Public"
+        //_publishAt << "2019-02-21 00:00"
+        click _postButton
+        _postedMessage == "😂"
     )
 
+    "Add link into Post to Feed" &&&& fun _ ->        
+        click _addLinkButton
+        _addLink << "https://ci.una.io/test/"
+        click _addLinkSubmitButton 
+        _visibility << "Public"
+        //_publishAt << "2019-02-21 00:00"
+        click _postButton
+        waitForElement _firstPostedLinkFrame

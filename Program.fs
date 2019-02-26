@@ -50,6 +50,7 @@ let main _ =
     LoginTests.all()
     SignupTests.all()
     PostToFeedTests.all()
+    CreateNewProfilePersonTests.all()
 
     run()
 

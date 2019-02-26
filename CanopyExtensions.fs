@@ -2,6 +2,7 @@ module CanopyExtensions
 
 open canopy
 open canopy.classic
+open OpenQA.Selenium
 
 let private _placeholder value = sprintf "[placeholder = '%s']" value
 let placeholder value = _placeholder value |> css
@@ -32,3 +33,11 @@ let optionsToInts selector =
 let firstOption selector = optionsToInts selector |> List.head |> string
 let recentOption selector = optionsToInts selector |> List.rev |> List.head |> string
 
+// it might happen you need to scroll to an element as it may ocasionaly fail if element is at the bottom of the screen
+let scrollTo selector =
+// .getBoundingClientRect()
+// window.scrollTo(500, 0);
+    canopy.classic.waitForElement selector
+    let e = canopy.classic.element selector
+    let executor = canopy.classic.browser :?> IJavaScriptExecutor
+    executor.ExecuteScript("var posBefore=window.scrollY;arguments[0].scrollIntoView(); if (posBefore == window.scrollY){console.log('alternative way to scroll');window.scrollTo(arguments[0].getBoundingClientRect().top, 0) }", e) |> ignore

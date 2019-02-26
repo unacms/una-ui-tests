@@ -20,6 +20,7 @@ let all () =
         Login._password << defaultAdmin.userPassword
         click Login._loginButton
         //verify that we logged as admin
-        _loggedAccountName == "admin"
-        click _accountButton
-        click _accountLogout
+        
+        // ToDo replace defaultAdmin with a newly created user in the test so that user has no any profiles and has the name of the actual user
+        // _loggedAccountName == "admin"
+        Login.userLogout()
