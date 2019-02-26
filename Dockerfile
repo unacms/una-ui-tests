@@ -1,5 +1,7 @@
 FROM microsoft/dotnet:2.2-sdk AS build-env
 
+RUN apt-get update && apt-get install -y libc6-dev libgdiplus
+
 COPY / ./tests
 
 RUN sed -i 's/let browserUrl = /let browserUrl = "http:\/\/testbrowser:4444\/wd\/hub\/" \/\/ /g' tests/Program.fs
