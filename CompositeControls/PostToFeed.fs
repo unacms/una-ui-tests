@@ -17,6 +17,7 @@ let _addLinkButton = css ".add-link a"
 let _addLink = css "input[name='url']"
 let _addLinkSubmitButton = css "button[name='do_submit']"
 let _addLinkCloseButton = css "button[name='do_cancel']"
+
 let _postedMessage = css "div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content p" //"#bx-timeline-main-outline-public div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content p"
 let _firstPostedLinkFrame = css "div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content iframe"
 
@@ -37,3 +38,7 @@ let clickEmojiButton emojiButton =
     let selector = sprintf ".emoji-items a[title='%s']" emojiButton    
     canopy.classic.waitForElement (css selector)    
     click (css selector)     
+
+let addedLinkSection itemNumber = 
+    let section = sprintf "#bx-timeline-attach-link-form_field [id^=bx-timeline-attach-link-item]:nth-child(%i)" itemNumber
+    css section

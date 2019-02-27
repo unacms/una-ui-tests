@@ -3,6 +3,7 @@ module CanopyExtensions
 open canopy
 open canopy.classic
 open OpenQA.Selenium
+open System
 
 let private _placeholder value = sprintf "[placeholder = '%s']" value
 let placeholder value = _placeholder value |> css
@@ -41,3 +42,11 @@ let scrollTo selector =
     let e = canopy.classic.element selector
     let executor = canopy.classic.browser :?> IJavaScriptExecutor
     executor.ExecuteScript("var posBefore=window.scrollY;arguments[0].scrollIntoView(); if (posBefore == window.scrollY){console.log('alternative way to scroll');window.scrollTo(arguments[0].getBoundingClientRect().top, 0) }", e) |> ignore
+
+let rec throwIfElementExists selector seconds = 
+  let elements = unreliableElements selector |> List.filter (fun e -> e.Displayed)
+  if elements.Length > 0 then 
+    if seconds = 0 then 
+      raise (Exception(sprintf "Element \"%s\" was found on a page while it was not expected." selector ))
+    sleep 1
+    throwIfElementExists selector (seconds-1)

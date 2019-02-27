@@ -11,7 +11,7 @@ open canopy
 
 let all () =
 
-    context "PostToFeedtests"  
+    context "PostToFeedTests"  
 
     once (fun _ -> 
         Login.userLogin defaultAdmin
@@ -30,7 +30,7 @@ let all () =
         click _postButton
         _postedMessage == messageToPost
     
-    "Add emoji into Post to Feed" &&& (fun _ ->        
+    "Click Add emoji -> Adds to feed a post message with emoji" &&& (fun _ ->        
         scrollTo _postToFeedHeader
         sleep 3 //it might happen that it needs some time to scroll and may fail 1 in 5 attempts
         clickEmojiButton ":joy:"
@@ -40,7 +40,7 @@ let all () =
         _postedMessage == "😂"
     )
 
-    "Add link into Post to Feed" &&& fun _ ->        
+    "Click Add link -> Adds to feed a post message with a link" &&& fun _ ->        
         click _addLinkButton
         _addLink << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
@@ -49,3 +49,16 @@ let all () =
         sleep 1 // that delay required as in CI/CD it may fail without it
         click _postButton
         waitForElement _firstPostedLinkFrame
+
+    "Click Add and Delete link -> Deletes added link" &&& fun _ ->        
+        click _addLinkButton
+        _addLink << "https://ci.una.io/test/"
+        click _addLinkSubmitButton 
+        _visibility << "Public"
+        
+        //click delete anchor in the first section with added link
+        let firstAddedLinkSection = addedLinkSection 1
+        element firstAddedLinkSection |> elementWithin "a" |> click
+
+        //make sure that element is not displayed
+        throwIfElementExists firstAddedLinkSection 5
