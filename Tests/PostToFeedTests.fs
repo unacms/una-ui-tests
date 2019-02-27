@@ -32,7 +32,7 @@ let all () =
     
     "Add emoji into Post to Feed" &&& (fun _ ->        
         scrollTo _postToFeedHeader
-        Threading.Thread.Sleep 3000 //it might happen that it needs some time to scroll and may fail 1 in 5 attempts
+        sleep 3 //it might happen that it needs some time to scroll and may fail 1 in 5 attempts
         clickEmojiButton ":joy:"
         _visibility << "Public"
         //_publishAt << "2019-02-21 00:00"
@@ -46,5 +46,6 @@ let all () =
         click _addLinkSubmitButton 
         _visibility << "Public"
         //_publishAt << "2019-02-21 00:00"
+        sleep 1 // that delay required as in CI/CD it may fail without it
         click _postButton
         waitForElement _firstPostedLinkFrame

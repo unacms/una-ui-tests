@@ -27,6 +27,7 @@ let main _ =
   configuration.autoPinBrowserRightOnLaunch <- false
   configuration.failIfAnyWipTests <- false
   //configuration.failFast := true
+  configuration.throwIfMoreThanOneElement <- true
 
 
   configuration.chromeDir <- "/usr/bin"
