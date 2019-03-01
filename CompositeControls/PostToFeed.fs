@@ -37,3 +37,7 @@ let clickEmojiButton emojiButton =
     let selector = sprintf ".emoji-items a[title='%s']" emojiButton    
     canopy.classic.waitForElement (css selector)    
     click (css selector)     
+
+let addedLinkSection itemNumber = 
+    let section = sprintf "#bx-timeline-attach-link-form_field [id^=bx-timeline-attach-link-item]:nth-child(%i)" itemNumber
+    css section

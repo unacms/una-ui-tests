@@ -11,6 +11,7 @@ let _password = css "input[name='Password']"
 let _loginButton = css "button[type='submit']"
 
 let userLogin userCredentials = 
+    printf "about to login using %A" userCredentials
     goto Pages.Login.uri
     _email << userCredentials.userName
     _password << userCredentials.userPassword
@@ -28,6 +29,7 @@ let userLogin userCredentials =
         printfn "clicked....."
         click element
         )
+    printf "logged in using %A" userCredentials
 
 let userLogout() = 
     click _accountButton
