@@ -8,20 +8,48 @@ open Common
 open Header
 open PostToFeed
 open canopy
+open CreateNewProfilePerson
+open ProfileToolbar
 
-let all () =
+type PostToFeedFrom = 
+    | PostToFeedFromAccount
+    | PostToFeedFromProfile
 
-    context "PostToFeedTests"  
+
+let all postToFeedFrom =
+
+    match postToFeedFrom with
+    | PostToFeedFromProfile -> context "PostToFeedFromProfileTests"
+    | PostToFeedFromAccount -> context "PostToFeedFromAccountTests"
 
     once (fun _ -> 
         Login.userLogin defaultAdmin
+
+        match postToFeedFrom with
+        | PostToFeedFromProfile -> 
+            let maleProfile = {defaultProfile with Gender = "Man"; FullName="Vasily"}
+            createPersonProfile maleProfile                
+        | PostToFeedFromAccount -> ()
+
     )
 
-    lastly( fun _ -> 
+    lastly ( fun _ -> 
+        match postToFeedFrom with
+        | PostToFeedFromProfile -> 
+            deleteProfile                
+        | PostToFeedFromAccount -> ()    
+
         Login.userLogout()
     )
 
-    "Post 'Hello yyyyMMdd-hhmmss' to Feed -> adds 'Hello yyyyMMdd-hhmmss' message to feed" &&& fun _ ->        
+    let tn testName =
+        match postToFeedFrom with
+        | PostToFeedFromAccount -> "PostToFeedFromAccount. " + testName
+        | PostToFeedFromProfile -> "PostToFeedFromProfile. " + testName 
+
+
+
+    tn("Post 'Hello yyyyMMdd-hhmmss' to Feed -> adds 'Hello yyyyMMdd-hhmmss' message to feed") &&& fun _ ->        
         let now = DateTime.Now.ToString("yyyyMMdd-hhmmss")        
         let messageToPost = sprintf "Hello %s" now
         insertPostMessage messageToPost
@@ -30,7 +58,7 @@ let all () =
         click _postButton
         _postedMessage == messageToPost
     
-    "Click Add emoji -> Adds to feed a post message with emoji" &&& (fun _ ->        
+    tn("Click Add emoji -> Adds to feed a post message with emoji") &&& (fun _ ->        
         scrollTo _postToFeedHeader
         sleep 3 //it might happen that it needs some time to scroll and may fail 1 in 5 attempts
         clickEmojiButton ":joy:"
@@ -40,7 +68,7 @@ let all () =
         _postedMessage == "😂"
     )
 
-    "Click Add link -> Adds to feed a post message with a link" &&& fun _ ->        
+    tn("Click Add link -> Adds to feed a post message with a link") &&& fun _ ->        
         click _addLinkButton
         _addLink << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
@@ -50,7 +78,7 @@ let all () =
         click _postButton
         waitForElement _firstPostedLinkFrame
 
-    "Click Add and Delete link -> Deletes added link" &&& fun _ ->        
+    tn("Click Add and Delete link -> Deletes added link") &&& fun _ ->        
         click _addLinkButton
         _addLink << "https://ci.una.io/test/"
         click _addLinkSubmitButton 

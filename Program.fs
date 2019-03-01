@@ -6,6 +6,7 @@ open canopy.runner.classic
 open types
 open configuration
 open reporters
+open PostToFeedTests
 
 let rec retry times fn = 
     if times > 1 then
@@ -52,7 +53,8 @@ let main _ =
 
     LoginTests.all()
     SignupTests.all()
-    PostToFeedTests.all()
+    PostToFeedTests.all PostToFeedFrom.PostToFeedFromAccount
+    PostToFeedTests.all PostToFeedFrom.PostToFeedFromProfile
     CreateNewProfilePersonTests.all()
 
     run()
