@@ -69,7 +69,7 @@ let all postToFeedFrom =
 
     tn("Click Add link -> Adds to feed a post message with a link") &&& fun _ ->        
         click _addLinkButton
-        _addLink << "https://ci.una.io/test/"
+        _addLinkTextBox << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
         _visibility << "Public"
         //_publishAt << "2019-02-21 00:00"
@@ -84,7 +84,7 @@ let all postToFeedFrom =
 
     tn("Click Add link, insert 12345 into link field -> Adds to feed a post message with a link") &&& fun _ ->        
         click _addLinkButton
-        _addLink << "12345"
+        _addLinkTextBox << "12345"
         click _addLinkSubmitButton 
         _addLinkError == "Correct Link is essential. Please, fill in this field."
         click _addLinkCloseButton
@@ -93,7 +93,7 @@ let all postToFeedFrom =
 
     tn("Click Add and Delete link -> Deletes added link") &&& fun _ ->        
         click _addLinkButton
-        _addLink << "https://ci.una.io/test/"
+        _addLinkTextBox << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
         _visibility << "Public"
         
