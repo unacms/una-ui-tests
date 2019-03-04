@@ -10,6 +10,7 @@ open CreateNewProfilePerson
 open Pages
 open ProfileToolbar
 open PostToFeed
+open CanopyExtensions
 
 let all () =
 

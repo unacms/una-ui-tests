@@ -1,9 +1,9 @@
 module PostToFeedTests
 
 open System
-open CanopyExtensions
 open canopy.runner.classic
 open canopy.classic
+open CanopyExtensions
 open Common
 open Header
 open PostToFeed
@@ -36,7 +36,7 @@ let all postToFeedFrom =
     lastly ( fun _ -> 
         match postToFeedFrom with
         | PostToFeedFromProfile -> 
-            deleteProfile                
+            deleteProfile()                
         | PostToFeedFromAccount -> ()    
 
         Login.userLogout()
@@ -60,7 +60,6 @@ let all postToFeedFrom =
     
     tn("Click Add emoji -> Adds to feed a post message with emoji") &&& (fun _ ->        
         scrollTo _postToFeedHeader
-        sleep 3 //it might happen that it needs some time to scroll and may fail 1 in 5 attempts
         clickEmojiButton ":joy:"
         _visibility << "Public"
         //_publishAt << "2019-02-21 00:00"
@@ -74,9 +73,23 @@ let all postToFeedFrom =
         click _addLinkSubmitButton 
         _visibility << "Public"
         //_publishAt << "2019-02-21 00:00"
-        sleep 1 // that delay required as in CI/CD it may fail without it
-        click _postButton
-        waitForElement _firstPostedLinkFrame
+        clickAndWait _postButton _firstPostedLinkFrame 10
+
+    tn("Click Add link, Do not insert link -> Adds to feed a post message with a link") &&& fun _ ->        
+        //clickAndWait _addLinkButton _addLinkSubmitButton 10
+        click _addLinkButton
+        click _addLinkSubmitButton 
+        _addLinkError == "Correct Link is essential. Please, fill in this field."
+        click _addLinkCloseButton
+
+    tn("Click Add link, insert 12345 into link field -> Adds to feed a post message with a link") &&& fun _ ->        
+        click _addLinkButton
+        _addLink << "12345"
+        click _addLinkSubmitButton 
+        _addLinkError == "Correct Link is essential. Please, fill in this field."
+        click _addLinkCloseButton
+
+
 
     tn("Click Add and Delete link -> Deletes added link") &&& fun _ ->        
         click _addLinkButton

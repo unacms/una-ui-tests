@@ -1,9 +1,9 @@
 module SignupTests
 
 
-open CanopyExtensions
 open canopy.runner.classic
 open canopy.classic
+open CanopyExtensions
 
 let all () =
 

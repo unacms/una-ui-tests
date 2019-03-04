@@ -3,6 +3,7 @@ module CreateNewProfilePerson
 open canopy.classic
 open Header
 open System
+open CanopyExtensions
 
 let _createAnewProfile = css ".bx-menu-account-popup-profile-switcher-link a"
 let _personButton = css "ul.bx-menu-object-sys_add_profile li:nth-child(1) a"

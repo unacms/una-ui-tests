@@ -2,6 +2,7 @@ module PostToFeed
 
 open canopy.classic
 open System
+open CanopyExtensions
 
 let _postToFeedHeader = xpath "//div[contains(text(),'Post to Feed')]"
 let _postTofeed = css "textarea[name='text']"
@@ -15,6 +16,7 @@ let _addEmojiButton = css ".add-emoji a"
 let _joyButton = css ".emoji-items a[title=':joy:']"
 let _addLinkButton = css ".add-link a"
 let _addLink = css "input[name='url']"
+let _addLinkError = css "#bx-form-element-url .bx-form-warn"
 let _addLinkSubmitButton = css "button[name='do_submit']"
 let _addLinkCloseButton = css "button[name='do_cancel']"
 let _postedMessage = css "div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content p" //"#bx-timeline-main-outline-public div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content p"
