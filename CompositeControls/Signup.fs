@@ -1,6 +1,8 @@
 module Signup
 
 open canopy.classic
+open CanopyExtensions
+
 
 let _accountName = css "input[name='name']"
 let _accountNameError = css "#bx-form-element-name .bx-form-warn"

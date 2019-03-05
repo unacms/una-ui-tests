@@ -1,10 +1,10 @@
 module LoginTests
 
-open CanopyExtensions
 open canopy.runner.classic
 open canopy.classic
 open Common
 open Header
+open CanopyExtensions
 
 
 let all () =

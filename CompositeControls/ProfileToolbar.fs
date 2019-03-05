@@ -12,7 +12,7 @@ let _deleteAccountWithContentButton = css "li.bx-menu-item-more-auto .bx-menu-it
 let _checkboxButton = css "input[name='delete_confirm']"
 let _deleteProfileSubmitButton = css "button[type='submit']"
 
-let deleteProfile = 
+let deleteProfile() = 
     click _moreButton
     click _deleteProfileButton
     click _checkboxButton

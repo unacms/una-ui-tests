@@ -10,6 +10,7 @@ open CreateNewProfilePerson
 open Pages
 open ProfileToolbar
 open PostToFeed
+open CanopyExtensions
 
 let all () =
 
@@ -26,12 +27,12 @@ let all () =
     "Create person profile and delete profile" &&& fun _ ->
         let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}
         createPersonProfile maleProfile
-        deleteProfile
+        deleteProfile()
 
     "Create person profile, post to feed, verify mesage, delete profile" &&& fun _ ->
         let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}
         createPersonProfile maleProfile
         postMessageAndVerify "Hello world"
-        deleteProfile
+        deleteProfile()
 
           
