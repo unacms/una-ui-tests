@@ -5,9 +5,10 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
     <Compile Include="TestTypes.fs" />
     <Compile Include="Common.fs" />
+    <Compile Include="Audit.fs" />
     <Compile Include="CanopyExtensions.fs" />
     <Compile Include="Pages.fs" />
     <Compile Include="CompositeControls/Header.fs" />

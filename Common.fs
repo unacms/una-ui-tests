@@ -15,3 +15,5 @@ let defaultAdmin = {
     userPassword = Environment.GetEnvironmentVariable("adminexamplepassword")
 }
 
+let generateResultsFullFileName filename = sprintf "./TestResults/%s" filename
+

@@ -5,17 +5,19 @@ open canopy.classic
 open Common
 open Header
 open CanopyExtensions
+open Audit
 
 
 let all () =
 
     context "Login tests"  
 
-    before (fun _ -> 
+    before (fun _ ->         
         goto Pages.Login.uri
     )
 
     "Log in test" &&& fun _ ->
+        createAndWriteAccessibilityReport "HomePage"
         Login._email << defaultAdmin.userName
         Login._password << defaultAdmin.userPassword
         click Login._loginButton
