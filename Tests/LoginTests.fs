@@ -17,7 +17,7 @@ let all () =
     )
 
     "Log in test" &&& fun _ ->
-        createAndWriteAccessibilityReport "HomePage"
+        createAndWriteAccessibilityReport "AccessibilityReport-HomePage"
         Login._email << defaultAdmin.userName
         Login._password << defaultAdmin.userPassword
         click Login._loginButton

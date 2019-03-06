@@ -10,6 +10,7 @@ open PostToFeed
 open canopy
 open CreateNewProfilePerson
 open ProfileToolbar
+open Audit
 
 type PostToFeedFrom = 
     | PostToFeedFromAccount
@@ -25,12 +26,18 @@ let all postToFeedFrom =
     once (fun _ -> 
         Login.userLogin defaultAdmin
 
+        let mutable reportName = ""
+
         match postToFeedFrom with
         | PostToFeedFromProfile -> 
             let maleProfile = {defaultProfile with Gender = "Man"; FullName="Vasily"}
-            createPersonProfile maleProfile                
-        | PostToFeedFromAccount -> ()
+            createPersonProfile maleProfile  
+            reportName <- "AccessibilityReport-PostToFeedFromProfile"              
+        | PostToFeedFromAccount -> 
+            reportName <- "AccessibilityReport-PostToFeedFromAccount"
 
+        //Here we run accessibility tests in both(PostToFeedFromAccount,PostToFeedFromProfile) cases
+        createAndWriteAccessibilityReport reportName
     )
 
     lastly ( fun _ -> 

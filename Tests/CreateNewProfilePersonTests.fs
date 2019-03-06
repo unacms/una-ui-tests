@@ -26,7 +26,7 @@ let all () =
 
     "Create person profile and delete profile" &&& fun _ ->
         let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}
-        createPersonProfile maleProfile
+        createPersonProfileWithAccessibilityTesting maleProfile
         deleteProfile()
 
     "Create person profile, post to feed, verify mesage, delete profile" &&& fun _ ->

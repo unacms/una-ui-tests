@@ -4,6 +4,7 @@ open canopy.classic
 open Header
 open System
 open CanopyExtensions
+open Audit
 
 let _createAnewProfile = css ".bx-menu-account-popup-profile-switcher-link a"
 let _personButton = css "ul.bx-menu-object-sys_add_profile li:nth-child(1) a"
@@ -25,9 +26,10 @@ let defaultProfile = {
     VisibleTo = "Public"
 }
 
-let createPersonProfile profile = 
+let createPersonProfileEx profile runAccessibilityTests = 
     click _accountButton
     click _createAnewProfile
+    if runAccessibilityTests then createAndWriteAccessibilityReport "AccessibilityReport-CreatePersonalProfile"
     click  _personButton
     _gender << profile.Gender
     _birthday << profile.Birthday.ToString("yyyy-MM-dd")
@@ -36,7 +38,13 @@ let createPersonProfile profile =
     _location << profile.Location
     click _locationOkButton
     _visibleTo << profile.VisibleTo
-    click _submitButton
+    click _submitButton     
+
+
+let createPersonProfile profile = createPersonProfileEx profile false
+
+let createPersonProfileWithAccessibilityTesting profile = createPersonProfileEx profile true   
+
    
 
 
