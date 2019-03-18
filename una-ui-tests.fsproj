@@ -16,11 +16,13 @@
     <Compile Include="CompositeControls/Login.fs" />
     <Compile Include="CompositeControls/PostToFeed.fs" />
     <Compile Include="CompositeControls/CreateNewProfilePerson.fs" />    
+    <Compile Include="CompositeControls/AccountPopup.fs" />    
     <Compile Include="CompositeControls/ProfileToolbar.fs" />    
     <Compile Include="Tests/SignupTests.fs" />
     <Compile Include="Tests/PostToFeedTests.fs" />
     <Compile Include="Tests/LoginTests.fs" />
     <Compile Include="Tests/CreateNewProfilePersonTests.fs" />
+    <Compile Include="Tests/ProfileToolbarTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 open canopy
 open canopy.classic
@@ -56,6 +56,7 @@ let main _ =
     PostToFeedTests.all PostToFeedFrom.PostToFeedFromAccount
     PostToFeedTests.all PostToFeedFrom.PostToFeedFromProfile
     CreateNewProfilePersonTests.all()
+    ProfileToolbarTests.all() 
 
     run()
 

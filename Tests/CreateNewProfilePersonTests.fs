@@ -30,7 +30,7 @@ let all () =
         deleteProfile()
 
     "Create person profile, post to feed, verify mesage, delete profile" &&& fun _ ->
-        let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}
+        let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}        
         createPersonProfile maleProfile
         postMessageAndVerify "Hello world"
         deleteProfile()

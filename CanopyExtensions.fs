@@ -68,4 +68,10 @@ let rec clickAndWait clickSelector elementToWait secondsToWait =
         clickAndWait clickSelector elementToWait (secondsToWait-1)
     | Some _ -> ()  
 
+let defaultIf action defaultValue =
+    try
+        action()
+    with 
+    | _ -> defaultValue
+
   
