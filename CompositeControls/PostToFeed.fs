@@ -12,7 +12,7 @@ let _postButton = css "button[type='submit']"
 let _postToFeedElement = css "#bx-form-element-text div.show-placeholder > span"
 
 // see below clickEmojiButton
-let _addEmojiButton = css ".add-emoji a"
+let _addEmojiButton = css "a[title='Add Emoji']"
 let _joyButton = css ".emoji-items a[title=':joy:']"
 let _addLinkButton = css ".add-link a"
 let _addLinkTextBox = css "input[name='url']"
