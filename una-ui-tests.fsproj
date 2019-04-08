@@ -18,6 +18,7 @@
     <Compile Include="CompositeControls/CreateNewProfilePerson.fs" />    
     <Compile Include="CompositeControls/AccountPopup.fs" />    
     <Compile Include="CompositeControls/ProfileToolbar.fs" />    
+    <Compile Include="Tests/TestsSetup.fs" />
     <Compile Include="Tests/SignupTests.fs" />
     <Compile Include="Tests/PostToFeedTests.fs" />
     <Compile Include="Tests/LoginTests.fs" />

@@ -1,4 +1,5 @@
-namespace LoginTests2
+namespace Tests.LoginTests2
+
 
 open NUnit.Framework
 open VCanopy.GivenWhenThen
@@ -13,28 +14,6 @@ open VCanopy
 
 
 
-[<SetUpFixture>]
-type TestsSetup () =
-
-
-    let createChromeDriver():IWebDriver = 
-        upcast new ChromeDriver("/home/john/Downloads")
-
-    let createRemoteDriver():IWebDriver =
-        let browserUrl = "" //"http://testbrowser:4444/wd/hub/" 
-        let browserName = "chrome"
-
-        let capability = OpenQA.Selenium.Remote.DesiredCapabilities()
-        capability.SetCapability("browserName", browserName) 
-        upcast new RemoteWebDriver(Uri(browserUrl), capability, TimeSpan.FromMinutes(3.0))
-
-    [<OneTimeSetUp>]    
-    member this.GlobalSetup () = 
-        setDriverFactory createChromeDriver
-        setConfig {WebDriverInstanceCount = 4; CompleteDriverRelease = true}
-
-    [<OneTimeTearDown>]   
-    member this.GlobalTeardown () = ()
 
 
 [<Parallelizable(ParallelScope.All)>]
@@ -42,9 +21,10 @@ type LoginTests () =
 
 
 
-    [<UseDriver>]
+
+    [<UseDriver(2)>]
     [<Test>]    
-    member this.SmokeLoginTest ()=
+    member this.``Smoke Login test and check name with spaces`` ()=
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
         goto "https://ci.una.io/test"
         click _headerLoginBtn
