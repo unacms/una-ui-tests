@@ -107,7 +107,7 @@ let all postToFeedFrom =
         
         //click delete anchor in the first section with added link
         let firstAddedLinkSection = addedLinkSection 1
-        element firstAddedLinkSection |> elementWithin "a" |> click
+        click (addedLinkSectionChild 1 " a")
 
         //make sure that element is not displayed
         throwIfElementDisplayed firstAddedLinkSection

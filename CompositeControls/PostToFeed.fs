@@ -40,6 +40,10 @@ let clickEmojiButton emojiButton =
     waitForElement (css selector)    
     click (css selector)     
 
-let addedLinkSection itemNumber = 
-    let section = sprintf "#bx-timeline-attach-link-form_field [id^=bx-timeline-attach-link-item]:nth-child(%i)" itemNumber
+let addedLinkSectionChild itemNumber childCSS = 
+    let section = sprintf "#bx-timeline-attach-link-form_field [id^=bx-timeline-attach-link-item]:nth-child(%i)%s" itemNumber childCSS
     css section
+
+let addedLinkSection itemNumber = 
+    addedLinkSectionChild itemNumber ""
+
