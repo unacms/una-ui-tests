@@ -1,6 +1,6 @@
 module Header
 
-open canopy.classic
+open VCanopy.Functions
 
 let _loginButton = css "li.bx-menu-item-login a"
 let _loggedAccountName = css "#bx-menu-toolbar-item-account span.bx-menu-toolbar-item-title"

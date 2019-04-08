@@ -1,6 +1,6 @@
 module AccountPopup
 
-open canopy.classic
+open VCanopy.Functions
 open Header
 open System
 open CanopyExtensions
@@ -45,7 +45,7 @@ let clickSwitchAccountButton profileName =
 //switch to a profile. admin user may switch to a user profile
 let switchProfile profileName =
       let switchBtn = switchAccountButton profileName
-      clickAndWait _accountButton switchBtn 5
+      click _accountButton
       clickSwitchAccountButton profileName
 
 let selectProfile = 

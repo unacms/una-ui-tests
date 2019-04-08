@@ -1,6 +1,6 @@
 module ProfileToolbar
 
-open canopy.classic
+open VCanopy.Functions
 open TestTypes
 open CanopyExtensions
 open System

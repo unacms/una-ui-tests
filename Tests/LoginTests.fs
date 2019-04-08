@@ -2,6 +2,7 @@ module LoginTests
 
 open canopy.runner.classic
 open canopy.classic
+open VCanopy.Functions
 open Common
 open Header
 open CanopyExtensions

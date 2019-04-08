@@ -3,6 +3,7 @@ module SignupTests
 
 open canopy.runner.classic
 open canopy.classic
+open VCanopy.Functions
 open CanopyExtensions
 open Audit
 

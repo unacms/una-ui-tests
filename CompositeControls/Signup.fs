@@ -1,6 +1,6 @@
 module Signup
 
-open canopy.classic
+open VCanopy.Functions
 open CanopyExtensions
 
 

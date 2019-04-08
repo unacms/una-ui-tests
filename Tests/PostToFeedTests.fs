@@ -3,6 +3,7 @@ module PostToFeedTests
 open System
 open canopy.runner.classic
 open canopy.classic
+open VCanopy.Functions
 open CanopyExtensions
 open Common
 open Header
@@ -80,7 +81,7 @@ let all postToFeedFrom =
         click _addLinkSubmitButton 
         _visibility << "Public"
         //_publishAt << "2019-02-21 00:00"
-        clickAndWait _postButton _firstPostedLinkFrame 10
+        click _postButton
 
     tn("Click Add link, Do not insert link -> Adds to feed a post message with a link") &&& fun _ ->        
         //clickAndWait _addLinkButton _addLinkSubmitButton 10
@@ -109,4 +110,4 @@ let all postToFeedFrom =
         element firstAddedLinkSection |> elementWithin "a" |> click
 
         //make sure that element is not displayed
-        throwIfElementExists firstAddedLinkSection 5
+        throwIfElementDisplayed firstAddedLinkSection

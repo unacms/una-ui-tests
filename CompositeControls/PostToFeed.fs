@@ -1,6 +1,6 @@
 module PostToFeed
 
-open canopy.classic
+open VCanopy.Functions
 open System
 open CanopyExtensions
 
@@ -37,7 +37,7 @@ let postMessageAndVerify messageToPost =
 let clickEmojiButton emojiButton = 
     click _addEmojiButton
     let selector = sprintf ".emoji-items a[title='%s']" emojiButton    
-    canopy.classic.waitForElement (css selector)    
+    waitForElement (css selector)    
     click (css selector)     
 
 let addedLinkSection itemNumber = 

@@ -1,6 +1,6 @@
 module CreateNewProfilePerson
 
-open canopy.classic
+open VCanopy.Functions
 open Header
 open System
 open CanopyExtensions

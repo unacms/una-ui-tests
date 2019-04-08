@@ -1,6 +1,6 @@
 module Login
 
-open canopy.classic
+open VCanopy.Functions
 open TestTypes
 open CanopyExtensions
 open Header
@@ -21,14 +21,17 @@ let userLogin userCredentials =
     // It might fail here on those 2 clicks as it may not show these messages for the user after user is no longer a new starter of this app
     // click "footer ul li a.shepherd-button-primary"
     // click "footer ul li a.shepherd-button-primary"
-    elementsWithText "footer ul li a.shepherd-button-primary" "NEXT" |> List.iter (fun element -> 
-        printfn "clicked....."
-        click element
-        )
-    elementsWithText "footer ul li a.shepherd-button-primary" "DONE" |> List.iter (fun element -> 
-        printfn "clicked....."
-        click element
-        )
+
+
+    // ToDo rewrite using XPATH
+    // elementsWithText "footer ul li a.shepherd-button-primary" "NEXT" |> List.iter (fun element -> 
+    //     printfn "clicked....."
+    //     click element
+    //     )
+    // elementsWithText "footer ul li a.shepherd-button-primary" "DONE" |> List.iter (fun element -> 
+    //     printfn "clicked....."
+    //     click element
+    //     )
     printfn "logged in using %A" userCredentials
 
 let userLogout() = 
