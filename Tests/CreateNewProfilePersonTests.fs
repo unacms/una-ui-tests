@@ -1,35 +1,40 @@
-module CreateNewProfilePersonTests
+
+namespace Tests.CreateNewProfilePersonTests
+
+open NUnit.Framework
 
 
+open VCanopy.GivenWhenThen
+open VCanopy.Functions
+open VCanopy.NUnit
 
-open canopy.runner.classic
-open canopy.classic
 open Common
-open Header
 open CreateNewProfilePerson
-open Pages
 open ProfileToolbar
 open PostToFeed
-open CanopyExtensions
 
-let all () =
+[<Parallelizable(ParallelScope.All)>]
+type ``Create a New Personal Profile`` () =
 
-    context "Create a New Personal Profile" 
 
-    before (fun _ -> 
+    [<SetUp>]    
+    member this.Setup()= 
         Login.userLogin defaultAdmin
-    )
 
-    after (fun _ -> 
+    [<TearDown>]    
+    member this.TearDown()= 
         Login.userLogout()
-    )    
 
-    "Create person profile and delete profile" &&& fun _ ->
+    [<UseDriver>]
+    [<Test>]
+    member this.``Create person profile and delete profile``() =
         let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}
         createPersonProfileWithAccessibilityTesting maleProfile
         deleteProfile()
 
-    "Create person profile, post to feed, verify mesage, delete profile" &&& fun _ ->
+    [<UseDriver>]
+    [<Test>]
+    member this.``Create person profile, post to feed, verify mesage, delete profile``() =
         let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}        
         createPersonProfile maleProfile
         postMessageAndVerify "Hello world"

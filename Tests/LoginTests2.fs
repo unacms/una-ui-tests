@@ -5,12 +5,8 @@ open NUnit.Framework
 open VCanopy.GivenWhenThen
 open VCanopy.Functions
 open VCanopy.NUnit
-open System
 open Login2
-open OpenQA.Selenium.Chrome
-open OpenQA.Selenium
-open OpenQA.Selenium.Remote
-open VCanopy
+
 
 
 
