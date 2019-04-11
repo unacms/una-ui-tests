@@ -18,7 +18,7 @@ type LoginTests () =
 
 
 
-    [<UseDriver(2)>]
+    [<UseDriver>]
     [<Test>]    
     member this.``Smoke Login test and check name with spaces`` ()=
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);

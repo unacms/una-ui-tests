@@ -55,7 +55,7 @@ let main _ =
     SignupTests.all()
     PostToFeedTests.all PostToFeedFrom.PostToFeedFromAccount
     PostToFeedTests.all PostToFeedFrom.PostToFeedFromProfile
-    ProfileToolbarTests.all() 
+
 
     run()
 
