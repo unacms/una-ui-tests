@@ -1,15 +1,14 @@
 module ProfileToolbar
 
 open VCanopy.Functions
-open TestTypes
-open CanopyExtensions
+
 open System
 open Header
 open AccountPopup
 
 
 
-let _moreButton = css "li.bx-menu-item-more-auto > span.bx-base-general-entity-action a.bx-btn"
+let private _moreButton = css "li.bx-menu-item-more-auto > span.bx-base-general-entity-action a.bx-btn"
 let _deleteProfileButton = css ".bx-menu-item-delete-persons-profile a.bx-btn"
 let _deleteAccountButton = css ".bx-menu-item-delete-persons-account a.bx-btn"
 let _deleteAccountWithContentButton = css ".bx-menu-item-delete-persons-account-content a.bx-btn"
@@ -31,9 +30,13 @@ let readReportCounter () =
         0
     else Int32.Parse(sc)
 
+let clickMoreButton()=
+    scrollTo (css ".bx-base-pofile-cover")
+    click _moreButton
+    
 /// Delete current active profile
 let deleteProfile() = 
-    click _moreButton
+    clickMoreButton()
     click _deleteProfileButton
     click _checkboxButton
     click _deleteProfileSubmitButton
@@ -45,9 +48,10 @@ let deleteProfile() =
 
 ///the method fails for some reason as it can't press any(_currentUserProfileButton,_profileButton) of the profile buttons.
 let rec deleteAllProfiles() =
+    hover _accountButton
     click _accountButton
     click _profileButton
-    click _moreButton
+    clickMoreButton()
     click _deleteProfileButton
     click _checkboxButton
     click _deleteProfileSubmitButton

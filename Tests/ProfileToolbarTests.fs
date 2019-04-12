@@ -50,7 +50,7 @@ type ``Create a New Personal Profile`` () =
     member this. ``Switch profile, raise a report and check that a proper number of report(s) is raised``()=
     
         switchProfile "Natalia"
-        click _moreButton
+        clickMoreButton()
         click _reportButton
         _reportType << "spam"       
         click _postReportButton
@@ -58,7 +58,7 @@ type ``Create a New Personal Profile`` () =
         Login.userLogout()
         Login.userLogin defaultAdmin
         switchProfile "Natalia"
-        click _moreButton
+        clickMoreButton()
         click _reportButton
         _reportType << "spam"       
         click _postReportButton
