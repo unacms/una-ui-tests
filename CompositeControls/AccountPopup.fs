@@ -45,6 +45,7 @@ let clickSwitchAccountButton profileName =
 //switch to a profile. admin user may switch to a user profile
 let switchProfile profileName =
       let switchBtn = switchAccountButton profileName
+      hover _accountButton
       click _accountButton
       clickSwitchAccountButton profileName
 

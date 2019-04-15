@@ -5,6 +5,7 @@ open VCanopy.Functions
 open System
 open Header
 open AccountPopup
+open TestHelpers
 
 
 
@@ -22,7 +23,7 @@ let _unfollowProfileButton = css ".bx-menu-item-profile-subscribe-remove a.bx-bt
 let _reportButton = css "a[id^=bx-report-do-link-bx-persons]"
 let _reportType = css "#bx-form-element-type select[name='type']"
 let _postReportButton = css "#bx-form-element-submit button[type='submit']"
-let _reportCounter = css ".bx-report-counter-holder"
+let _reportCounter = css ".bx-report-counter-holder a"
 
 let readReportCounter () =
     let sc = read _reportCounter
@@ -48,9 +49,13 @@ let deleteProfile() =
 
 ///the method fails for some reason as it can't press any(_currentUserProfileButton,_profileButton) of the profile buttons.
 let rec deleteAllProfiles() =
-    hover _accountButton
-    click _accountButton
-    click _profileButton
+    retry 3 (fun _ ->
+        hover _accountButton
+        click _accountButton
+        hover _profileButton
+        click _profileButton
+        )
+
     clickMoreButton()
     click _deleteProfileButton
     click _checkboxButton

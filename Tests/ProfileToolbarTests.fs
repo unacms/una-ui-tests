@@ -18,7 +18,7 @@ open AccountPopup
 
 [<Parallelizable(ParallelScope.All)>]
 
-type ``Create a New Personal Profile`` () =
+type CreateNewPersonalProfile () =
      
 
     [<SetUp>]    
