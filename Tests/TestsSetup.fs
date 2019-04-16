@@ -25,7 +25,7 @@ type TestsSetup () =
     [<OneTimeSetUp>]    
     member this.GlobalSetup () = 
         setDriverFactory createChromeDriver
-        setConfig {WebDriverInstanceCount = 4; CompleteDriverRelease = true}
+        setConfig {WebDriverInstanceCount = 1; CompleteDriverRelease = true}
 
     [<OneTimeTearDown>]   
     member this.GlobalTeardown () = ()
