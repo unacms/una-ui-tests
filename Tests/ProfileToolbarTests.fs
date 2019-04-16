@@ -24,6 +24,7 @@ type CreateNewPersonalProfile () =
     [<SetUp>]    
     member this.Setup()= 
         Login.userLogin defaultAdmin
+        //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
         deleteAllProfiles()
 
@@ -36,8 +37,10 @@ type CreateNewPersonalProfile () =
     [<TearDown>]
     member this.TearDown()=
         switchProfile "Valentin"
+        selectProfile "Valentin"
         deleteProfile()
         switchProfile "Natalia"
+        selectProfile "Natalia"
         deleteProfile()
         Login.userLogout()
       
@@ -48,7 +51,7 @@ type CreateNewPersonalProfile () =
     [<UseDriver>]
     [<Test>]    
     member this. ``Switch profile, raise a report and check that a proper number of report(s) is raised``()=
-    
+        
         switchProfile "Natalia"
         clickMoreButton()
         click _reportButton
@@ -58,6 +61,7 @@ type CreateNewPersonalProfile () =
         Login.userLogout()
         Login.userLogin defaultAdmin
         switchProfile "Natalia"
+        selectProfile "Valentin"
         clickMoreButton()
         click _reportButton
         _reportType << "spam"       

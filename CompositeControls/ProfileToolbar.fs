@@ -43,25 +43,21 @@ let deleteProfile() =
     click _deleteProfileSubmitButton
 
 
-
-
 //Helpers for debugging
 
 ///the method fails for some reason as it can't press any(_currentUserProfileButton,_profileButton) of the profile buttons.
 let rec deleteAllProfiles() =
-    retry 3 (fun _ ->
-        hover _accountButton
-        click _accountButton
-        hover _profileButton
-        click _profileButton
-        )
-
-    clickMoreButton()
-    click _deleteProfileButton
-    click _checkboxButton
-    click _deleteProfileSubmitButton
-
-    //check if profile exists         
     let currentProfileName = Header.currentProfileName()
-    if ("admin" <> currentProfileName) then
+    if ("admin" <> currentProfileName) then                    
+        retry 3 (fun _ ->
+            hover _accountButton
+            click _accountButton
+            hover _profileButton
+            click _profileButton
+            )
+
+        clickMoreButton()
+        click _deleteProfileButton
+        click _checkboxButton
+        click _deleteProfileSubmitButton
         deleteAllProfiles()

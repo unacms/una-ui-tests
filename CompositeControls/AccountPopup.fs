@@ -38,25 +38,16 @@ let switchAccountButton profileName =
 let clickSwitchAccountButton profileName =
       click (switchAccountButton profileName) 
       
-// let switchProfile profileName =
-//       click _accountButton
-//       clickSwitchAccountButton profileName
 
 //switch to a profile. admin user may switch to a user profile
 let switchProfile profileName =
-      let switchBtn = switchAccountButton profileName
-      hover _accountButton
+      let currentProfileName = Header.currentProfileName()
+      if (profileName <> currentProfileName) then
+            let switchBtn = switchAccountButton profileName
+            hover _accountButton
+            click _accountButton
+            clickSwitchAccountButton profileName
+
+let selectProfile profileName = 
       click _accountButton
-      clickSwitchAccountButton profileName
-
-let selectProfile = 
-      click _accountButton
-      clickSelectProfile
-
-
-
-
-
-
-
-// "//div[contains(concat(' ',@class,' '),' sys-profile-switch-row ') and .//a[contains(concat(' ',@class,' '),' bx-def-unit-info-title ') and text()='Valentin'] ]//div[contains(concat(' ',@class,' '),' sys-profile-switch-row-control ')]/a"
+      clickSelectProfile profileName
