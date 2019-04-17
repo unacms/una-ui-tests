@@ -25,8 +25,6 @@
     <Compile Include="Tests/LoginTests.fs" />
     <Compile Include="Tests/CreateNewProfilePersonTests.fs" />
     <Compile Include="Tests/ProfileToolbarTests.fs" />
-    <Compile Include="Components/Login2.fs" />
-    <Compile Include="Tests/LoginTests2.fs" /> 
     <Compile Include="Program.fs" />    
   </ItemGroup>
   <ItemGroup>
