@@ -1,26 +1,60 @@
-module LoginTests
+namespace Tests.LoginTests2
 
-open canopy.runner.classic
-open canopy.classic
+
+open NUnit.Framework
+open VCanopy.GivenWhenThen
+open VCanopy.Functions
+open VCanopy.NUnit
+open Login
 open Common
-open Header
-open CanopyExtensions
 
 
-let all () =
 
-    context "Login tests"  
 
-    before (fun _ -> 
+
+
+[<Parallelizable(ParallelScope.All)>]
+type LoginTests () =
+
+
+
+
+    [<UseDriver>]
+    [<Test>]    
+    member this.``Smoke Login test and check name with spaces`` ()=
+        //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
         goto Pages.Login.uri
-    )
+        click Header._loginButton
+        _email << defaultAdmin.userName
+        _password << defaultAdmin.userPassword
+        click _loginButton
+        click Header._accountButton
+        click Header._accountLogout 
+        ()
 
-    "Log in test" &&& fun _ ->
-        Login._email << defaultAdmin.userName
-        Login._password << defaultAdmin.userPassword
-        click Login._loginButton
-        //verify that we logged as admin
-        
-        // ToDo replace defaultAdmin with a newly created user in the test so that user has no any profiles and has the name of the actual user
-        // _loggedAccountName == "admin"
-        Login.userLogout()
+    [<UseDriver>]
+    [<Test>]
+    member this.SmokeLoginTestGWT ()=
+        Given "a not logged in user on home page"       (fun _ ->
+            goto Pages.Login.uri
+                                                        ) |>
+        When "user clicks header login button and enters a correct login details"      (fun _ ->
+            click Header._loginButton
+            _email << defaultAdmin.userName
+            _password << defaultAdmin.userPassword
+                                                        ) |>
+        AndWhen "user clicks submit login button "      (fun _ ->
+            click _loginButton
+            
+                                                        ) |>
+        Then "user logs in "                            (fun _ ->
+            //todo add a check that we're in a portal
+            ()
+                                                        ) |>
+        AndThen "can logout by pressing `account` button & `sign out` button "    (fun _ ->
+            click Header._accountButton
+            click Header._accountLogout 
+
+                                                        ) |>
+        Run                                                                
+

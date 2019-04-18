@@ -1,6 +1,6 @@
 module PostToFeed
 
-open canopy.classic
+open VCanopy.Functions
 open System
 open CanopyExtensions
 
@@ -12,7 +12,7 @@ let _postButton = css "button[type='submit']"
 let _postToFeedElement = css "#bx-form-element-text div.show-placeholder > span"
 
 // see below clickEmojiButton
-let _addEmojiButton = css ".add-emoji a"
+let _addEmojiButton = css "a[title='Add Emoji']"
 let _joyButton = css ".emoji-items a[title=':joy:']"
 let _addLinkButton = css ".add-link a"
 let _addLinkTextBox = css "input[name='url']"
@@ -37,9 +37,13 @@ let postMessageAndVerify messageToPost =
 let clickEmojiButton emojiButton = 
     click _addEmojiButton
     let selector = sprintf ".emoji-items a[title='%s']" emojiButton    
-    canopy.classic.waitForElement (css selector)    
+    waitForElement (css selector)    
     click (css selector)     
 
-let addedLinkSection itemNumber = 
-    let section = sprintf "#bx-timeline-attach-link-form_field [id^=bx-timeline-attach-link-item]:nth-child(%i)" itemNumber
+let addedLinkSectionChild itemNumber childCSS = 
+    let section = sprintf "#bx-timeline-attach-link-form_field [id^=bx-timeline-attach-link-item]:nth-child(%i)%s" itemNumber childCSS
     css section
+
+let addedLinkSection itemNumber = 
+    addedLinkSectionChild itemNumber ""
+
