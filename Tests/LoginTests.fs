@@ -13,7 +13,7 @@ open Common
 
 
 
-[<Parallelizable(ParallelScope.All)>]
+[<Parallelizable(ParallelScope.Children)>]
 type LoginTests () =
 
 
@@ -22,11 +22,12 @@ type LoginTests () =
     [<UseDriver>]
     [<Test>]    
     member this.``Smoke Login test and check name with spaces`` ()=
+        let user = user_luck
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
         goto Pages.Login.uri
         click Header._loginButton
-        _email << defaultAdmin.userName
-        _password << defaultAdmin.userPassword
+        _email << user.userName
+        _password << user.userPassword
         click _loginButton
         click Header._accountButton
         click Header._accountLogout 
@@ -39,9 +40,10 @@ type LoginTests () =
             goto Pages.Login.uri
                                                         ) |>
         When "user clicks header login button and enters a correct login details"      (fun _ ->
+            let user = user_lily
             click Header._loginButton
-            _email << defaultAdmin.userName
-            _password << defaultAdmin.userPassword
+            _email << user.userName
+            _password << user.userPassword
                                                         ) |>
         AndWhen "user clicks submit login button "      (fun _ ->
             click _loginButton
