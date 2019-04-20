@@ -26,7 +26,7 @@ type PostToFeedTests(postToFeedFrom:string) =
 //     let postToFeedFrom = "PostToFeedFromProfile"
 
 
-    //member this.Setup credentials= 
+    
     let setup credentials= 
         Login.userLogin credentials
 

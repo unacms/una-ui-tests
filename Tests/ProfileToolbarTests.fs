@@ -16,18 +16,17 @@ open PostToFeed
 open CanopyExtensions
 open AccountPopup
 
-[<Parallelizable(ParallelScope.All)>]
+[<Parallelizable(ParallelScope.Children)>]
 
-type CreateNewPersonalProfile () =
+type ProfileToolbarTests () =
      
 
-    [<SetUp>]    
-    member this.Setup()= 
-        Login.userLogin defaultAdmin
+    let setup credentials= 
+        Login.userLogin credentials
+
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
         deleteAllProfiles()
-
         let femaleProfile = {defaultProfile with FullName="Natalia"}
         createPersonProfileWithAccessibilityTesting femaleProfile 
         let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}
@@ -52,6 +51,7 @@ type CreateNewPersonalProfile () =
     [<Test>]    
     member this. ``Switch profile, raise a report and check that a proper number of report(s) is raised``()=
         
+        setup user_luck
         switchProfile "Natalia"
         clickMoreButton()
         click _reportButton
