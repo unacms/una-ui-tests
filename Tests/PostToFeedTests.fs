@@ -17,7 +17,7 @@ type PostToFeedFrom =
     | PostToFeedFromProfile of string
 
 
-[<Parallelizable(ParallelScope.All)>]
+[<Parallelizable(ParallelScope.Children)>]
 [<TestFixture("PostToFeedFromAccount")>]
 [<TestFixture("PostToFeedFromProfile")>]
 type PostToFeedTests(postToFeedFrom:string) =
@@ -26,9 +26,9 @@ type PostToFeedTests(postToFeedFrom:string) =
 //     let postToFeedFrom = "PostToFeedFromProfile"
 
 
-    [<SetUp>]    
-    member this.Setup()= 
-        Login.userLogin defaultAdmin
+    //member this.Setup credentials= 
+    let setup credentials= 
+        Login.userLogin credentials
 
         let reportName = 
             match postToFeedFrom with
@@ -56,38 +56,40 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]    
     member this.``Post 'Hello yyyyMMdd-hhmmss' to Feed -> adds 'Hello yyyyMMdd-hhmmss' message to feed`` ()=
+        setup user_luck
         let now = DateTime.Now.ToString("yyyyMMdd-hhmmss")        
         let messageToPost = sprintf "Hello %s" now
         insertPostMessage messageToPost
         _visibility << "Public"
-        //_publishAt << "2019-02-21 00:00"
         click _postButton
         _postedMessage == messageToPost
     
     [<UseDriver>]
     [<Test>]    
     member this.``Click Add emoji -> Adds to feed a post message with emoji`` ()=
+        setup user_lily
         scrollTo _postToFeedHeader
         clickEmojiButton ":joy:"
         _visibility << "Public"
-        //_publishAt << "2019-02-21 00:00"
         click _postButton
         _postedMessage == "😂"
 
     [<UseDriver>]
     [<Test>]    
     member this.``Click Add link -> Adds to feed a post message with a link`` ()=
+        setup user_eva
         click _addLinkButton
         _addLinkTextBox << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
         _visibility << "Public"
         //_publishAt << "2019-02-21 00:00"
         click _postButton
+        //What is the check in that test???
 
     [<UseDriver>]
     [<Test>]    
     member this.``Click Add link, Do not insert link -> Adds to feed a post message with a link`` ()=
-        //clickAndWait _addLinkButton _addLinkSubmitButton 10
+        setup user_linda
         click _addLinkButton
         click _addLinkSubmitButton 
         _addLinkError == "Correct Link is essential. Please, fill in this field."
@@ -96,6 +98,7 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]    
     member this.``Click Add link, insert 12345 into link field -> Adds to feed a post message with a link`` ()=
+        setup user_emma
         click _addLinkButton
         _addLinkTextBox << "12345"
         click _addLinkSubmitButton 
@@ -107,6 +110,7 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]    
     member this.``Click Add and Delete link -> Deletes added link`` ()=
+        setup user_karen
         click _addLinkButton
         _addLinkTextBox << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
@@ -114,7 +118,9 @@ type PostToFeedTests(postToFeedFrom:string) =
         
         //click delete anchor in the first section with added link
         let firstAddedLinkSection = addedLinkSection 1
-        click (addedLinkSectionChild 1 " a")
+        scrollTo firstAddedLinkSection
+        let sc = (addedLinkSectionChild 1 " a")
+        click sc //(addedLinkSectionChild 1 " a")
 
         //make sure that element is not displayed
         throwIfElementDisplayed firstAddedLinkSection

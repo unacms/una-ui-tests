@@ -7,12 +7,15 @@ open System
 open OpenQA.Selenium.Chrome
 open OpenQA.Selenium
 open OpenQA.Selenium.Remote
+open System
 
 [<SetUpFixture>]
 type TestsSetup () =
 
     let createChromeDriver():IWebDriver = 
-        upcast new ChromeDriver("/usr/bin")
+        let driver = new ChromeDriver("/usr/bin")
+        driver.Manage().Timeouts().AsynchronousJavaScript <- TimeSpan.FromMinutes(1.0)
+        upcast driver
 
     let createRemoteDriver():IWebDriver =
         let browserUrl = "" //"http://testbrowser:4444/wd/hub/" 
@@ -25,7 +28,7 @@ type TestsSetup () =
     [<OneTimeSetUp>]    
     member this.GlobalSetup () = 
         setDriverFactory createChromeDriver
-        setConfig {WebDriverInstanceCount = 1; CompleteDriverRelease = true}
+        setConfig {WebDriverInstanceCount = 4; CompleteDriverRelease = true}
 
     [<OneTimeTearDown>]   
     member this.GlobalTeardown () = ()
