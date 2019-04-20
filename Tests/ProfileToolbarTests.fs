@@ -26,7 +26,7 @@ type ProfileToolbarTests () =
 
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
-        deleteAllProfiles()
+        deleteAllProfiles credentials
         let femaleProfile = {defaultProfile with FullName="Natalia"}
         createPersonProfileWithAccessibilityTesting femaleProfile 
         let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}
@@ -50,8 +50,8 @@ type ProfileToolbarTests () =
     [<UseDriver>]
     [<Test>]    
     member this. ``Switch profile, raise a report and check that a proper number of report(s) is raised``()=
-        
-        setup user_luck
+        let user = user_luck
+        setup user
         switchProfile "Natalia"
         clickMoreButton()
         click _reportButton
@@ -59,7 +59,7 @@ type ProfileToolbarTests () =
         click _postReportButton
         _reportCounter == "1" 
         Login.userLogout()
-        Login.userLogin defaultAdmin
+        Login.userLogin user
         switchProfile "Natalia"
         selectProfile "Valentin"
         clickMoreButton()

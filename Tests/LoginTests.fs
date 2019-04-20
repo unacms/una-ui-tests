@@ -26,7 +26,7 @@ type LoginTests () =
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
         goto Pages.Login.uri
         click Header._loginButton
-        _email << user.userName
+        _email << user.userEmail
         _password << user.userPassword
         click _loginButton
         click Header._accountButton
@@ -42,7 +42,7 @@ type LoginTests () =
         When "user clicks header login button and enters a correct login details"      (fun _ ->
             let user = user_lily
             click Header._loginButton
-            _email << user.userName
+            _email << user.userEmail
             _password << user.userPassword
                                                         ) |>
         AndWhen "user clicks submit login button "      (fun _ ->

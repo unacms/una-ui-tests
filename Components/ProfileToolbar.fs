@@ -6,6 +6,7 @@ open System
 open Header
 open AccountPopup
 open TestHelpers
+open TestTypes
 
 
 
@@ -46,9 +47,9 @@ let deleteProfile() =
 //Helpers for debugging
 
 ///the method fails for some reason as it can't press any(_currentUserProfileButton,_profileButton) of the profile buttons.
-let rec deleteAllProfiles() =
+let rec deleteAllProfiles credentials =
     let currentProfileName = Header.currentProfileName()
-    if ("admin" <> currentProfileName) then                    
+    if (credentials.userName <> currentProfileName) then                    
         retry 3 (fun _ ->
             hover _accountButton
             click _accountButton
@@ -60,4 +61,4 @@ let rec deleteAllProfiles() =
         click _deleteProfileButton
         click _checkboxButton
         click _deleteProfileSubmitButton
-        deleteAllProfiles()
+        deleteAllProfiles credentials

@@ -15,12 +15,12 @@ let _doneButton = xpath "//footer//ul//a[text()='Done' and contains(concat(' ',@
 let userLogin userCredentials = 
     printfn "about to login using %A" userCredentials
     goto Pages.Login.uri
-    _email << userCredentials.userName
+    _email << userCredentials.userEmail
     _password << userCredentials.userPassword
     click _loginButton
     waitForElement Header._loggedAccountName // this is just to make sure we're on the profile page & we have logged
 
-
+    // ToDo find out the conditions when those 2 buttons appear and call click only if they appear
     clickUnstable _nextButton
     clickUnstable _doneButton
     printfn "logged in using %A" userCredentials
