@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y libc6-dev libgdiplus
 
 COPY / ./tests
 
-RUN sed -i 's/let browserUrl = /let browserUrl = "http:\/\/testbrowser:4444\/wd\/hub\/" \/\/ /g' tests/Tests/TestsSetup.fs && \
+RUN sed -i 's/let browserUrl = /let browserUrl = "http:\/\/hub:4444\/wd\/hub\/" \/\/ /g' tests/Tests/TestsSetup.fs && \
     sed -i 's/setDriverFactory /setDriverFactory createRemoteDriver \/\/ /g' tests/Tests/TestsSetup.fs 
    
 

@@ -1,3 +1,3 @@
 namespace TestTypes
 
-type Credentials = {userName: string; userPassword: string}
+type Credentials = {userEmail: string; userPassword: string; userName: string}
