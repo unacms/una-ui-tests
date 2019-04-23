@@ -13,11 +13,15 @@ let defaultAdmin = {
     //to make this work add on local machine into your ~/.bashrc next line
     // export adminexamplepassword=apasswordforadminuser
     userPassword = Environment.GetEnvironmentVariable("adminexamplepassword");
-    userName = "admin"
+    userName = "admin";
+    isAdmin = true
 }
 
 let createUser userName =
-    {defaultAdmin with userEmail = userName + "@example.com"; userName = userName}
+    {defaultAdmin with userEmail = userName + "@example.com"; userName = userName; 
+                        // ToDo uncomment later once users will be changed to not admins
+                        //isAdmin = false
+    }
 
 let user_luck = createUser "luck" 
 let user_lily = createUser "lily"
