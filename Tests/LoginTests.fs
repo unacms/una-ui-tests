@@ -11,13 +11,8 @@ open Common
 
 
 
-
-
 [<Parallelizable(ParallelScope.Children)>]
 type LoginTests () =
-
-
-
 
     [<UseDriver>]
     [<Test>]  
@@ -101,4 +96,21 @@ type LoginTests () =
         _password << "unaUna123"
         click _loginButton
 
-        Login. _loginEmailError == "Entered email or password is incorrect. Please try again."       
+        Login. _loginEmailError == "Entered email or password is incorrect. Please try again."   
+
+
+    [<UseDriver>]
+    [<TestCase(null)>] 
+    [<TestCase("")>] 
+    [<TestCase("1234")>] 
+    [<TestCase("qwerty")>] 
+    [<Category("Negative")>]
+    member this.``Login test with incorrect password field`` password=
+        
+        goto Pages.Login.uri
+        _email << "eva@example.com"
+        if not (isNull password) then
+            _password << password
+        click _loginButton
+
+        Login. _loginEmailError == "Entered email or password is incorrect. Please try again."
