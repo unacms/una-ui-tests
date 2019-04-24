@@ -101,14 +101,14 @@ type LoginTests () =
 
     [<UseDriver>]
     [<TestCase(null)>] 
-    [<TestCase("")>] 
-    [<TestCase("1234")>] 
-    [<TestCase("qwerty")>] 
+    [<TestCase("",1)>] 
+    [<TestCase("1234",1)>] 
+    [<TestCase("qwerty",2)>] 
     [<Category("Negative")>]
-    member this.``Login test with incorrect password field`` password=
-        
+    member this.``Login test with incorrect password field`` password userId=
+        let user = if (userId = 1) then user_eva else user_linda
         goto Pages.Login.uri
-        _email << "eva@example.com"
+        _email << user.userEmail
         if not (isNull password) then
             _password << password
         click _loginButton
