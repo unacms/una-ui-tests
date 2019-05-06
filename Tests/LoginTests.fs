@@ -68,7 +68,7 @@ type LoginTests () =
         _password << "unaUna123"
         click _loginButton
 
-        Login. _loginEmailError == "Error Occurred"
+        Login._loginEmailError == "Error Occurred"
 
     [<UseDriver>]
     [<TestCase("a.com")>] 
@@ -96,16 +96,17 @@ type LoginTests () =
         _password << "unaUna123"
         click _loginButton
 
-        Login. _loginEmailError == "Entered email or password is incorrect. Please try again."   
+        Login._loginEmailError == "Entered email or password is incorrect. Please try again."   
 
 
     [<UseDriver>]
-    [<TestCase(null)>] 
+    [<TestCase(null,0)>] 
     [<TestCase("",1)>] 
     [<TestCase("1234",1)>] 
     [<TestCase("qwerty",2)>] 
     [<Category("Negative")>]
     member this.``Login test with incorrect password field`` password userId=
+        //we can't use same email more than 2 times as it would lock the account
         let user = if (userId = 1) then user_eva else user_linda
         goto Pages.Login.uri
         _email << user.userEmail
@@ -113,4 +114,4 @@ type LoginTests () =
             _password << password
         click _loginButton
 
-        Login. _loginEmailError == "Entered email or password is incorrect. Please try again."
+        Login._loginEmailError == "Entered email or password is incorrect. Please try again."

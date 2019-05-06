@@ -31,6 +31,15 @@ let user_emma = createUser "emma"
 let user_karen = createUser "karen"
 let user_ella = createUser "ella"
 let user_viky = createUser "viky"
+let user_mila = createUser "mila"
+let user_eric = createUser "eric"
+let user_jack = createUser "jack"
+let user_rob = createUser "rob"
+let user_dave = createUser "dave"
+let user_tom = createUser "tom"
+let user_andy = createUser "andy"
+let user_ivan = createUser "ivan"
+
 
 let generateResultsFullFileName filename = sprintf "./TestResults/%s" filename
 
