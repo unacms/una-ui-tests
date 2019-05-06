@@ -44,7 +44,6 @@ type ``Create a New Personal Profile`` () =
         postMessageAndVerify "Hello world"
         deleteProfile()
 
-
     [<UseDriver>]
     [<Test>]
     [<Category("Negative")>]
@@ -52,13 +51,37 @@ type ``Create a New Personal Profile`` () =
         setup user_eva
         let maleProfile = {defaultProfile with Gender = "Man"}
         _fullNameError == "This information is essential. Please, fill in this field."
-        
-          
+                  
     [<UseDriver>]
     [<Test>]
     [<Category("Negative")>]
     member this.``Create person profile and put the birthday date less then 18 yo``() =
         setup user_eva
-        let maleProfile = {defaultProfile with Gender = "Man"; Birthday = DateTime.Now.AddYears(-18)}
+        let maleProfile = {defaultProfile with Gender = "Man"; Birthday = DateTime.Now.AddYears(-18).AddDays(1.0)}
         _birthdayError == "Your age should be in the range of 18 to 99 years"
-        
+    
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Negative")>]
+    member this.``Create person profile and put the birthday date more than 99``() =
+        setup user_eva
+        let maleProfile = {defaultProfile with Gender = "Man"; Birthday = DateTime.Now.AddYears(-99).AddDays(1.0)}
+        _birthdayError == "Your age should be in the range of 18 to 99 years"  
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    member this.``Create person profile and put the birthday date 18 yo``() =
+        setup user_eva
+        let maleProfile = {defaultProfile with Gender = "Man"; Birthday = DateTime.Now.AddYears(-18); FullName = "Nick"}
+        createPersonProfile maleProfile
+        deleteProfile()
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    member this.``Create person profile and put the birthday date 99 yo``() =
+        setup user_linda
+        let maleProfile = {defaultProfile with Gender = "Man"; Birthday = DateTime.Now.AddYears(-99).AddDays(1.); FullName = "Nathan"}
+        createPersonProfile maleProfile
+        deleteProfile()
