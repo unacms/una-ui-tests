@@ -73,4 +73,10 @@ let defaultIf action defaultValue =
     with 
     | _ -> defaultValue
 
+let ( <<< ) element text = 
+    match text with
+    | Some t -> write t element
+    | _ -> ()    
+        
+
   

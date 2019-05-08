@@ -27,9 +27,9 @@ type ProfileToolbarTests () =
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
         deleteAllProfiles credentials
-        let femaleProfile = {defaultProfile with FullName="Natalia"}
+        let femaleProfile = {defaultProfile with FullName = Some "Natalia"}
         createPersonProfileWithAccessibilityTesting femaleProfile 
-        let maleProfile = {defaultProfile with Gender = "Man"; FullName="Valentin"}
+        let maleProfile = {defaultProfile with Gender = "Man"; FullName = Some "Valentin"}
         createPersonProfileWithAccessibilityTesting maleProfile
    
 
