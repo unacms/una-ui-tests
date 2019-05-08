@@ -15,6 +15,8 @@ let _location = css "input[id='bx_person_input_d5189de027922f81005951e6efe0efd5_
 let _locationOkButton = css "button.dismissButton"
 let _visibleTo = css "select[name='allow_view_to']"
 let _submitButton = css "button[type='submit']"
+let _fullNameError = css "#bx-form-element-fullname .bx-form-warn"
+let _birthdayError = css "#bx-form-element-birthday .bx-form-warn"
 
 type Profile = {Gender: string; Birthday: DateTime; FullName: string; Location: string; VisibleTo:string }
 

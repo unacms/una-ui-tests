@@ -11,16 +11,12 @@ open Common
 
 
 
-
-
 [<Parallelizable(ParallelScope.Children)>]
 type LoginTests () =
 
-
-
-
     [<UseDriver>]
-    [<Test>]    
+    [<Test>]  
+    [<Category("Positive")>]  
     member this.``Smoke Login test and check name with spaces`` ()=
         let user = user_luck
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
@@ -30,11 +26,11 @@ type LoginTests () =
         _password << user.userPassword
         click _loginButton
         click Header._accountButton
-        click Header._accountLogout 
-        ()
+        click Header._accountLogout
 
     [<UseDriver>]
     [<Test>]
+    [<Category("Positive")>]
     member this.SmokeLoginTestGWT ()=
         Given "a not logged in user on home page"       (fun _ ->
             goto Pages.Login.uri
@@ -60,3 +56,62 @@ type LoginTests () =
                                                         ) |>
         Run                                                                
 
+
+    [<UseDriver>]
+    [<Test>] 
+    [<Category("Negative")>]
+
+    member this.``Login test with empty email field`` ()=
+        
+        //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
+        goto Pages.Login.uri
+        _password << "unaUna123"
+        click _loginButton
+
+        Login._loginEmailError == "Error Occurred"
+
+    [<UseDriver>]
+    [<TestCase("a.com")>] 
+    [<TestCase("acom")>] 
+    [<TestCase("acom#com")>] 
+    [<TestCase("acom@")>] 
+    [<TestCase("a..b@com")>] 
+    [<TestCase("рпрвыф@com")>] 
+    [<TestCase(".A@com")>]
+    [<TestCase("a@-com")>] 
+    [<TestCase("a@12345.121")>]  
+    [<TestCase("@a.com")>] 
+    [<TestCase("ca#p@com")>] 
+    [<TestCase("ca$p@com")>] 
+    [<TestCase("ca%p@com")>] 
+    [<TestCase("ca^p@com")>] 
+    [<TestCase("ca&p@com")>] 
+    [<TestCase("ca*p@com")>] 
+    [<TestCase("a.@com")>] 
+    [<Category("Negative")>]
+
+    member this.LoginTestWithIncorrectEmailAddress email =
+        goto Pages.Login.uri
+        _email << email
+        _password << "unaUna123"
+        click _loginButton
+
+        Login._loginEmailError == "Entered email or password is incorrect. Please try again."   
+
+
+    [<UseDriver>]
+    [<TestCase(null,0)>] 
+    [<TestCase("",1)>] 
+    [<TestCase("1234",1)>] 
+    [<TestCase("qwerty",2)>] 
+    [<Category("Negative")>]
+    member this.``Login test with incorrect password field`` password userId=
+        //we can't use same email more than 2 times as it would lock the account
+        let user = if (userId = 1) then user_eva else user_linda
+        goto Pages.Login.uri
+        _email << user.userEmail
+        if not (isNull password) then
+            _password << password
+        click _loginButton
+
+        Login._loginEmailError == "Entered email or password is incorrect. Please try again."
