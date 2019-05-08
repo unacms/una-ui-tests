@@ -33,7 +33,7 @@ type PostToFeedTests(postToFeedFrom:string) =
         let reportName = 
             match postToFeedFrom with
                 | "PostToFeedFromProfile" -> 
-                    let maleProfile = {defaultProfile with Gender = "Man"; FullName="Vasily"}
+                    let maleProfile = {defaultProfile with Gender = "Man"; FullName = Some "Vasily"}
                     createPersonProfile maleProfile  
                     "AccessibilityReport-PostToFeedFromProfile"              
                 | _ -> 
