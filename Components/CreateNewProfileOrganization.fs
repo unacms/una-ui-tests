@@ -20,7 +20,7 @@ let _submitButtonError = css "#bx-form-element-do_submit .bx-form-warn"
 
 type OrganizationProfile = { OrganizationName: string option; Category: string option; Location: string; VisibleTo: string }
 let defaultProfileOrganization = {
-    OrganizationName = Some "Roga and Copita";
+    OrganizationName = Some "Head dummy organization";
     Category =  Some "Agriculture";
     Location = "Australia";
     VisibleTo = "Public"

@@ -29,6 +29,7 @@
     <Compile Include="Tests/CreateNewProfilePersonTests.fs" />                      
     <Compile Include="Tests/CreateNewProfileOrganizationTests.fs" />
     <Compile Include="Tests/ProfileToolbarTests.fs" />
+    <Compile Include="Tests/EditOrganizationProfileTests.fs" />
     <Compile Include="Program.fs" />    
   </ItemGroup>
   <ItemGroup>
