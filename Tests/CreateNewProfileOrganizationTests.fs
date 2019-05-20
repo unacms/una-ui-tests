@@ -28,7 +28,7 @@ type CreateNewOrganizationProfile () =
     [<Category("Positive")>]
     member this.``Create organization profile and delete organization profile``() =
         setup user_luck
-        let orgProfile = {defaultProfileOrganization with OrganizationName = Some "FirstRog"; Category = Some "Food"}
+        let orgProfile = {defaultProfileOrganization with OrganizationName = Some "A dummy organization"; Category = Some "Food"}
         createOrganizationProfileWithAccessibilityTesting orgProfile
         deleteOrganizationProfile ()
 
@@ -47,7 +47,7 @@ type CreateNewOrganizationProfile () =
     [<Category("Negative")>]
     member this.CategoryFieldEmpty_ErrorMessage() =
         setup user_lily
-        let orgProfile = {defaultProfileOrganization with  OrganizationName = Some "Copito"; Category = None}
+        let orgProfile = {defaultProfileOrganization with  OrganizationName = Some "Second organization"; Category = None}
         createOrganizationProfile orgProfile
         _categoryError == "Category field is mandatory"
         _submitButtonError == "Incorrect info. Please, check your inputs and try to submit again."

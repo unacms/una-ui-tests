@@ -41,7 +41,7 @@ let createPersonProfileEx profile runAccessibilityTests =
     click _gender
     _fullName <<< profile.FullName
     _location << profile.Location
-    click _locationOkButton
+    //click _locationOkButton
     _visibleTo << profile.VisibleTo
     click _submitButton     
 
