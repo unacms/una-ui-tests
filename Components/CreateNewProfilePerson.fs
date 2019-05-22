@@ -18,14 +18,14 @@ let _submitButton = css "button[type='submit']"
 let _fullNameError = css "#bx-form-element-fullname .bx-form-warn"
 let _birthdayError = css "#bx-form-element-birthday .bx-form-warn"
 
-type Profile = {Gender: string; Birthday: DateTime option; FullName: string option; Location: string; VisibleTo:string }
+type Profile = {Gender: string option; Birthday: DateTime option; FullName: string option; Location: string option; VisibleTo:string option }
 
 let defaultProfile = {
-    Gender = "Woman";
-    Birthday = Some (DateTime(1990,3, 18));
-    FullName = Some "Alexandra";
-    Location = "Australia";
-    VisibleTo = "Public"
+    Gender = None;// "Woman";
+    Birthday = None; //Some (DateTime(1990,3, 18));
+    FullName = Some "Sandra";
+    Location = None;//"Australia";
+    VisibleTo =None;//"Public"
 }
 
 let createPersonProfileEx profile runAccessibilityTests = 
@@ -33,16 +33,16 @@ let createPersonProfileEx profile runAccessibilityTests =
     click _createAnewProfile
     if runAccessibilityTests then createAndWriteAccessibilityReport "AccessibilityReport-CreatePersonalProfile"
     click  _personButton
-    _gender << profile.Gender
+    _gender <<< profile.Gender
     
     let birthday = profile.Birthday |> Option.map (fun dob -> dob.ToString("yyyy-MM-dd"))
 //    let birthday = Option.map (fun (dob:DateTime) -> dob.ToString("yyyy-MM-dd")) profile.Birthday
     _birthday <<< birthday
     click _gender
     _fullName <<< profile.FullName
-    _location << profile.Location
+    _location <<< profile.Location
     //click _locationOkButton
-    _visibleTo << profile.VisibleTo
+    _visibleTo <<< profile.VisibleTo
     click _submitButton     
 
 

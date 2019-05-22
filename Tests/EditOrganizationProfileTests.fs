@@ -33,8 +33,7 @@ type EditOrganizationProfile () =
     [<Category("Positive")>]
     member this.ChangingOrganizationName_OrganizationNameGetsUpdated() =
         setup user_luck
-        let orgProfile = {defaultProfileOrganization with OrganizationName = Some "A dummy organization name"; Category = Some "Food"}
-        createOrganizationProfileWithAccessibilityTesting orgProfile
+        createOrganizationProfile defaultProfileOrganization
         startEditOrganizationProfile ()
         _editProfileOrganizationName << "A new org name"
         click _editProfileSubmitButton
@@ -56,8 +55,7 @@ type EditOrganizationProfile () =
         // From business point of view what is currently decribed is easier to read and understand.
         Given "a user modifies organization profile" (fun _ ->
             setup user_lily
-            let orgProfile = {defaultProfileOrganization with OrganizationName = Some "A dummy organization"; Category = Some "Food"}
-            createOrganizationProfileWithAccessibilityTesting orgProfile
+            createOrganizationProfile defaultProfileOrganization
             startEditOrganizationProfile ()
             ) |>
         When "user enters empty organization name and clicks submit button" (fun _ ->        
@@ -76,8 +74,7 @@ type EditOrganizationProfile () =
     [<Category("Positive")>]
     member this.ChangingOrganizationCategory_CategoryGetsUpdated() = 
         setup user_eva
-        let orgProfile = {defaultProfileOrganization with OrganizationName = Some "A dummy organization"; Category = Some "Food"}
-        createOrganizationProfileWithAccessibilityTesting orgProfile
+        createOrganizationProfile defaultProfileOrganization
         startEditOrganizationProfile ()
         _editProfileOrganizationCategory << "Energy"
         click _editProfileSubmitButton
@@ -92,16 +89,16 @@ type EditOrganizationProfile () =
     [<TestCase("Friends", 2)>]
     [<TestCase("Closed", 3)>]
     [<TestCase("Secret", 4)>]
+    
 
     member this.ChangingOrganizationVisibleTo_VisibleToGetsUpdatedtoMeOnly visibleTo index = 
     // [<Test>]
-    // member this.ChangingOrganizationVisibleTo_VisibleToGetsUpdatedtoMeOnly() =
+    // member this.ChangingOrganizationVisibleTo_VisibleToGetsUpdated() =
     //     let visibleTo="Public"
-    //     let index = 0
+    //     let index = 1
         let user = [user_linda; user_emma; user_karen; user_ella; user_viky].[index]
         setup user
-        let orgProfile = {defaultProfileOrganization with OrganizationName = Some "A dummy organization"; Category = Some "Food"}
-        createOrganizationProfileWithAccessibilityTesting orgProfile
+        createOrganizationProfile defaultProfileOrganization
         startEditOrganizationProfile ()
         scrollTo _editProfileOrganizationVisibleTo
         _editProfileOrganizationVisibleTo << visibleTo
@@ -122,8 +119,7 @@ type EditOrganizationProfile () =
     member this.ChangingOrganizationWhoCanPost_WhoCanPostGetsUpdated whoCanPost index = 
         let user = [user_mila; user_eric; user_jack; user_rob; user_dave].[index]
         setup user
-        let orgProfile = {defaultProfileOrganization with OrganizationName = Some "A dummy organization"; Category = Some "Food"}
-        createOrganizationProfileWithAccessibilityTesting orgProfile
+        createOrganizationProfile defaultProfileOrganization
         startEditOrganizationProfile ()
         scrollTo _editProfileOrganizationWhoCanPost
         _editProfileOrganizationWhoCanPost << whoCanPost
@@ -137,8 +133,7 @@ type EditOrganizationProfile () =
     [<Category("Negative")>]
     member this.EmptyOrganizationCategory_ShowsErrorMessage() = 
         setup user_andy
-        let orgProfile = {defaultProfileOrganization with OrganizationName = Some "A dummy organization"; Category = Some "Food"}
-        createOrganizationProfileWithAccessibilityTesting orgProfile
+        createOrganizationProfile defaultProfileOrganization
         startEditOrganizationProfile ()
         _editProfileOrganizationCategory << ""
         click _editProfileSubmitButton

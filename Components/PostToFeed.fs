@@ -31,7 +31,6 @@ let insertPostMessage message =
 
 let postMessageAndVerify messageToPost = 
     insertPostMessage messageToPost
-    _visibility << "Public"
     click _postButton
     _postedMessage == messageToPost
 

@@ -18,12 +18,12 @@ let _organizationNameError = css "#bx-form-element-org_name .bx-form-warn"
 let _categoryError = css "#bx-form-element-org_cat .bx-form-warn"
 let _submitButtonError = css "#bx-form-element-do_submit .bx-form-warn"
 
-type OrganizationProfile = { OrganizationName: string option; Category: string option; Location: string; VisibleTo: string }
+type OrganizationProfile = { OrganizationName: string option; Category: string option; Location: string option; VisibleTo: string option }
 let defaultProfileOrganization = {
     OrganizationName = Some "Head dummy organization";
     Category =  Some "Agriculture";
-    Location = "Australia";
-    VisibleTo = "Public"
+    Location = None; //"Australia";
+    VisibleTo = None; //"Public"
 }
 
 let createOrganizationProfileEx profile runAccessibilityTests = 
@@ -33,8 +33,8 @@ let createOrganizationProfileEx profile runAccessibilityTests =
     click  _organizationButton
     _organizationName <<< profile.OrganizationName
     _category <<< profile.Category
-    _location << profile.Location
-    _visibleTo << profile.VisibleTo
+    _location <<< profile.Location
+    _visibleTo <<< profile.VisibleTo
     click _submitButton     
 
 

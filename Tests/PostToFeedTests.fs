@@ -33,7 +33,7 @@ type PostToFeedTests(postToFeedFrom:string) =
         let reportName = 
             match postToFeedFrom with
                 | "PostToFeedFromProfile" -> 
-                    let maleProfile = {defaultProfile with Gender = "Man"; FullName = Some "Vasily"}
+                    let maleProfile = {defaultProfile with Gender = Some "Man"; FullName = Some "Vasily"}
                     createPersonProfile maleProfile  
                     "AccessibilityReport-PostToFeedFromProfile"              
                 | _ -> 
@@ -56,23 +56,21 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
-    member this.``Post 'Hello yyyyMMdd-hhmmss' to Feed -> adds 'Hello yyyyMMdd-hhmmss' message to feed`` ()=
+    member this.PostHelloDateOnMoment_PostsMessageWithNowDate ()=
         setup user_luck
         let now = DateTime.Now.ToString("yyyyMMdd-hhmmss")        
         let messageToPost = sprintf "Hello %s" now
         insertPostMessage messageToPost
-        _visibility << "Public"
         click _postButton
         _postedMessage == messageToPost
     
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
-    member this.``Click Add emoji -> Adds to feed a post message with emoji`` ()=
+    member this.ClickAddEmoji_PostsMessageWithEmoji()=
         setup user_lily
         scrollTo _postToFeedHeader
         clickEmojiButton ":joy:"
-        _visibility << "Public"
         click _postButton
         _postedMessage == "😂"
         
@@ -80,12 +78,11 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>] 
-    member this.``Click Add link -> Adds to feed a post message with a link`` ()=
+    member this.ClickAddLink_PostsMessageWithLink()=
         setup user_eva
         click _addLinkButton
         _addLinkTextBox << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
-        _visibility << "Public"
         //_publishAt << "2019-02-21 00:00"
         click _postButton
         //Just check conteiner in place, requiered visiual testing
@@ -94,7 +91,7 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]    
     [<Category("Negative")>]
-    member this.``Click Add link, Do not insert link -> Adds to feed a post message with a link`` ()=
+    member this.ClickAddLinkWithEmtyField_ShowsErrorMessage ()=
         setup user_linda
         click _addLinkButton
         click _addLinkSubmitButton 
@@ -104,7 +101,7 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]    
     [<Category("Negative")>]
-    member this.``Click Add link, insert 12345 into link field -> Adds to feed a post message with a link`` ()=
+    member this.ClickAddLinkWith12345_ShowsErrorMessage ()=
         setup user_emma
         click _addLinkButton
         _addLinkTextBox << "12345"
@@ -117,18 +114,16 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>] 
-    member this.``Click Add and Delete link -> Deletes added link`` ()=
+    member this.ClickAddAndDeleteLink_DeletesMessageWithLink ()=
         setup user_karen
         click _addLinkButton
         _addLinkTextBox << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
-        _visibility << "Public"
         
         //click delete anchor in the first section with added link
         let firstAddedLinkSection = addedLinkSection 1
         scrollTo firstAddedLinkSection
-        let sc = (addedLinkSectionChild 1 " a")
-        click sc //(addedLinkSectionChild 1 " a")
+        click (addedLinkSectionChild 1 " a")
 
         //make sure that element is not displayed
         throwIfElementDisplayed firstAddedLinkSection
@@ -137,9 +132,9 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>] 
     [<Category("Negative")>]  
-    member this.``Leave empty Post to Feed field and post it`` ()=
+    member this.EmptyPostToFeedField_ShowsErrorMessage ()=
         setup user_ella
-        _visibility << "Public"
+        //not entering a message
         click _postButton
         _postToFeedError == "The post is empty."
 
@@ -147,14 +142,13 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
-    member this.``Adds to feed a post message with emoji and a link`` ()=
+    member this.PostMessageWithEmojiAndLink_PostsMessageWithEmojiAndLink()=
         setup user_viky
         scrollTo _postToFeedHeader
         clickEmojiButton ":joy:"
         click _addLinkButton
         _addLinkTextBox << "https://ci.una.io/test/"
         click _addLinkSubmitButton 
-        _visibility << "Public"
         click _postButton
         _postedMessage == "😂"
         waitForDisplayed _postedLinkFrame
@@ -164,14 +158,13 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
-    member this.``Adds to feed a post message emoji and 'Hello yyyyMMdd-hhmmss' `` ()=
+    member this.AddsEmojiAndDateOnMoment_PostsMessageWithEmojiAndDate()=
         setup user_mila
         scrollTo _postToFeedHeader
         let now = DateTime.Now.ToString("yyyyMMdd-hhmmss")        
         let messageToPost = sprintf "Hello %s" now
         insertPostMessage messageToPost
         clickEmojiButton ":joy:"
-        _visibility << "Public"
         click _postButton
         // the emoji appears in front just because the cursor was at the beginning
 
