@@ -55,4 +55,48 @@ type CreateNewOrganizationProfile () =
     member this.OrganizationName50characters_CreatesProfile() =
         setup user_eva
         createOrganizationProfile {defaultProfileOrganization with OrganizationName = Some "12345678901234567890123456789012345678901234567890"}
+        deleteOrganizationProfile () 
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    member this.EmptyLocationField_CreatesProfile() =
+        setup user_linda
+        createOrganizationProfile {defaultProfileOrganization with Location = None}
+        deleteOrganizationProfile ()           
+
+    [<UseDriver>] 
+    [<Test>]
+    [<Category("Positive")>]
+    member this.ValidLocationField_CreatesProfile() =
+        setup user_emma
+        createOrganizationProfile {defaultProfileOrganization with Location = Some "Australia"}
+        deleteOrganizationProfile () 
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    [<TestCase("Me only",0)>]
+    [<TestCase("Public",1)>]
+    [<TestCase("Friends",2)>]
+    [<TestCase("Closed",3)>]
+    [<TestCase("Secret",4)>]
+    member this.ValidVisibleToField_CreatesProfile visibleTo index =
+        let user = [user_karen; user_ella; user_viky; user_mila; user_eric].[index]
+        setup user
+        createOrganizationProfile {defaultProfileOrganization with VisibleTo = Some visibleTo}
+        deleteOrganizationProfile ()   
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    [<TestCase("Me only",0)>]
+    [<TestCase("Public",1)>]
+    [<TestCase("Friends",2)>]
+    [<TestCase("Employees",3)>]
+    [<TestCase("Followers",4)>]
+    member this.ValidWhoCanPostField_CreatesProfile whoCanPost index =
+        let user = [user_jack; user_rob; user_dave; user_tom; user_andy].[index]
+        setup user
+        createOrganizationProfile {defaultProfileOrganization with WhoCanPost = Some whoCanPost}
         deleteOrganizationProfile ()        

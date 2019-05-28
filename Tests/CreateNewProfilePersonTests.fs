@@ -96,3 +96,59 @@ type CreateNewPersonalProfileTests () =
         createPersonProfile {defaultProfile with Gender = None} 
         deleteProfile()
 
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    [<TestCase("Man",0)>]
+    [<TestCase("Woman",1)>]
+    member this.ValidGenderField_GenderFieldGetsUpdated gender index =
+        let user = [user_viky; user_mila].[index]
+        setup user  
+        createPersonProfile {defaultProfile with Gender = Some gender}
+        _genderInfo == gender
+        deleteProfile()
+
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]    
+    member this.ValidLocationField_LocationFieldGetsUpdated() =
+        setup user_eric
+        createPersonProfile {defaultProfile with Location = Some "Australia"}
+        deleteProfile()
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]    
+    member this.EmptyLocationField_CreatesPersonalProfile() =
+        setup user_jack
+        createPersonProfile {defaultProfile with Location = None}
+        deleteProfile()
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    [<TestCase("Me only",0)>]
+    [<TestCase("Public",1)>]
+    [<TestCase("Friends",2)>]
+    member this.ValidVisibleToField_CreatesPersonalProfile visibleTo index =
+        let user = [user_rob; user_dave; user_tom].[index]
+        setup user  
+        createPersonProfile {defaultProfile with VisibleTo = Some visibleTo}
+        deleteProfile()
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    [<TestCase("Me only",0)>]
+    [<TestCase("Public",1)>]
+    [<TestCase("Friends",2)>]
+    member this.ValidWhoCanPostField_CreatesPersonalProfile whoCanPost index =
+        let user = [user_andy; user_ivan; user_luck].[index]
+        setup user  
+        createPersonProfile {defaultProfile with WhoCanPost = Some whoCanPost}
+        deleteProfile()
+    
+
+       
+   
