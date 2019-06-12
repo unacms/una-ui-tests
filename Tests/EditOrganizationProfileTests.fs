@@ -91,7 +91,7 @@ type EditOrganizationProfile () =
     [<TestCase("Secret", 4)>]
     
 
-    member this.ChangingOrganizationVisibleTo_VisibleToGetsUpdatedtoMeOnly visibleTo index = 
+    member this.ChangingOrganizationVisibleTo_VisibleToGetsUpdated visibleTo index = 
     // [<Test>]
     // member this.ChangingOrganizationVisibleTo_VisibleToGetsUpdated() =
     //     let visibleTo="Public"

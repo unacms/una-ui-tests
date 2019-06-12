@@ -7,6 +7,7 @@ open Header
 open AccountPopup
 open TestHelpers
 open TestTypes
+open CreateNewProfilePerson
 
 
 
@@ -25,6 +26,19 @@ let _reportButton = css "a[id^=bx-report-do-link-bx-persons]"
 let _reportType = css "#bx-form-element-type select[name='type']"
 let _postReportButton = css "#bx-form-element-submit button[type='submit']"
 let _reportCounter = css ".bx-report-counter-holder a"
+let _editPersonalProfileButton = css ".bx-menu-item-edit-persons-profile a.bx-btn"
+let _editPersonalProfileGender = css "select[name='gender']"
+let _editPersonalProfileSubmitButton = css "button[type='submit']"
+let _genderInfo = xpath "//div[contains(concat(' ',@class,' '),' bx-form-row-view-wrapper ') and ./div[contains(concat(' ',@class,' '),' bx-form-row-view-caption ') and text()='Gender:']]//div[contains(concat(' ',@class,' '),' bx-form-row-view-value ' )]"
+let _editPersonalProfileFullName = css "input[name='fullname']"
+let _fullNameInfo = xpath "//div[contains(concat(' ',@class,' '),' bx-form-row-view-wrapper ') and ./div[contains(concat(' ',@class,' '),' bx-form-row-view-caption ') and text()='Full Name:']]//div[contains(concat(' ',@class,' '),' bx-form-row-view-value ' )]"
+let _editPersonalProfileFullNameError = css "#bx-form-element-fullname .bx-form-warn"
+let _editPersonalProfileSubmitButtonError = css "#bx-form-element-do_submit .bx-form-warn" 
+let _editPersonalProfileLocation = css "input[name='location']"
+let _editPersonalProfileVisibleTo = css "select[name='allow_view_to']"
+let _editPersonalProfileWhoCanPost = css "select[name='allow_post_to']"
+let _editPersonalProfileBirthday = css "input[name='birthday']"
+let _editPersonalProfileBirthdayError = css "#bx-form-element-birthday .bx-form-warn"
 
 let readReportCounter () =
     let sc = read _reportCounter
@@ -62,3 +76,9 @@ let rec deleteAllProfiles credentials =
         click _checkboxButton
         click _deleteProfileSubmitButton
         deleteAllProfiles credentials
+
+let startEditPersonalProfile() = 
+    clickMoreButton()
+    click _editPersonalProfileButton
+
+let editPersonalProfileBirthday = Option.map (fun (dob:DateTime) -> dob.ToString("yyyy-MM-dd")) 
