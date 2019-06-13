@@ -82,3 +82,7 @@ let startEditPersonalProfile() =
     click _editPersonalProfileButton
 
 let editPersonalProfileBirthday = Option.map (fun (dob:DateTime) -> dob.ToString("yyyy-MM-dd")) 
+
+let setLocation locationPrefix locationSuffix =
+    _editPersonalProfileLocation << locationPrefix
+    click (xpath (sprintf "//div[contains(concat(' ',@class,' '),' pac-container ')]/div[.//span[text()='%s']]" locationSuffix))

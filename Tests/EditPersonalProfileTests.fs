@@ -43,7 +43,7 @@ type CreateNewPersonalProfileTests () =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
-       member this.EmtyPersonalGenderField_GenderFieldGetsUpdated() = 
+    member this.EmtyPersonalGenderField_GenderFieldGetsUpdated() = 
         setup user_eva
         createPersonProfile defaultProfile
         startEditPersonalProfile ()
@@ -56,7 +56,7 @@ type CreateNewPersonalProfileTests () =
     [<UseDriver>]
     [<Test>]
     [<Category("Negative")>]
-       member this.EmtyPersonalFullNameField_ShowsErrorMessage() = 
+    member this.EmtyPersonalFullNameField_ShowsErrorMessage() = 
         setup user_linda
         createPersonProfile defaultProfile 
         startEditPersonalProfile ()
@@ -69,7 +69,7 @@ type CreateNewPersonalProfileTests () =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
-       member this.ChangingPersonalFullNameField_FullNameGetsUpdate() = 
+    member this.ChangingPersonalFullNameField_FullNameGetsUpdate() = 
         setup user_emma
         createPersonProfile defaultProfile 
         startEditPersonalProfile ()
@@ -81,11 +81,11 @@ type CreateNewPersonalProfileTests () =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
-       member this.ChangingPersonalLocationField_LocationFieldGetsUpdate() = 
+    member this.ChangingPersonalLocationField_LocationFieldGetsUpdate() = 
         setup user_karen
         createPersonProfile defaultProfile 
         startEditPersonalProfile ()
-        _editPersonalProfileLocation << "Australia"
+        setLocation "Austr" "alia"
         click _editPersonalProfileSubmitButton
         startEditPersonalProfile ()
         _editPersonalProfileLocation == "Australia"
