@@ -1,11 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
-
-  <ItemGroup>    
+  <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="TestHelpers.fs" />
     <Compile Include="TestTypes.fs" />
@@ -17,25 +14,21 @@
     <Compile Include="Components/Signup.fs" />
     <Compile Include="Components/Login.fs" />
     <Compile Include="Components/PostToFeed.fs" />
-    <Compile Include="Components/CreateNewProfilePerson.fs" />   
+    <Compile Include="Components/CreateNewProfilePerson.fs" />
     <Compile Include="Components/CreateNewProfileOrganization.fs" />
-    <Compile Include="Components/AccountPopup.fs" />    
-    <Compile Include="Components/ProfileToolbar.fs" /> 
-    <Compile Include="Components/OrganizationProfileToolbar.fs" />  
+    <Compile Include="Components/AccountPopup.fs" />
+    <Compile Include="Components/ProfileToolbar.fs" />
+    <Compile Include="Components/OrganizationProfileToolbar.fs" />
     <Compile Include="Tests/TestsSetup.fs" />
     <Compile Include="Tests/SignupTests.fs" />
     <Compile Include="Tests/PostToFeedTests.fs" />
     <Compile Include="Tests/LoginTests.fs" />
-    <Compile Include="Tests/CreateNewProfilePersonTests.fs" />                      
+    <Compile Include="Tests/CreateNewProfilePersonTests.fs" />
     <Compile Include="Tests/CreateNewProfileOrganizationTests.fs" />
     <Compile Include="Tests/ProfileToolbarTests.fs" />
     <Compile Include="Tests/EditOrganizationProfileTests.fs" />
-    <Compile Include="Program.fs" />    
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="VCanopy">
-        <HintPath>Dependencies\VCanopy.dll</HintPath>
-    </Reference>
+    <Compile Include="Tests/EditPersonalProfileTests.fs" />
+    <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="canopy" Version="2.1.0" />
@@ -43,6 +36,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <Reference Include="VCanopy">
+      <HintPath>Dependencies\VCanopy.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
-

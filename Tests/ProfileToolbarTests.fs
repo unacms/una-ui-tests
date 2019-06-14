@@ -29,7 +29,7 @@ type ProfileToolbarTests () =
         deleteAllProfiles credentials
         let femaleProfile = {defaultProfile with FullName = Some "Natalia"}
         createPersonProfileWithAccessibilityTesting femaleProfile 
-        let maleProfile = {defaultProfile with Gender = "Man"; FullName = Some "Valentin"}
+        let maleProfile = {defaultProfile with Gender = Some "Man"; FullName = Some "Valentin"}
         createPersonProfileWithAccessibilityTesting maleProfile
    
 
@@ -49,7 +49,7 @@ type ProfileToolbarTests () =
 
     [<UseDriver>]
     [<Test>]    
-    member this. ``Switch profile, raise a report and check that a proper number of report(s) is raised``()=
+    member this.SwithProfileRaisReport_ProperNumberOfReportPaised()=
         let user = user_luck
         setup user
         switchProfile "Natalia"

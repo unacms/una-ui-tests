@@ -17,7 +17,7 @@ type LoginTests () =
     [<UseDriver>]
     [<Test>]  
     [<Category("Positive")>]  
-    member this.``Smoke Login test and check name with spaces`` ()=
+    member this.LoginNewUser_CreatesNewUser()=
         let user = user_luck
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
         goto Pages.Login.uri
@@ -61,7 +61,7 @@ type LoginTests () =
     [<Test>] 
     [<Category("Negative")>]
 
-    member this.``Login test with empty email field`` ()=
+    member this.EmptyEmailField_ShowsErrorMessage()=
         
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
         goto Pages.Login.uri
@@ -90,7 +90,7 @@ type LoginTests () =
     [<TestCase("a.@com")>] 
     [<Category("Negative")>]
 
-    member this.LoginTestWithIncorrectEmailAddress email =
+    member this.IncorrectEmailAddress_ShowsErrorMessage email =
         goto Pages.Login.uri
         _email << email
         _password << "unaUna123"
@@ -105,7 +105,7 @@ type LoginTests () =
     [<TestCase("1234",1)>] 
     [<TestCase("qwerty",2)>] 
     [<Category("Negative")>]
-    member this.``Login test with incorrect password field`` password userId=
+    member this.IncorrectPasswordField_ShowsErrorMessage password userId=
         //we can't use same email more than 2 times as it would lock the account
         let user = if (userId = 1) then user_eva else user_linda
         goto Pages.Login.uri
