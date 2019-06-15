@@ -8,8 +8,7 @@ RUN sed -i 's/let browserUrl = /let browserUrl = "http:\/\/hub:4444\/wd\/hub\/" 
     sed -i 's/setDriverFactory /setDriverFactory createRemoteDriver \/\/ /g' tests/Tests/TestsSetup.fs 
    
 
-
 VOLUME /tests/TestResults
 
-#ENTRYPOINT ["dotnet", "test","--logger","trx;LogFileName=result.trx","/tests/una-ui-tests.fsproj","--filter","LoginTests"]
-ENTRYPOINT ["dotnet", "test","--logger","trx;LogFileName=result.trx","/tests/una-ui-tests.fsproj"]
+ENTRYPOINT ["dotnet", "test","--logger","trx;LogFileName=result.trx","/tests/una-ui-tests.fsproj","--filter"]
+CMD ["Name!=NotExistingTestNameToRunAllTests"]
