@@ -3,13 +3,13 @@ namespace Tests.CreateNewProfileOrganizationTests
 open NUnit.Framework
 
 
-open VCanopy.GivenWhenThen
 open VCanopy.Functions
 open VCanopy.NUnit
 
 open Common
 open CreateNewProfileOrganization
 open OrganizationProfileToolbar
+
 
 
 [<Parallelizable(ParallelScope.Children)>]
@@ -39,7 +39,7 @@ type CreateNewOrganizationProfile () =
         createOrganizationProfile {defaultProfileOrganization with OrganizationName = None}
         _organizationNameError == "This information is essential. Please, fill in this field."
         _submitButtonError == "Incorrect info. Please, check your inputs and try to submit again."
-
+       
     [<UseDriver>]
     [<Test>]
     [<Category("Negative")>]
@@ -52,9 +52,9 @@ type CreateNewOrganizationProfile () =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
-    member this.OrganizationName50characters_CreatesProfile() =
+    member this.OrganizationName45characters_CreatesProfile() =
         setup user_eva
-        createOrganizationProfile {defaultProfileOrganization with OrganizationName = Some "12345678901234567890123456789012345678901234567890"}
+        createOrganizationProfile {defaultProfileOrganization with OrganizationName = Some "123456789012345678901234567890123456789012345"}
         deleteOrganizationProfile () 
 
     [<UseDriver>]
