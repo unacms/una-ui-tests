@@ -85,7 +85,10 @@ type CreateNewPersonalProfileTests () =
     member this.FullName50characters_CreatesProfile() =
         setup user_karen
         createPersonProfile  {defaultProfile with FullName = Some "12345678901234567890123456789012345678901234567890"}
-        deleteProfile()  
+        click _deleteProfileButton
+        click _checkboxButton
+        click _deleteProfileSubmitButton
+
 
      
     [<UseDriver>]

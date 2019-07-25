@@ -18,14 +18,31 @@ let _deleteAccountWithContentButton = css ".bx-menu-item-delete-persons-account-
 let _checkboxButton = css "input[name='delete_confirm']"
 let _deleteProfileSubmitButton = css "button[type='submit']"
 let _addFriendProfileButton = css ".bx-menu-item-profile-friend-add a.bx-btn"
-//let _addFriendRequestedProfileButton = css ".bx-menu-item-profile-friend-add a.bx-btn"
+let _addFriendProfileButtonInfo = css ".bx-menu-item-profile-friend-add .bx-def-margin-sec-left-auto"
+let _addFriendRequestedProfileButton = css ".bx-menu-item-profile-friend-add a.bx-btn"
+let _addFriendRequestedProfileButtonInfo = css ".bx-menu-item-profile-friend-add .bx-def-margin-sec-left-auto"
 let _cancelFriendRequestProfileButton = css ".bx-menu-item-profile-friend-remove a.bx-btn"
+let _acceptFriendRequestButtonInfo = css ".bx-menu-item-profile-friend-add .bx-def-margin-sec-left-auto"
+let _acceptFriendRequestButton = css ".bx-menu-item-profile-friend-add .bx-btn"
+let _personalProfileFriends = css "#bx-page-persons-profile-friends"
+let _unfriendButtonInfo = css ".bx-menu-item-profile-friend-remove .bx-def-margin-sec-left-auto"
+let _unfriendButton = css ".bx-menu-item-profile-friend-remove a.bx-btn"
+let _addRelationshipButtonInfo = css ".bx-menu-item-profile-relation-add .bx-def-margin-sec-left-auto"
+let _addRelationshipButton = css ".bx-menu-item-profile-relation-add a.bx-btn"
+//let _addRelationshipStatus = xpath "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//div[contains(concat(' ',@class,' '),'bx-def-padding-right ')]//span[text()]"
+let _addRelationshipStatus = xpath "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//div[contains(concat(' ',@class,' '),'bx-def-padding-right ')]"
+//let _relationshipStatusButton = xpath "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//li[contains(concat(' ',@class,' '),'bx-def-round-corners ')]//a"
 let _followProfileButton = css ".bx-menu-item-profile-subscribe-add a.bx-btn"
 let _unfollowProfileButton = css ".bx-menu-item-profile-subscribe-remove a.bx-btn"
+let _followProfileButtonInfo = css ".bx-menu-item-profile-subscribe-add .bx-def-margin-sec-left-auto"
+let _unfollowProfileButtonInfo = css ".bx-menu-item-profile-subscribe-remove .bx-def-margin-sec-left-auto"
 let _reportButton = css "a[id^=bx-report-do-link-bx-persons]"
 let _reportType = css "#bx-form-element-type select[name='type']"
 let _postReportButton = css "#bx-form-element-submit button[type='submit']"
-let _reportCounter = css ".bx-report-counter-holder a"
+let _removeRelationshipInfo = xpath "//li[contains(concat(' ',@class,' '),' bx-menu-item-profile-relation-remove ')]//span[contains(concat(' ',@class,' '),' bx-def-margin-sec-left-auto ') and text()='Remove Relationship']"
+let _removeRelationshipButton = css ".bx-menu-item-profile-relation-remove a.bx-btn"
+//let _reportCounter = css ".bx-report-counter-holder a"
+let _reportCounter = css ".bx-view-counter"
 let _editPersonalProfileButton = css ".bx-menu-item-edit-persons-profile a.bx-btn"
 let _editPersonalProfileGender = css "select[name='gender']"
 let _editPersonalProfileSubmitButton = css "button[type='submit']"
@@ -48,6 +65,7 @@ let readReportCounter () =
 
 let clickMoreButton()=
     scrollTo (css ".bx-base-pofile-cover")
+    Threading.Thread.Sleep 3000
     click _moreButton
     
 /// Delete current active profile
@@ -86,3 +104,8 @@ let editPersonalProfileBirthday = Option.map (fun (dob:DateTime) -> dob.ToString
 let setLocation locationPrefix locationSuffix =
     _editPersonalProfileLocation << locationPrefix
     click (xpath (sprintf "//div[contains(concat(' ',@class,' '),' pac-container ')]/div[.//span[text()='%s']]" locationSuffix))
+
+
+let clickSelectRelationshipStatus relationshipStatus = 
+   let selector = sprintf "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//div[contains(concat(' ',@class,' '),'bx-def-padding-right ')]//span[text()='%s']" relationshipStatus  
+   click (xpath selector)

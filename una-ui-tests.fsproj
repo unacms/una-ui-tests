@@ -19,6 +19,7 @@
     <Compile Include="Components/AccountPopup.fs" />
     <Compile Include="Components/ProfileToolbar.fs" />
     <Compile Include="Components/OrganizationProfileToolbar.fs" />
+    <Compile Include="Components/MainMenubar.fs" />
     <Compile Include="Tests/TestsSetup.fs" />
     <Compile Include="Tests/SignupTests.fs" />
     <Compile Include="Tests/PostToFeedTests.fs" />
@@ -28,6 +29,7 @@
     <Compile Include="Tests/ProfileToolbarTests.fs" />
     <Compile Include="Tests/EditOrganizationProfileTests.fs" />
     <Compile Include="Tests/EditPersonalProfileTests.fs" />
+    <Compile Include="Tests/MainMenuPersonalProfileTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>

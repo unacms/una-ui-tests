@@ -27,11 +27,11 @@ let _postedLinkFrame = css "div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-
 //unfortunately it is not easy using normal selenium way to insert a text into that control.
 //devs said to do this way.
 let insertPostMessage message = 
-    js (sprintf "$('textarea[id^=\"bx-timeline-textarea\"').froalaEditor('html.set','<p>%s</p>')" message) |> ignore
+    js (sprintf "$('textarea[id^=\"bx-timeline-textarea\"').data('froala-instance').html.set('<p>%s</p>')" message) |> ignore
 
 let postMessageAndVerify messageToPost = 
     insertPostMessage messageToPost
-    click _postButton
+    click _postButton 
     _postedMessage == messageToPost
 
 let clickEmojiButton emojiButton = 

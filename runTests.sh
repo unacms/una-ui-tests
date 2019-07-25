@@ -25,3 +25,16 @@ fi
 # ToDo make proper clean up as this doesn't clean completely. 
 # This also `docker image prune -f -a` doesn't clean, so it might be better to walk through the list `docker image ls` and clean everything except microsoft/dotnet:2.2-sdk & selenium/standalone-chrome
 docker image prune -f
+
+# dotnet test --filter CreateNewOrganizationProfile
+# dotnet test --filter CreateNewPersonalProfileTests
+# dotnet test --filter EditOrganizationProfile
+# dotnet test --filter EditPersonalProfileTests
+# dotnet test --filter LoginTests
+# dotnet test --filter MainMenuPersonalProfileTests
+# dotnet test --filter PostToFeedTests
+# dotnet test --filter ProfileToolbarTests
+# dotnet test --filter
+# dotnet test --filter
+# dotnet test --filter
+# dotnet test --filter

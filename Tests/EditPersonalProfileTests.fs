@@ -16,7 +16,7 @@ open CreateNewProfilePerson
 open CreateNewProfileOrganization
 
 [<Parallelizable(ParallelScope.Children)>]
-type CreateNewPersonalProfileTests () =
+type EditPersonalProfileTests () =
 
     let setup credentials= 
         Login.userLogin credentials
