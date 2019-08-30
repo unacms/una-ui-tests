@@ -109,3 +109,5 @@ let setLocation locationPrefix locationSuffix =
 let clickSelectRelationshipStatus relationshipStatus = 
    let selector = sprintf "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//div[contains(concat(' ',@class,' '),'bx-def-padding-right ')]//span[text()='%s']" relationshipStatus  
    click (xpath selector)
+
+//let profileName = sprintf "%s _Natalia" oriented object name

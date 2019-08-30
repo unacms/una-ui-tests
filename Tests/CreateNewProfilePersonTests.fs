@@ -43,7 +43,7 @@ type CreateNewPersonalProfileTests () =
     [<Test>]
     [<Category("Negative")>]
     member this.YangerThan18YO_ShowsAgeError() =
-        setup user_eva 
+        setup user_eva
         createPersonProfile {defaultProfile with Birthday = Some (DateTime.Now.AddYears(-18).AddDays(1.0))}
         _birthdayError == "Your age should be in the range of 18 to 99 years"
     

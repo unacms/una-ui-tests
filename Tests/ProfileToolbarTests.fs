@@ -20,19 +20,35 @@ open AccountPopup
 [<Parallelizable(ParallelScope.Children)>]
 
 type ProfileToolbarTests () =
-     
+
+    let mutable userCredential = user_luck
+
+    let fullProfileName name =
+        sprintf "%s-%s" userCredential.userName name
+
+    let toFullProfileName profile=
+        match profile.FullName with
+        | Some name -> {profile with FullName = Some (fullProfileName name)}
+        | None -> profile
+
 
     let setup credentials= 
+        userCredential <- credentials
         Login.userLogin credentials
 
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
         deleteAllProfiles credentials
-        let femaleProfile = {defaultProfile with FullName = Some "Natalia"}
+        let femaleProfile = {defaultProfile with FullName = Some "Natalia"} |> toFullProfileName
+        //let femaleProfile = {defaultProfile with FullName = Some (fullProfileName "Natalia")} 
         createPersonProfileWithAccessibilityTesting femaleProfile 
-        let maleProfile = {defaultProfile with Gender = Some "Man"; FullName = Some "Valentin"}
+        let maleProfile = {defaultProfile with Gender = Some "Man"; FullName = Some "Valentin"} |> toFullProfileName
         createPersonProfileWithAccessibilityTesting maleProfile
-   
+    
+    let switchProfile profileName=
+        let fullProfileName = fullProfileName profileName
+        AccountPopup.switchProfile fullProfileName
+    
 
     [<TearDown>]
     member this.TearDown()=
