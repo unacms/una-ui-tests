@@ -14,6 +14,8 @@ type TestsSetup () =
 
     let createChromeDriver():IWebDriver = 
         let driver = new ChromeDriver("/usr/bin")
+        driver.Manage().Window.Size <- System.Drawing.Size(1050,1000)        
+        printfn "BrowserSize %A" (driver.Manage().Window.Size)
         driver.Manage().Timeouts().AsynchronousJavaScript <- TimeSpan.FromMinutes(1.0)
         upcast driver
 
@@ -23,7 +25,11 @@ type TestsSetup () =
 
         let capability = OpenQA.Selenium.Remote.DesiredCapabilities()
         capability.SetCapability("browserName", browserName) 
-        upcast new RemoteWebDriver(Uri(browserUrl), capability, TimeSpan.FromMinutes(3.0))
+
+        let driver = new RemoteWebDriver(Uri(browserUrl), capability, TimeSpan.FromMinutes(3.0))
+        printfn "BrowserSize %A" (driver.Manage().Window.Size)
+
+        upcast driver
 
     [<OneTimeSetUp>]    
     member this.GlobalSetup () = 

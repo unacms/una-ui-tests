@@ -8,6 +8,7 @@ open AccountPopup
 open TestHelpers
 open TestTypes
 open CreateNewProfilePerson
+open CanopyExtensions
 
 
 
@@ -29,8 +30,6 @@ let _unfriendButtonInfo = css ".bx-menu-item-profile-friend-remove .bx-def-margi
 let _unfriendButton = css ".bx-menu-item-profile-friend-remove a.bx-btn"
 let _addRelationshipButtonInfo = css ".bx-menu-item-profile-relation-add .bx-def-margin-sec-left-auto"
 let _addRelationshipButton = css ".bx-menu-item-profile-relation-add a.bx-btn"
-//let _addRelationshipStatus = xpath "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//div[contains(concat(' ',@class,' '),'bx-def-padding-right ')]//span[text()]"
-let _addRelationshipStatus = xpath "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//div[contains(concat(' ',@class,' '),'bx-def-padding-right ')]"
 //let _relationshipStatusButton = xpath "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//li[contains(concat(' ',@class,' '),'bx-def-round-corners ')]//a"
 let _followProfileButton = css ".bx-menu-item-profile-subscribe-add a.bx-btn"
 let _unfollowProfileButton = css ".bx-menu-item-profile-subscribe-remove a.bx-btn"
@@ -69,34 +68,46 @@ let clickMoreButton()=
     click _moreButton
     
 /// Delete current active profile
-let deleteProfile() = 
-    clickMoreButton()
+let deleteProfile() =
+    if (not (isDisplayed _deleteProfileButton)) then
+        clickMoreButton()
     click _deleteProfileButton
     click _checkboxButton
     click _deleteProfileSubmitButton
+
+
 
 
 //Helpers for debugging
 
 ///the method fails for some reason as it can't press any(_currentUserProfileButton,_profileButton) of the profile buttons.
 let rec deleteAllProfiles credentials =
-    let currentProfileName = Header.currentProfileName()
-    if (credentials.userName <> currentProfileName) then                    
+    let mutable currentProfileName = Header.currentProfileName()
+    if (not (currentProfileName.StartsWith(credentials.userName+"-"))) then
+        openAccountMenu()
+        let profileNameSelector = xpath <| sprintf "(//a[contains(concat(' ',@class,' '),' bx-def-unit-info-title ') and contains(text(),'%s-')])[1]" credentials.userName
+        let profileName = readUnstable profileNameSelector
+        match profileName with
+        | Some pn -> switchProfile pn
+        | None -> ()
+            
+
+    //example if currentProfileName = "ella-Valentin" and credentials.userName="ella", then we need to delete "ella-Valentin" profile
+    //minus added below to avoid deleting itself    
+    currentProfileName <- Header.currentProfileName()
+    if (currentProfileName.StartsWith(credentials.userName+"-")) then                    
         retry 3 (fun _ ->
-            hover _accountButton
-            click _accountButton
+            openAccountMenu()
             hover _profileButton
             click _profileButton
             )
 
-        clickMoreButton()
-        click _deleteProfileButton
-        click _checkboxButton
-        click _deleteProfileSubmitButton
+        deleteProfile()
         deleteAllProfiles credentials
 
 let startEditPersonalProfile() = 
-    clickMoreButton()
+    if (not (isDisplayed _editPersonalProfileButton)) then
+        clickMoreButton()
     click _editPersonalProfileButton
 
 let editPersonalProfileBirthday = Option.map (fun (dob:DateTime) -> dob.ToString("yyyy-MM-dd")) 
@@ -107,7 +118,5 @@ let setLocation locationPrefix locationSuffix =
 
 
 let clickSelectRelationshipStatus relationshipStatus = 
-   let selector = sprintf "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//div[contains(concat(' ',@class,' '),'bx-def-padding-right ')]//span[text()='%s']" relationshipStatus  
+   let selector = sprintf "//ul[contains(concat(' ',@class,' '),' bx-menu-object-sys_add_relation ')]//span[text()='%s']" relationshipStatus  
    click (xpath selector)
-
-//let profileName = sprintf "%s _Natalia" oriented object name

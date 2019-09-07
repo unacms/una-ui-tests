@@ -5,6 +5,7 @@ open Header
 open System
 open CanopyExtensions
 open Audit
+open AccountPopup
 
 
 let _createAnewProfile = css ".bx-menu-account-popup-profile-switcher-link a"
@@ -29,7 +30,7 @@ let defaultProfileOrganization = {
 }
 
 let createOrganizationProfileEx profile runAccessibilityTests = 
-    click _accountButton
+    openAccountMenu()
     click _createAnewProfile
     if runAccessibilityTests then createAndWriteAccessibilityReport "AccessibilityReport-CreateOrganizationProfile"
     click  _organizationButton

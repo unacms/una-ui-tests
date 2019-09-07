@@ -1,6 +1,7 @@
 module CanopyExtensions
 
 open VCanopy.Functions
+open VCanopy.Types
 open OpenQA.Selenium
 open System
 
@@ -76,7 +77,28 @@ let defaultIf action defaultValue =
 let ( <<< ) element text = 
     match text with
     | Some t -> write t element
-    | _ -> ()    
+    | _ -> () 
+
+let isDisplayed element=    
+    let displayed =
+        try
+            throwIfElementDisplayed element
+            false
+        with
+            | :? VCanopyException as ex ->  
+                true
+    displayed
+
+//ToDo fix in the framework. Reads immediately without waiting
+let readUnstable element=    
+    let result =
+        try
+            readUnstable element "" |> Some            
+        with
+            | :? VCanopyException as ex ->  
+                None
+    result
+
         
 
   

@@ -5,6 +5,7 @@ open TestTypes
 open CanopyExtensions
 open Header
 open VCanopy.NUnit
+open AccountPopup
 
 
 let _email = css "input[name='ID']"
@@ -33,5 +34,5 @@ let userLogin userCredentials =
     printfn "logged in using %A" userCredentials
 
 let userLogout() = 
-    click _accountButton
+    openAccountMenu()
     click _accountLogout    

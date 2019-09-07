@@ -19,18 +19,14 @@ open AccountPopup
 
 [<Parallelizable(ParallelScope.Children)>]
 
-type ProfileToolbarTests () =
+type ProfileToolbarTests1 () =
 
     let mutable userCredential = user_luck
+    let mutable profileNatalia = defaultProfile
+    let mutable profileValentin = defaultProfile
 
     let fullProfileName name =
         sprintf "%s-%s" userCredential.userName name
-
-    let toFullProfileName profile=
-        match profile.FullName with
-        | Some name -> {profile with FullName = Some (fullProfileName name)}
-        | None -> profile
-
 
     let setup credentials= 
         userCredential <- credentials
@@ -39,24 +35,25 @@ type ProfileToolbarTests () =
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
         deleteAllProfiles credentials
-        let femaleProfile = {defaultProfile with FullName = Some "Natalia"} |> toFullProfileName
-        //let femaleProfile = {defaultProfile with FullName = Some (fullProfileName "Natalia")} 
-        createPersonProfileWithAccessibilityTesting femaleProfile 
-        let maleProfile = {defaultProfile with Gender = Some "Man"; FullName = Some "Valentin"} |> toFullProfileName
-        createPersonProfileWithAccessibilityTesting maleProfile
+        profileNatalia <- {defaultProfile with FullName = Some (fullProfileName "Natalia")} 
+        createPersonProfileWithAccessibilityTesting profileNatalia 
+        profileValentin <- {defaultProfile with Gender = Some "Man"; FullName = Some "Valentin"}
+        createPersonProfileWithAccessibilityTesting profileValentin
     
-    let switchProfile profileName=
-        let fullProfileName = fullProfileName profileName
-        AccountPopup.switchProfile fullProfileName
-    
+    let switchProfile profile=
+        switchProfile profile.FullName.Value
+
+    let selectProfile profile =         
+        selectProfile profile.FullName.Value
+
 
     [<TearDown>]
     member this.TearDown()=
-        switchProfile "Valentin"
-        selectProfile "Valentin"
+        switchProfile profileValentin
+        selectProfile profileValentin
         deleteProfile()
-        switchProfile "Natalia"
-        selectProfile "Natalia"
+        switchProfile profileNatalia
+        selectProfile profileNatalia
         deleteProfile()
         Login.userLogout()
       
@@ -70,7 +67,7 @@ type ProfileToolbarTests () =
     member this.SwithProfileRaisReport_ProperNumberOfReportPaised()=
         let user = user_luck
         setup user
-        switchProfile "Natalia"
+        switchProfile profileNatalia
         clickMoreButton()
         click _reportButton
         _reportType << "spam"       
@@ -78,8 +75,8 @@ type ProfileToolbarTests () =
         _reportCounter == "1" 
         Login.userLogout()
         Login.userLogin user
-        switchProfile "Natalia"
-        selectProfile "Valentin"
+        switchProfile profileNatalia
+        selectProfile profileValentin
         clickMoreButton()
         click _reportButton
         _reportType << "spam"       
@@ -93,8 +90,8 @@ type ProfileToolbarTests () =
     member this.SwithProfileAddFriend_FriendRequestSent()=
         let user = user_lily
         setup user
-        switchProfile "Natalia"
-        selectProfile "Valentin"
+        switchProfile profileNatalia
+        selectProfile profileValentin
         _addFriendProfileButtonInfo == "Add friend"
         click _addFriendProfileButton
         _addFriendRequestedProfileButtonInfo == "Add friend (requested)"
@@ -106,8 +103,8 @@ type ProfileToolbarTests () =
     member this.SwithProfileAddFriendAndCancel_FriendRequestCanceled()=
         let user = user_eva
         setup user
-        switchProfile "Natalia"
-        selectProfile "Valentin"
+        switchProfile profileNatalia
+        selectProfile profileValentin
         _addFriendProfileButtonInfo == "Add friend"
         click _addFriendProfileButton
         _addFriendRequestedProfileButtonInfo == "Add friend (requested)"
@@ -121,20 +118,20 @@ type ProfileToolbarTests () =
     member this.SwithProfileAddFriend_RequestAccepted()=
         let user = user_linda
         setup user
-        //switchProfile "Valentin"
-        selectProfile "Natalia"
+        //we're already in Valentins profile switchProfile profileValentin
+        selectProfile profileNatalia
         //_addFriendProfileButtonInfo == "Add friend"
         click _addFriendProfileButton
         _addFriendRequestedProfileButtonInfo == "Add friend (requested)"
         Login.userLogout()
         Login.userLogin user
-        switchProfile "Natalia"
-        selectProfile "Valentin"
+        switchProfile profileNatalia
+        selectProfile profileValentin
         _acceptFriendRequestButtonInfo == "Accept friend request"
         click _acceptFriendRequestButton
         _unfriendButtonInfo == "Unfriend" 
         click _personalProfileFriendButton
-        _friendName == "Natalia"
+        _friendName == profileNatalia.FullName.Value
 
     [<UseDriver>]
     [<Category("Positive")>] 
@@ -142,20 +139,20 @@ type ProfileToolbarTests () =
     member this.SwithProfileUnfriend_Unfriended()=
         let user = user_emma
         setup user
-        //switchProfile "Valentin"
-        selectProfile "Natalia"
+        //we're already in Valentins profile switchProfile profileValentin
+        selectProfile profileNatalia
         //_addFriendProfileButtonInfo == "Add friend"
         click _addFriendProfileButton
         _addFriendRequestedProfileButtonInfo == "Add friend (requested)"
         Login.userLogout()
         Login.userLogin user
-        switchProfile "Natalia"
-        selectProfile "Valentin"
+        switchProfile profileNatalia
+        selectProfile profileValentin
         _acceptFriendRequestButtonInfo == "Accept friend request"
         click _acceptFriendRequestButton
         _unfriendButtonInfo == "Unfriend"
         click _personalProfileFriendButton
-        _friendName == "Natalia"
+        _friendName == profileNatalia.FullName.Value
         _unfriendButtonInfo == "Unfriend"   
         click _unfriendButton 
         click _personalProfileFriendButton
@@ -168,8 +165,8 @@ type ProfileToolbarTests () =
     member this.SwithProfileFollow_Followed()=
         let user = user_karen
         setup user
-        switchProfile "Valentin"
-        selectProfile "Natalia"
+        switchProfile profileValentin
+        selectProfile profileNatalia
         _followProfileButtonInfo == "Follow"
         click _followProfileButtonInfo
         _unfollowProfileButtonInfo == "Unfollow" 
@@ -179,8 +176,8 @@ type ProfileToolbarTests () =
     member this.SwithProfileUnfollow_Unfollowed()=
         let user = user_ella
         setup user
-        switchProfile "Valentin"
-        selectProfile "Natalia"
+        switchProfile profileValentin
+        selectProfile profileNatalia
         _followProfileButtonInfo == "Follow"
         click _followProfileButtonInfo
         _unfollowProfileButtonInfo == "Unfollow"  
@@ -193,17 +190,17 @@ type ProfileToolbarTests () =
     member this.SwithProfileFollow_GetsFollowers()=
         let user = user_viky
         setup user
-        selectProfile "Natalia"
+        selectProfile profileNatalia
         _followProfileButtonInfo == "Follow"
         click _followProfileButtonInfo
         _unfollowProfileButtonInfo == "Unfollow"  
         Login.userLogout()
         Login.userLogin user
-        switchProfile "Natalia"
-        selectProfile "Natalia" 
+        switchProfile profileNatalia
+        selectProfile profileNatalia 
         click _personalProfileFollowButton
         scrollTo _followersName
-        _followersName == "Valentin"
+        _followersName == profileValentin.FullName.Value
 
 
     [<UseDriver>]
@@ -211,42 +208,56 @@ type ProfileToolbarTests () =
     member this.SwithProfileFollow_GetsFollowing()=
         let user = user_mila
         setup user
-        selectProfile "Natalia"
+        selectProfile profileNatalia
         _followProfileButtonInfo == "Follow"
         click _followProfileButtonInfo
         _unfollowProfileButtonInfo == "Unfollow"  
         Login.userLogout()
         Login.userLogin user
-        switchProfile "Valentin"
-        selectProfile "Valentin" 
+        switchProfile profileValentin
+        selectProfile profileValentin 
         click _personalProfileFollowButton
-        _followingName == "Natalia"
+        _followingName == profileNatalia.FullName.Value
 
 [<Parallelizable(ParallelScope.Children)>]
-
 type ProfileToolbarTests2 () = 
 
+    let mutable userCredential = user_luck
+    let mutable profileNatalia = defaultProfile
+    let mutable profileValentin = defaultProfile
+
+    let fullProfileName name =
+        sprintf "%s-%s" userCredential.userName name
+
     let setup credentials= 
+        userCredential <- credentials
         Login.userLogin credentials
 
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
         deleteAllProfiles credentials
-        let femaleProfile = {defaultProfile with FullName = Some "Natalia"}
-        createPersonProfileWithAccessibilityTesting femaleProfile 
-        let maleProfile = {defaultProfile with Gender = Some "Man"; FullName = Some "Valentin"}
-        createPersonProfileWithAccessibilityTesting maleProfile
-   
+        profileNatalia <- {defaultProfile with FullName = Some (fullProfileName "Natalia")} 
+        createPersonProfileWithAccessibilityTesting profileNatalia 
+        profileValentin <- {defaultProfile with Gender = Some "Man"; FullName = Some (fullProfileName "Valentin")}
+        createPersonProfileWithAccessibilityTesting profileValentin
+    
+    let switchProfile profile=
+        switchProfile profile.FullName.Value
 
+    let selectProfile profile =         
+        selectProfile profile.FullName.Value
+
+    
     [<TearDown>]
     member this.TearDown()=
-        switchProfile "Valentin"
-        selectProfile "Valentin"
+        switchProfile profileValentin
+        selectProfile profileValentin
         deleteProfile()
-        switchProfile "Natalia"
-        selectProfile "Natalia"
+        switchProfile profileNatalia
+        selectProfile profileNatalia
         deleteProfile()
         Login.userLogout()
+
     [<UseDriver>]
     [<Category("Positive")>] 
     [<TestCase("husband",0)>]
@@ -257,23 +268,23 @@ type ProfileToolbarTests2 () =
     [<TestCase("daughter",5)>]
     [<TestCase("brother",6)>]
     [<TestCase("sister",7)>]
-    member this.SwithProfileAddRelationship_AddedRelation relation index=
+    member this.SwitchProfileAddRelationship_AddedRelation relation index=
         let user = [user_karen; user_ella; user_viky; user_mila; user_eric; user_jack; user_rob; user_dave].[index]
         setup user
-        //switchProfile "Valentin"
-        selectProfile "Natalia"
+        switchProfile profileValentin
+        selectProfile profileNatalia
         _addFriendProfileButtonInfo == "Add friend"
         click _addFriendProfileButton
         _addFriendRequestedProfileButtonInfo == "Add friend (requested)"
         Login.userLogout()
         Login.userLogin user
-        switchProfile "Natalia"
-        selectProfile "Valentin"
+        switchProfile profileNatalia
+        selectProfile profileValentin
         _acceptFriendRequestButtonInfo == "Accept friend request"
         click _acceptFriendRequestButton
         _unfriendButtonInfo == "Unfriend"
         click _personalProfileFriendButton
-        _friendName == "Natalia"
+        _friendName == profileNatalia.FullName.Value
         _addRelationshipButtonInfo == "Add Relationship"
         click _addRelationshipButton
         clickSelectRelationshipStatus relation
@@ -292,23 +303,23 @@ type ProfileToolbarTests2 () =
     [<TestCase("daughter",5)>]
     [<TestCase("brother",6)>]
     [<TestCase("sister",7)>]
-    member this.SwithProfileRemoveRelationship_RemoveRelation relation index=
+    member this.SwitchProfileRemoveRelationship_RemoveRelation relation index=
         let user = [user_tom; user_andy; user_ivan; user_luck; user_lily; user_eva; user_linda; user_emma].[index]
         setup user
-        switchProfile "Valentin"
-        selectProfile "Natalia"
+        switchProfile profileValentin
+        selectProfile profileNatalia
         _addFriendProfileButtonInfo == "Add friend"
         click _addFriendProfileButton
         _addFriendRequestedProfileButtonInfo == "Add friend (requested)"
         Login.userLogout()
         Login.userLogin user
-        switchProfile "Natalia"
-        selectProfile "Valentin"
+        switchProfile profileNatalia
+        selectProfile profileValentin
         _acceptFriendRequestButtonInfo == "Accept friend request"
         click _acceptFriendRequestButton
         _unfriendButtonInfo == "Unfriend"
         click _personalProfileFriendButton
-        _friendName == "Natalia"
+        _friendName == profileNatalia.FullName.Value
         _addRelationshipButtonInfo == "Add Relationship"
         click _addRelationshipButton
         clickSelectRelationshipStatus relation

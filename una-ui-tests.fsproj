@@ -11,12 +11,12 @@
     <Compile Include="CanopyExtensions.fs" />
     <Compile Include="Pages.fs" />
     <Compile Include="Components/Header.fs" />
+    <Compile Include="Components/AccountPopup.fs" />
     <Compile Include="Components/Signup.fs" />
     <Compile Include="Components/Login.fs" />
     <Compile Include="Components/PostToFeed.fs" />
     <Compile Include="Components/CreateNewProfilePerson.fs" />
-    <Compile Include="Components/CreateNewProfileOrganization.fs" />
-    <Compile Include="Components/AccountPopup.fs" />
+    <Compile Include="Components/CreateNewProfileOrganization.fs" />    
     <Compile Include="Components/ProfileToolbar.fs" />
     <Compile Include="Components/OrganizationProfileToolbar.fs" />
     <Compile Include="Components/MainMenubar.fs" />

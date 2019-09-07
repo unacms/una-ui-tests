@@ -17,7 +17,8 @@ let _shoppingCartButton = css ".bx-menu-item-cart a"
 let _conversationButton = css ".bx-menu-item-notifications-convos a"
 let _notificationButton = css ".bx-menu-item-notifications-notifications a"
 let _signOutButton = css ".bx-menu-item-logout a"
-let _closeMenuButton = css "#bx-sliding-menu-account a.bx-sliding-menu-close a"
+let _closeMenuButton = css "#bx-sliding-menu-account .bx-sliding-menu-close"
+
 //let _currentUserProfileButton = css ".bx-menu-account-popup-profile .bx-base-pofile-unit a"
 let _createAnewProfile = css ".bx-menu-account-popup-profile-switcher-link"
 
@@ -36,18 +37,22 @@ let switchAccountButton profileName =
 
 //clicks 'switch' button for switching to a profile. admin user may switch to a user profile
 let clickSwitchAccountButton profileName =
-      click (switchAccountButton profileName) 
-      
+      let swb = switchAccountButton profileName
+      click swb 
+
+let openAccountMenu()=
+    if (not (isDisplayed _closeMenuButton)) then
+        hover _accountButton
+        click _accountButton       
 
 //switch to a profile. admin user may switch to a user profile
 let switchProfile profileName =
       let currentProfileName = Header.currentProfileName()
       if (profileName <> currentProfileName) then
             let switchBtn = switchAccountButton profileName
-            hover _accountButton
-            click _accountButton
+            openAccountMenu()
             clickSwitchAccountButton profileName
 
 let selectProfile profileName = 
-      click _accountButton
+      openAccountMenu()
       clickSelectProfile profileName
