@@ -41,5 +41,6 @@
     <Reference Include="VCanopy">
       <HintPath>Dependencies\VCanopy.dll</HintPath>
     </Reference>
+    <Reference Include="netstandard" />
   </ItemGroup>
 </Project>

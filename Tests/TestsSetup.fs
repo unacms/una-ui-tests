@@ -35,6 +35,7 @@ type TestsSetup () =
     member this.GlobalSetup () = 
         setDriverFactory createChromeDriver
         setConfig {WebDriverInstanceCount = 4; CompleteDriverRelease = true}
+        VCanopy.Configuration.configuration1 <- {VCanopy.Configuration.configuration1 with ClickDelayMs=500}
 
     [<OneTimeTearDown>]   
     member this.GlobalTeardown () = ()

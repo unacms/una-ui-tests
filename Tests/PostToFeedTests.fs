@@ -55,7 +55,6 @@ type PostToFeedTests() =
     [<Category("Positive")>]
     member this.PostHelloDateOnMoment_PostsMessageWithNowDate ()=
         setup user_luck
-        scrollTo _postToFeedHeader
         let now = DateTime.Now.ToString("yyyyMMdd-hhmmss")        
         let messageToPost = sprintf "Hello %s" now
         insertPostMessage messageToPost
@@ -67,7 +66,6 @@ type PostToFeedTests() =
     [<Category("Positive")>]
     member this.ClickAddEmoji_PostsMessageWithEmoji()=
         setup user_lily
-        scrollTo _postToFeedHeader
         clickEmojiButton ":joy:"
         click _addEmojiButton
         click _postButton
@@ -143,7 +141,6 @@ type PostToFeedTests() =
     [<Category("Positive")>]
     member this.PostMessageWithEmojiAndLink_PostsMessageWithEmojiAndLink()=
         setup user_viky
-        scrollTo _postToFeedHeader
         clickEmojiButton ":joy:"
         click _addLinkButton
         _addLinkTextBox << "https://ci.una.io/test/"
@@ -159,7 +156,6 @@ type PostToFeedTests() =
     [<Category("Positive")>]
     member this.AddsEmojiAndDateOnMoment_PostsMessageWithEmojiAndDate()=
         setup user_mila
-        scrollTo _postToFeedHeader
         let now = DateTime.Now.ToString("yyyyMMdd-hhmmss")        
         let messageToPost = sprintf "Hello %s" now
         insertPostMessage messageToPost

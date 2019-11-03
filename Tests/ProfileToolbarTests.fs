@@ -37,7 +37,7 @@ type ProfileToolbarTests1 () =
         deleteAllProfiles credentials
         profileNatalia <- {defaultProfile with FullName = Some (fullProfileName "Natalia")} 
         createPersonProfileWithAccessibilityTesting profileNatalia 
-        profileValentin <- {defaultProfile with Gender = Some "Man"; FullName = Some "Valentin"}
+        profileValentin <- {defaultProfile with Gender = Some "Man"; FullName = Some (fullProfileName "Valentin")}
         createPersonProfileWithAccessibilityTesting profileValentin
     
     let switchProfile profile=
@@ -64,7 +64,7 @@ type ProfileToolbarTests1 () =
     [<UseDriver>]
     [<Category("Positive")>] 
     [<Test>]    
-    member this.SwithProfileRaisReport_ProperNumberOfReportPaised()=
+    member this.SwitchProfileRaiseReport_ProperNumberOfReportRaised()=
         let user = user_luck
         setup user
         switchProfile profileNatalia
@@ -87,7 +87,7 @@ type ProfileToolbarTests1 () =
     [<UseDriver>]
     [<Category("Positive")>] 
     [<Test>]    
-    member this.SwithProfileAddFriend_FriendRequestSent()=
+    member this.SwitchProfileAddFriend_FriendRequestSent()=
         let user = user_lily
         setup user
         switchProfile profileNatalia
@@ -100,7 +100,7 @@ type ProfileToolbarTests1 () =
     [<UseDriver>]
     [<Category("Positive")>] 
     [<Test>]    
-    member this.SwithProfileAddFriendAndCancel_FriendRequestCanceled()=
+    member this.SwitchProfileAddFriendAndCancel_FriendRequestCanceled()=
         let user = user_eva
         setup user
         switchProfile profileNatalia
@@ -115,7 +115,7 @@ type ProfileToolbarTests1 () =
     [<UseDriver>]
     [<Category("Positive")>] 
     [<Test>]    
-    member this.SwithProfileAddFriend_RequestAccepted()=
+    member this.SwitchProfileAddFriend_RequestAccepted()=
         let user = user_linda
         setup user
         //we're already in Valentins profile switchProfile profileValentin
@@ -136,7 +136,7 @@ type ProfileToolbarTests1 () =
     [<UseDriver>]
     [<Category("Positive")>] 
     [<Test>]    
-    member this.SwithProfileUnfriend_Unfriended()=
+    member this.SwitchProfileUnfriend_Unfriended()=
         let user = user_emma
         setup user
         //we're already in Valentins profile switchProfile profileValentin
@@ -162,7 +162,7 @@ type ProfileToolbarTests1 () =
     
     [<UseDriver>]
     [<Test>]    
-    member this.SwithProfileFollow_Followed()=
+    member this.SwitchProfileFollow_Followed()=
         let user = user_karen
         setup user
         switchProfile profileValentin
@@ -173,7 +173,7 @@ type ProfileToolbarTests1 () =
 
     [<UseDriver>]
     [<Test>]    
-    member this.SwithProfileUnfollow_Unfollowed()=
+    member this.SwitchProfileUnfollow_Unfollowed()=
         let user = user_ella
         setup user
         switchProfile profileValentin
@@ -187,7 +187,7 @@ type ProfileToolbarTests1 () =
 
     [<UseDriver>]
     [<Test>]    
-    member this.SwithProfileFollow_GetsFollowers()=
+    member this.SwitchProfileFollow_GetsFollowers()=
         let user = user_viky
         setup user
         selectProfile profileNatalia
@@ -205,7 +205,7 @@ type ProfileToolbarTests1 () =
 
     [<UseDriver>]
     [<Test>]    
-    member this.SwithProfileFollow_GetsFollowing()=
+    member this.SwitchProfileFollow_GetsFollowing()=
         let user = user_mila
         setup user
         selectProfile profileNatalia
@@ -319,6 +319,8 @@ type ProfileToolbarTests2 () =
         click _acceptFriendRequestButton
         _unfriendButtonInfo == "Unfriend"
         click _personalProfileFriendButton
+        let friendName = read _friendName
+        printfn "before check: friendName=%s   profileNatalia.FullName.Value=%s" friendName profileNatalia.FullName.Value
         _friendName == profileNatalia.FullName.Value
         _addRelationshipButtonInfo == "Add Relationship"
         click _addRelationshipButton

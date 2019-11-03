@@ -35,10 +35,9 @@ let postMessageAndVerify messageToPost =
     _postedMessage == messageToPost
 
 let clickEmojiButton emojiButton = 
-    click _addEmojiButton
-    let selector = sprintf ".emoji-items a[title='%s']" emojiButton    
-    waitForElement (css selector)    
-    click (css selector)     
+    let emojiBtnselector = sprintf ".emoji-items a[title='%s']" emojiButton |> css
+    clickUntilDisplayed _addEmojiButton emojiBtnselector
+    click emojiBtnselector     
 
 let addedLinkSectionChild itemNumber childCSS = 
     let section = sprintf "#bx-timeline-attach-link-form_field [id^=bx-timeline-attach-link-item]:nth-child(%i)%s" itemNumber childCSS

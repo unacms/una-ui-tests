@@ -71,8 +71,9 @@ let clickMoreButton()=
 let deleteProfile() =
     if (not (isDisplayed _deleteProfileButton)) then
         clickMoreButton()
-    click _deleteProfileButton
-    click _checkboxButton
+    clickUntilDisplayed _deleteProfileButton _checkboxButton
+    //click _checkboxButton
+    clickUntilDisplayed _checkboxButton _deleteProfileSubmitButton    
     click _deleteProfileSubmitButton
 
 

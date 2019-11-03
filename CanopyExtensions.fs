@@ -79,16 +79,6 @@ let ( <<< ) element text =
     | Some t -> write t element
     | _ -> () 
 
-let isDisplayed element=    
-    let displayed =
-        try
-            throwIfElementDisplayed element
-            false
-        with
-            | :? VCanopyException as ex ->  
-                true
-    displayed
-
 //ToDo fix in the framework. Reads immediately without waiting
 let readUnstable element=    
     let result =

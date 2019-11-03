@@ -41,9 +41,8 @@ let clickSwitchAccountButton profileName =
       click swb 
 
 let openAccountMenu()=
-    if (not (isDisplayed _closeMenuButton)) then
-        hover _accountButton
-        click _accountButton       
+      if (not (isDisplayed _closeMenuButton)) then
+            clickUntilDisplayed _accountButton _closeMenuButton    
 
 //switch to a profile. admin user may switch to a user profile
 let switchProfile profileName =
