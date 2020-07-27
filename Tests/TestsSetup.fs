@@ -13,7 +13,8 @@ open System
 type TestsSetup () =
 
     let createChromeDriver():IWebDriver = 
-        let driver = new ChromeDriver("/usr/bin")
+        //let driver = new ChromeDriver("/usr/bin")
+        let driver = new ChromeDriver()
         driver.Manage().Window.Size <- System.Drawing.Size(1050,1000)        
         printfn "BrowserSize %A" (driver.Manage().Window.Size)
         driver.Manage().Timeouts().AsynchronousJavaScript <- TimeSpan.FromMinutes(1.0)
