@@ -64,6 +64,7 @@ type PostToFeedTests() =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
+    [<Ignore("No Emoji element anymore")>]
     member this.ClickAddEmoji_PostsMessageWithEmoji()=
         setup user_lily
         clickEmojiButton ":joy:"
@@ -139,6 +140,7 @@ type PostToFeedTests() =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
+    [<Ignore("No Emoji element anymore")>]
     member this.PostMessageWithEmojiAndLink_PostsMessageWithEmojiAndLink()=
         setup user_viky
         clickEmojiButton ":joy:"
@@ -154,6 +156,7 @@ type PostToFeedTests() =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
+    [<Ignore("No Emoji element anymore")>]
     member this.AddsEmojiAndDateOnMoment_PostsMessageWithEmojiAndDate()=
         setup user_mila
         let now = DateTime.Now.ToString("yyyyMMdd-hhmmss")        
