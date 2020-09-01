@@ -20,6 +20,10 @@
     <Compile Include="Components/ProfileToolbar.fs" />
     <Compile Include="Components/OrganizationProfileToolbar.fs" />
     <Compile Include="Components/MainMenubar.fs" />
+    <Content Include="Tests\TestFailures\2020-08\27.08.20_ProfileToolbarTests.txt" />
+    <Content Include="Tests\TestFailures\2020-08\26.08.20_ProfileToolbarTests.txt" />
+    <Content Include="Tests\TestFailures\2020-08\11.08.20_ValidWhoCanPostField.txt" />
+    <Content Include="Tests\TestFailures\2020-08\06.08.20_ValidWhoCanPostField..txt" />
     <Compile Include="Tests/TestsSetup.fs" />
     <Compile Include="Tests/SignupTests.fs" />
     <Compile Include="Tests/PostToFeedTests.fs" />

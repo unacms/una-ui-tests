@@ -34,7 +34,7 @@ type ProfileToolbarTests1 () =
 
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
-        deleteAllProfiles credentials
+       //ToDo fix this deleteAllProfiles credentials
         profileNatalia <- {defaultProfile with FullName = Some (fullProfileName "Natalia")} 
         createPersonProfileWithAccessibilityTesting profileNatalia 
         profileValentin <- {defaultProfile with Gender = Some "Man"; FullName = Some (fullProfileName "Valentin")}
@@ -235,7 +235,7 @@ type ProfileToolbarTests2 () =
 
         //while(not System.Diagnostics.Debugger.IsAttached) do System.Threading.Thread.Sleep(500);
 
-        deleteAllProfiles credentials
+        //ToDo fix this deleteAllProfiles credentials
         profileNatalia <- {defaultProfile with FullName = Some (fullProfileName "Natalia")} 
         createPersonProfileWithAccessibilityTesting profileNatalia 
         profileValentin <- {defaultProfile with Gender = Some "Man"; FullName = Some (fullProfileName "Valentin")}
