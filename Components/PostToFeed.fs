@@ -20,7 +20,7 @@ let _addLinkTextBox = css "input[name='url']"
 let _addLinkError = css "#bx-form-element-url .bx-form-warn"
 let _addLinkSubmitButton = css "button[name='do_submit']"
 let _addLinkCloseButton = css "button[name='do_cancel']"
-let _postedMessage = css "div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content p" //"#bx-timeline-main-outline-public div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content p"
+let _postedMessage = css "div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content" //"#bx-timeline-main-outline-public div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content p"
 let _postedLinkFrame = css "div.bx-tl-items div.bx-tl-item:first-of-type .bx-tl-item-content iframe.embedly-card"
 
 
