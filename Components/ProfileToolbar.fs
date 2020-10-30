@@ -19,11 +19,11 @@ let _deleteAccountWithContentButton = css ".bx-menu-item-delete-persons-account-
 let _checkboxButton = css "input[name='delete_confirm']"
 let _deleteProfileSubmitButton = css "button[type='submit']"
 let _addFriendProfileButton = css ".bx-menu-item-profile-friend-add a.bx-btn"
-let _addFriendProfileButtonInfo = css ".bx-menu-item-profile-friend-add .bx-def-margin-sec-left-auto"
-let _addFriendRequestedProfileButton = css ".bx-menu-item-profile-friend-add a.bx-btn"
-let _addFriendRequestedProfileButtonInfo = css ".bx-menu-item-profile-friend-add .bx-def-margin-sec-left-auto"
+let _addFriendProfileButtonInfo = xpath "//li[contains(concat(' ',@class,' '),' bx-menu-item-profile-friend-add ')]//span[contains(concat(' ',@class,' '),' bx-def-margin-sec-left-auto ') and text()='Add friend']"
+//let _addFriendRequestedProfileButton = css ".bx-menu-item-profile-friend-add a.bx-btn"
+let _addFriendRequestedProfileButtonInfo = xpath "//li[contains(concat(' ',@class,' '),' bx-menu-item-profile-friend-add ')]//span[contains(concat(' ',@class,' '),' bx-def-margin-sec-left-auto ') and text()='Add friend (requested)']"
 let _cancelFriendRequestProfileButton = css ".bx-menu-item-profile-friend-remove a.bx-btn"
-let _acceptFriendRequestButtonInfo = css ".bx-menu-item-profile-friend-add .bx-def-margin-sec-left-auto"
+let _acceptFriendRequestButtonInfo = xpath "//li[contains(concat(' ',@class,' '),' bx-menu-item-profile-friend-add ')]//span[contains(concat(' ',@class,' '),' bx-def-margin-sec-left-auto ') and text()='Accept friend request']"
 let _acceptFriendRequestButton = css ".bx-menu-item-profile-friend-add .bx-btn"
 let _personalProfileFriends = css "#bx-page-persons-profile-friends"
 let _unfriendButtonInfo = css ".bx-menu-item-profile-friend-remove .bx-def-margin-sec-left-auto"
@@ -73,8 +73,11 @@ let clickMoreButton()=
     
 /// Delete current active profile
 let deleteProfile() =
-    if (not (isDisplayed _deleteProfileButton)) then
+    //if (not (isDisplayed _deleteProfileButton)) then
+    //    clickMoreButton()
+    while (not (isDisplayed _deleteProfileButton)) do
         clickMoreButton()
+
     clickUntilDisplayed _deleteProfileButton _checkboxButton
     //click _checkboxButton
     clickUntilDisplayed _checkboxButton _deleteProfileSubmitButton    
