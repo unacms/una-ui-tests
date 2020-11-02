@@ -18,12 +18,9 @@ type PostToFeedFrom =
 
 
 [<Parallelizable(ParallelScope.Children)>]
-[<TestFixture("PostToFeedFromAccount")>]
-[<TestFixture("PostToFeedFromProfile")>]
-type PostToFeedTests(postToFeedFrom:string) =
-// // type PostToFeedTests() =
-// //     let postToFeedFrom = "PostToFeedFromAccount"
-// // //    let postToFeedFrom = "PostToFeedFromProfile"
+
+type PostToFeedTests() =
+    let postToFeedFrom = "PostToFeedFromProfile"
 
 
     
@@ -67,10 +64,11 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
+    [<Ignore("No Emoji element anymore")>]
     member this.ClickAddEmoji_PostsMessageWithEmoji()=
         setup user_lily
-        scrollTo _postToFeedHeader
         clickEmojiButton ":joy:"
+        click _addEmojiButton
         click _postButton
         _postedMessage == "😂"
         
@@ -142,9 +140,9 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
+    [<Ignore("No Emoji element anymore")>]
     member this.PostMessageWithEmojiAndLink_PostsMessageWithEmojiAndLink()=
         setup user_viky
-        scrollTo _postToFeedHeader
         clickEmojiButton ":joy:"
         click _addLinkButton
         _addLinkTextBox << "https://ci.una.io/test/"
@@ -158,13 +156,14 @@ type PostToFeedTests(postToFeedFrom:string) =
     [<UseDriver>]
     [<Test>]
     [<Category("Positive")>]
+    [<Ignore("No Emoji element anymore")>]
     member this.AddsEmojiAndDateOnMoment_PostsMessageWithEmojiAndDate()=
         setup user_mila
-        scrollTo _postToFeedHeader
         let now = DateTime.Now.ToString("yyyyMMdd-hhmmss")        
         let messageToPost = sprintf "Hello %s" now
         insertPostMessage messageToPost
         clickEmojiButton ":joy:"
+        click _addEmojiButton
         click _postButton
         // the emoji appears in front just because the cursor was at the beginning
 

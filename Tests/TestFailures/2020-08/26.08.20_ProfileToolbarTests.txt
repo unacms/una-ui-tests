@@ -1,0 +1,201 @@
+﻿ SwitchProfileFollow_Followed
+   Source: ProfileToolbarTests.fs line 166
+   Duration: 10.4 min
+
+  Message: 
+    OpenQA.Selenium.WebDriverException : The HTTP request to the remote WebDriver server for URL http://localhost:60446/session/1ffcf276a7bce1676bb004eff744ff9a/screenshot timed out after 60 seconds.
+      ----> System.Net.WebException : The operation has timed out.
+    TearDown : OpenQA.Selenium.WebDriverException : The HTTP request to the remote WebDriver server for URL http://localhost:60446/session/1ffcf276a7bce1676bb004eff744ff9a/screenshot timed out after 60 seconds.
+      ----> System.Net.WebException : The operation has timed out.
+  Stack Trace: 
+    HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+    HttpCommandExecutor.Execute(Command commandToExecute)
+    DriverServiceCommandExecutor.Execute(Command commandToExecute)
+    RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    RemoteWebDriver.GetScreenshot()
+    Screenshot.takeScreenshot(String directory, String filename) line 36
+    Screenshot.takeScreenshotOnErrorIfRequired(Configuration configuration) line 58
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex) line 72
+    click@226.Invoke(Boolean timedout, Exception ex) line 226
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) line 220
+    Functions.click(Element element) line 226
+    AccountPopup.clickSelectProfile(String profileName) line 31
+    AccountPopup.selectProfile(String profileName) line 57
+    ProfileToolbarTests1.selectProfile(Profile profile) line 47
+    ProfileToolbarTests1.SwitchProfileFollow_Followed() line 169
+    --WebException
+    HttpWebRequest.GetResponse()
+    HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+    --TearDown
+    HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+    HttpCommandExecutor.Execute(Command commandToExecute)
+    DriverServiceCommandExecutor.Execute(Command commandToExecute)
+    RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    RemoteWebDriver.GetScreenshot()
+    Screenshot.takeScreenshot(String directory, String filename) line 36
+    Screenshot.takeScreenshotOnErrorIfRequired(Configuration configuration) line 58
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex) line 72
+    waitForElement@276-1.Invoke(Boolean timedout, Exception ex) line 276
+    Functions.waitForElement(Element element) line 274
+    Header.currentProfileName() line 12
+    AccountPopup.switchProfile(String profileName) line 49
+    ProfileToolbarTests1.switchProfile(Profile profile) line 44
+    ProfileToolbarTests1.TearDown() line 52
+    --WebException
+    HttpWebRequest.GetResponse()
+    HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+
+   Open additional output for this result
+override this.Execute context test id: 0-1086
+Lock was not taken Log from testId: 0-1086 26-120515.551 index:0 ProcessId:1436
+Lock taken Log from testId: 0-1086 26-120812.338 index:1 ProcessId:1436
+BrowserSize {Width=1050, Height=1000}
+about to login using { userEmail = "karen@example.com"
+  userPassword = "unauna"
+  userName = "karen"
+  isAdmin = true }
+logged in using { userEmail = "karen@example.com"
+  userPassword = "unauna"
+  userName = "karen"
+  isAdmin = true }
+ExceptionType:OpenQA.Selenium.WebDriverException, Message:The HTTP request to the remote WebDriver server for URL http://localhost:60446/session/1ffcf276a7bce1676bb004eff744ff9a/element timed out after 60 seconds., StackTrace:
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElement(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElementByXPath(String xpath)
+   at OpenQA.Selenium.By.<>c__DisplayClass19_0.<XPath>b__0(ISearchContext context)
+   at VCanopy.Functions.getWebElement(Element element, IWebDriver webDriver) in C:\work\testingframework\VCanopy\Functions.fs:line 28
+   at VCanopy.Functions.clickEx@220-5.Invoke(Unit unitVar0) in C:\work\testingframework\VCanopy\Functions.fs:line 220
+   at VCanopy.Functions.clickEx@220.Invoke(ElementApplyParams a) in C:\work\testingframework\VCanopy\Functions.fs:line 221
+   at VCanopy.Functions.clickEx@220-3.Invoke(ElementApplyParams args)
+   at VCanopy.Functions.clickEx@220-4.Invoke(Boolean timedout)
+   at VCanopy.Functions.clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) in C:\work\testingframework\VCanopy\Functions.fs:line 220
+InnerException:
+    ExceptionType:System.Net.WebException, Message:The operation has timed out., StackTrace:
+       at System.Net.HttpWebRequest.GetResponse()
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+InnerException:
+NULL
+ExceptionType:OpenQA.Selenium.WebDriverException, Message:The HTTP request to the remote WebDriver server for URL http://localhost:60446/session/1ffcf276a7bce1676bb004eff744ff9a/element timed out after 60 seconds., StackTrace:
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElement(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElementByXPath(String xpath)
+   at OpenQA.Selenium.By.<>c__DisplayClass19_0.<XPath>b__0(ISearchContext context)
+   at VCanopy.Functions.getWebElement(Element element, IWebDriver webDriver) in C:\work\testingframework\VCanopy\Functions.fs:line 28
+   at VCanopy.Functions.clickEx@220-5.Invoke(Unit unitVar0) in C:\work\testingframework\VCanopy\Functions.fs:line 220
+   at VCanopy.Functions.clickEx@220.Invoke(ElementApplyParams a) in C:\work\testingframework\VCanopy\Functions.fs:line 221
+   at VCanopy.Functions.clickEx@220-3.Invoke(ElementApplyParams args)
+   at VCanopy.Functions.clickEx@220-4.Invoke(Boolean timedout)
+   at VCanopy.Functions.clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) in C:\work\testingframework\VCanopy\Functions.fs:line 220
+InnerException:
+    ExceptionType:System.Net.WebException, Message:The operation has timed out., StackTrace:
+       at System.Net.HttpWebRequest.GetResponse()
+   at OpenQA.Selenium.Remote.HttpCommandExe< Truncated >
+
+
+
+
+
+    SwitchProfileUnfriend_Unfriended
+   Source: ProfileToolbarTests.fs line 140
+   Duration: 7.2 min
+
+  Message: 
+    OpenQA.Selenium.WebDriverException : The HTTP request to the remote WebDriver server for URL http://localhost:61183/session/1d4cea447e80d9953c78a7e2d1992905/screenshot timed out after 60 seconds.
+      ----> System.Net.WebException : The operation has timed out.
+    TearDown : OpenQA.Selenium.WebDriverException : The HTTP request to the remote WebDriver server for URL http://localhost:61183/session/1d4cea447e80d9953c78a7e2d1992905/screenshot timed out after 60 seconds.
+      ----> System.Net.WebException : The operation has timed out.
+  Stack Trace: 
+    HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+    HttpCommandExecutor.Execute(Command commandToExecute)
+    DriverServiceCommandExecutor.Execute(Command commandToExecute)
+    RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    RemoteWebDriver.GetScreenshot()
+    Screenshot.takeScreenshot(String directory, String filename) line 36
+    Screenshot.takeScreenshotOnErrorIfRequired(Configuration configuration) line 58
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex) line 72
+    click@226.Invoke(Boolean timedout, Exception ex) line 226
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) line 220
+    Functions.click(Element element) line 226
+    AccountPopup.clickSelectProfile(String profileName) line 31
+    AccountPopup.selectProfile(String profileName) line 57
+    ProfileToolbarTests1.selectProfile(Profile profile) line 47
+    ProfileToolbarTests1.SwitchProfileUnfriend_Unfriended() line 143
+    --WebException
+    HttpWebRequest.GetResponse()
+    HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+    --TearDown
+    HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+    HttpCommandExecutor.Execute(Command commandToExecute)
+    DriverServiceCommandExecutor.Execute(Command commandToExecute)
+    RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    RemoteWebDriver.GetScreenshot()
+    Screenshot.takeScreenshot(String directory, String filename) line 36
+    Screenshot.takeScreenshotOnErrorIfRequired(Configuration configuration) line 58
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex) line 72
+    waitForElement@276-1.Invoke(Boolean timedout, Exception ex) line 276
+    Functions.waitForElement(Element element) line 274
+    Header.currentProfileName() line 12
+    AccountPopup.switchProfile(String profileName) line 49
+    ProfileToolbarTests1.switchProfile(Profile profile) line 44
+    ProfileToolbarTests1.TearDown() line 52
+    --WebException
+    HttpWebRequest.GetResponse()
+    HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+
+   Open additional output for this result
+   override this.Execute context test id: 0-1085
+Lock taken Log from testId: 0-1085 26-121504.538 index:0 ProcessId:1436
+BrowserSize {Width=1050, Height=1000}
+about to login using { userEmail = "emma@example.com"
+  userPassword = "unauna"
+  userName = "emma"
+  isAdmin = true }
+logged in using { userEmail = "emma@example.com"
+  userPassword = "unauna"
+  userName = "emma"
+  isAdmin = true }
+ExceptionType:OpenQA.Selenium.ElementClickInterceptedException, Message:element click intercepted: Element is not clickable at point (937, -19)
+  (Session info: chrome=84.0.4147.135), StackTrace:
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+   at VCanopy.Functions.clickElement(FSharpOption`1 elementWaitTilDisplayed, FSharpOption`1 parent, IWebElement element, ElementApplyParams elementApplyParams) in C:\work\testingframework\VCanopy\Functions.fs:line 202
+   at VCanopy.Functions.clickEx@220.Invoke(ElementApplyParams a) in C:\work\testingframework\VCanopy\Functions.fs:line 223
+   at VCanopy.Functions.clickEx@220-3.Invoke(ElementApplyParams args)
+   at VCanopy.Functions.clickEx@220-4.Invoke(Boolean timedout)
+   at VCanopy.Functions.clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) in C:\work\testingframework\VCanopy\Functions.fs:line 220
+InnerException:
+NULL
+ExceptionType:OpenQA.Selenium.WebDriverException, Message:The HTTP request to the remote WebDriver server for URL http://localhost:61183/session/1d4cea447e80d9953c78a7e2d1992905/element timed out after 60 seconds., StackTrace:
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElement(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElementByXPath(String xpath)
+   at VCanopy.Functions.getWebElement(Element element, IWebDriver webDriver) in C:\work\testingframework\VCanopy\Functions.fs:line 28
+   at VCanopy.Functions.clickEx@220-5.Invoke(Unit unitVar0) in C:\work\testingframework\VCanopy\Functions.fs:line 220
+   at VCanopy.Functions.clickEx@220.Invoke(ElementApplyParams a) in C:\work\testingframework\VCanopy\Functions.fs:line 221
+   at VCanopy.Functions.clickEx@220-3.Invoke(ElementApplyParams args)
+   at VCanopy.Functions.clickEx@220-4.Invoke(Boolean timedout)
+   at VCanopy.Functions.clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) in C:\work\testingframework\VCanopy\Functions.fs:line 220
+InnerException:
+    ExceptionType:System.Net.WebException, Message:The operation has timed out., StackTrace:
+       at System.Net.HttpWebRequest.GetResponse()
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+InnerException:
+NULL
+ExceptionType:OpenQA.Selenium.WebDriverException, Message:The HTTP request to the remote WebDriver server for URL http://localhost:61183/session/1d4cea447e80d9953c78a7e2d1992905/element timed out after 60 seconds., StackTrace:
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.MakeHttpRequest(HttpRequestInfo requestInfo)
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElement(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElementByXPath(String xpath)
+   at VCanopy.F< Truncated >

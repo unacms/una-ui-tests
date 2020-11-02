@@ -12,6 +12,7 @@ let defaultAdmin = {
 
     //to make this work add on local machine into your ~/.bashrc next line
     // export adminexamplepassword=apasswordforadminuser
+    // in windows run setx adminexamplepassword apasswordforadminuser
     userPassword = Environment.GetEnvironmentVariable("adminexamplepassword");
     userName = "admin";
     isAdmin = true

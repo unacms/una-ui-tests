@@ -25,8 +25,7 @@ type LoginTests () =
         _email << user.userEmail
         _password << user.userPassword
         click _loginButton
-        click Header._accountButton
-        click Header._accountLogout
+        userLogout()
 
     [<UseDriver>]
     [<Test>]
@@ -50,8 +49,7 @@ type LoginTests () =
             ()
                                                         ) |>
         AndThen "can logout by pressing `account` button & `sign out` button "    (fun _ ->
-            click Header._accountButton
-            click Header._accountLogout 
+            userLogout() 
 
                                                         ) |>
         Run                                                                

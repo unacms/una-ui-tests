@@ -13,8 +13,18 @@ open System
 type TestsSetup () =
 
     let createChromeDriver():IWebDriver = 
-        let driver = new ChromeDriver("/usr/bin")
-        driver.Manage().Timeouts().AsynchronousJavaScript <- TimeSpan.FromMinutes(1.0)
+        //let driver = new ChromeDriver("/usr/bin")
+        let co = new ChromeOptions()
+        co.AddArgument("no-sandbox")
+        let a = ChromeDriverService.CreateDefaultService()
+
+        let driver = new ChromeDriver(a, co, TimeSpan.FromSeconds(179.))
+        //driver. to do set time out
+        driver.Manage().Window.Size <- System.Drawing.Size(1050,1000)        
+        printfn "BrowserSize %A" (driver.Manage().Window.Size)
+        driver.Manage().Timeouts().AsynchronousJavaScript <- TimeSpan.FromMinutes(3.0)
+        driver.Manage().Timeouts().ImplicitWait <- TimeSpan.FromMinutes(3.0)
+        driver.Manage().Timeouts().PageLoad <- TimeSpan.FromMinutes(3.0)
         upcast driver
 
     let createRemoteDriver():IWebDriver =
@@ -23,12 +33,22 @@ type TestsSetup () =
 
         let capability = OpenQA.Selenium.Remote.DesiredCapabilities()
         capability.SetCapability("browserName", browserName) 
-        upcast new RemoteWebDriver(Uri(browserUrl), capability, TimeSpan.FromMinutes(3.0))
+
+        let driver = new RemoteWebDriver(Uri(browserUrl), capability, TimeSpan.FromMinutes(3.0))
+        printfn "BrowserSize %A" (driver.Manage().Window.Size)
+
+        upcast driver
 
     [<OneTimeSetUp>]    
     member this.GlobalSetup () = 
         setDriverFactory createChromeDriver
         setConfig {WebDriverInstanceCount = 4; CompleteDriverRelease = true}
+        VCanopy.Configuration.configuration1 <- {VCanopy.Configuration.configuration1 with ClickDelayMs=500; SaveScreenshotOnFailure = true
+            
+
+            //; ScreenshotPath=Some "."
+            }
+        //VCanopy.Configuration.configuration1.ScreenshotPath
 
     [<OneTimeTearDown>]   
     member this.GlobalTeardown () = ()

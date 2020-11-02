@@ -5,6 +5,7 @@ open TestTypes
 open CanopyExtensions
 open Header
 open VCanopy.NUnit
+open AccountPopup
 
 
 let _email = css "input[name='ID']"
@@ -27,11 +28,11 @@ let userLogin userCredentials =
     click _loginButton
     waitForElement Header._loggedAccountName // this is just to make sure we're on the profile page & we have logged
 
-    if (userCredentials.isAdmin && homePageTourHidden()<>"1") then
-        click _nextButton
-        click _doneButton
+    // if (userCredentials.isAdmin && homePageTourHidden()<>"1") then
+    //     click _nextButton
+    //     click _doneButton
     printfn "logged in using %A" userCredentials
 
 let userLogout() = 
-    click _accountButton
+    openAccountMenu()
     click _accountLogout    

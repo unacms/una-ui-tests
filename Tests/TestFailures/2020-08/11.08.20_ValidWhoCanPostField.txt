@@ -1,0 +1,120 @@
+﻿ValidWhoCanPostField_CreatesProfile("Employees",3)
+   Source: CreateNewProfileOrganizationTests.fs line 99
+   Duration: 4.8 min
+
+  Message: 
+    VCanopy.Types+VCanopyTimedoutException : Timedout. ScreenshotFileName:Some
+      "Tests.CreateNewProfileOrganizationTests.CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(-Employees-,3)_2020-08-11-120452.909"
+      ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"css selector","selector":"ul.bx-menu-object-sys_add_profile li:nth-child(2) a"}
+      (Session info: chrome=84.0.4147.105)
+  Stack Trace: 
+    Types.raiseVCanopyTimedout[a](FSharpOption`1 screenshotFileName, Exception ex) line 43
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex) line 64
+    click@226.Invoke(Boolean timedout, Exception ex) line 226
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) line 220
+    Functions.click(Element element) line 226
+    CreateNewProfileOrganization.createOrganizationProfileEx(OrganizationProfile profile, Boolean runAccessibilityTests) line 36
+    CreateNewProfileOrganization.createOrganizationProfile(OrganizationProfile profile) line 45
+    CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(String whoCanPost, Int32 index) line 101
+    --NoSuchElementException
+    RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+    RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    RemoteWebDriver.FindElement(String mechanism, String value)
+    Functions.getWebElement(Element element, IWebDriver webDriver) line 28
+    clickEx@220-5.Invoke(Unit unitVar0) line 220
+    clickEx@220.Invoke(ElementApplyParams a) line 221
+    clickEx@220-3.Invoke(ElementApplyParams args)
+    clickEx@220-4.Invoke(Boolean timedout)
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) line 220
+
+override this.Execute context test id: 0-1077
+Lock taken Log from testId: 0-1077 11-120107.414 index:1 ProcessId:8916
+BrowserSize {Width=1050, Height=1000}
+about to login using { userEmail = "tom@example.com"
+  userPassword = "unauna"
+  userName = "tom"
+  isAdmin = true }
+logged in using { userEmail = "tom@example.com"
+  userPassword = "unauna"
+  userName = "tom"
+  isAdmin = true }
+
+
+
+
+
+
+
+ValidWhoCanPostField_CreatesProfile("Friends",2)
+   Source: CreateNewProfileOrganizationTests.fs line 99
+   Duration: 4.8 min
+
+  Message: 
+    VCanopy.Types+VCanopyTimedoutException : Timedout. ScreenshotFileName:Some
+      "Tests.CreateNewProfileOrganizationTests.CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(-Friends-,2)_2020-08-11-120520.316"
+      ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"css selector","selector":"ul.bx-menu-object-sys_add_profile li:nth-child(2) a"}
+      (Session info: chrome=84.0.4147.105)
+  Stack Trace: 
+    Types.raiseVCanopyTimedout[a](FSharpOption`1 screenshotFileName, Exception ex) line 43
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex) line 64
+    click@226.Invoke(Boolean timedout, Exception ex) line 226
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) line 220
+    Functions.click(Element element) line 226
+    CreateNewProfileOrganization.createOrganizationProfileEx(OrganizationProfile profile, Boolean runAccessibilityTests) line 36
+    CreateNewProfileOrganization.createOrganizationProfile(OrganizationProfile profile) line 45
+    CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(String whoCanPost, Int32 index) line 101
+    --NoSuchElementException
+    RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+    RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    RemoteWebDriver.FindElement(String mechanism, String value)
+    Functions.getWebElement(Element element, IWebDriver webDriver) line 28
+    clickEx@220-5.Invoke(Unit unitVar0) line 220
+    clickEx@220.Invoke(ElementApplyParams a) line 221
+    clickEx@220-3.Invoke(ElementApplyParams args)
+    clickEx@220-4.Invoke(Boolean timedout)
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) line 220
+
+   Open additional output for this result
+
+
+
+
+
+
+
+
+ValidWhoCanPostField_CreatesProfile("Me only",0)
+   Source: CreateNewProfileOrganizationTests.fs line 99
+   Duration: 4.7 min
+
+  Message: 
+    VCanopy.Types+VCanopyTimedoutException : Timedout. ScreenshotFileName:Some
+      "Tests.CreateNewProfileOrganizationTests.CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(-Me only-,0)_2020-08-11-120512.202"
+      ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"css selector","selector":"ul.bx-menu-object-sys_add_profile li:nth-child(2) a"}
+      (Session info: chrome=84.0.4147.105)
+  Stack Trace: 
+    Types.raiseVCanopyTimedout[a](FSharpOption`1 screenshotFileName, Exception ex) line 43
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex) line 64
+    click@226.Invoke(Boolean timedout, Exception ex) line 226
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) line 220
+    Functions.click(Element element) line 226
+    CreateNewProfileOrganization.createOrganizationProfileEx(OrganizationProfile profile, Boolean runAccessibilityTests) line 36
+    CreateNewProfileOrganization.createOrganizationProfile(OrganizationProfile profile) line 45
+    CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(String whoCanPost, Int32 index) line 101
+    --NoSuchElementException
+    RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+    RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+    RemoteWebDriver.FindElement(String mechanism, String value)
+    Functions.getWebElement(Element element, IWebDriver webDriver) line 28
+    clickEx@220-5.Invoke(Unit unitVar0) line 220
+    clickEx@220.Invoke(ElementApplyParams a) line 221
+    clickEx@220-3.Invoke(ElementApplyParams args)
+    clickEx@220-4.Invoke(Boolean timedout)
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider) line 220
+
+   Open additional output for this result
+
+
+
+
+

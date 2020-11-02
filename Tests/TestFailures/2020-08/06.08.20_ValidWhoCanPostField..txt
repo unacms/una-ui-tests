@@ -1,0 +1,126 @@
+﻿
+ValidWhoCanPostField_CreatesProfile("Public",1)
+   Source: CreateNewProfileOrganizationTests.fs line 99
+   Duration: 5 min
+
+  Message: 
+    System.IO.IOException : The filename, directory name, or volume label syntax is incorrect. : 'C:\work\una-ui-tests\TestResults\Tests.CreateNewProfileOrganizationTests.CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile("Public",1)_2020-08-06-105503.618.png'
+  Stack Trace: 
+    FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+    FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+    FileStream.ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+    FileStream.ctor(String path, FileMode mode, FileAccess access, FileShare share)
+    File.InternalWriteAllBytes(String path, Byte[] bytes)
+    File.WriteAllBytes(String path, Byte[] bytes)
+    Screenshot.saveScreenshot(String directory, String filename, Byte[] pic)
+    Screenshot.takeScreenshot(String directory, String filename)
+    Screenshot.takeScreenshotOnErrorIfRequired(Configuration configuration)
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex)
+    click@226.Invoke(Boolean timedout, Exception ex)
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider)
+    Functions.click(Element element)
+    CreateNewProfileOrganization.createOrganizationProfileEx(OrganizationProfile profile, Boolean runAccessibilityTests) line 36
+    CreateNewProfileOrganization.createOrganizationProfile(OrganizationProfile profile) line 45
+    CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(String whoCanPost, Int32 index) line 101
+
+   Open additional output for this result
+
+   override this.Execute context test id: 0-1075
+Lock taken Log from testId: 0-1075 06-105044.328 index:0 ProcessId:10380
+BrowserSize {Width=1050, Height=1000}
+about to login using { userEmail = "rob@example.com"
+  userPassword = "unauna"
+  userName = "rob"
+  isAdmin = true }
+logged in using { userEmail = "rob@example.com"
+  userPassword = "unauna"
+  userName = "rob"
+  isAdmin = true }
+
+
+
+
+
+
+
+  ValidWhoCanPostField_CreatesProfile("Friends",2)
+   Source: CreateNewProfileOrganizationTests.fs line 99
+   Duration: 5.5 min
+
+  Message: 
+    System.IO.IOException : The filename, directory name, or volume label syntax is incorrect. : 'C:\work\una-ui-tests\TestResults\Tests.CreateNewProfileOrganizationTests.CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile("Friends",2)_2020-08-06-105515.256.png'
+  Stack Trace: 
+    FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+    FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+    FileStream.ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+    FileStream.ctor(String path, FileMode mode, FileAccess access, FileShare share)
+    File.InternalWriteAllBytes(String path, Byte[] bytes)
+    File.WriteAllBytes(String path, Byte[] bytes)
+    Screenshot.saveScreenshot(String directory, String filename, Byte[] pic)
+    Screenshot.takeScreenshot(String directory, String filename)
+    Screenshot.takeScreenshotOnErrorIfRequired(Configuration configuration)
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex)
+    click@226.Invoke(Boolean timedout, Exception ex)
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider)
+    Functions.click(Element element)
+    CreateNewProfileOrganization.createOrganizationProfileEx(OrganizationProfile profile, Boolean runAccessibilityTests) line 36
+    CreateNewProfileOrganization.createOrganizationProfile(OrganizationProfile profile) line 45
+    CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(String whoCanPost, Int32 index) line 101
+
+   Open additional output for this result
+
+   override this.Execute context test id: 0-1076
+Lock taken Log from testId: 0-1076 06-105044.394 index:2 ProcessId:10380
+BrowserSize {Width=1050, Height=1000}
+about to login using { userEmail = "dave@example.com"
+  userPassword = "unauna"
+  userName = "dave"
+  isAdmin = true }
+logged in using { userEmail = "dave@example.com"
+  userPassword = "unauna"
+  userName = "dave"
+  isAdmin = true }
+
+
+
+
+
+
+
+  ValidWhoCanPostField_CreatesProfile("Employees",3)
+   Source: CreateNewProfileOrganizationTests.fs line 99
+   Duration: 5 min
+
+  Message: 
+    System.IO.IOException : The filename, directory name, or volume label syntax is incorrect. : 'C:\work\una-ui-tests\TestResults\Tests.CreateNewProfileOrganizationTests.CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile("Employees",3)_2020-08-06-105501.017.png'
+  Stack Trace: 
+    FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+    FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+    FileStream.ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+    FileStream.ctor(String path, FileMode mode, FileAccess access, FileShare share)
+    File.InternalWriteAllBytes(String path, Byte[] bytes)
+    File.WriteAllBytes(String path, Byte[] bytes)
+    Screenshot.saveScreenshot(String directory, String filename, Byte[] pic)
+    Screenshot.takeScreenshot(String directory, String filename)
+    Screenshot.takeScreenshotOnErrorIfRequired(Configuration configuration)
+    Types.failIfTimedout[a,b](String reason, a element, Boolean timedout, Exception ex)
+    click@226.Invoke(Boolean timedout, Exception ex)
+    clickEx@220-2.Invoke(FSharpFunc`2 defaultValueProvider)
+    Functions.click(Element element)
+    CreateNewProfileOrganization.createOrganizationProfileEx(OrganizationProfile profile, Boolean runAccessibilityTests) line 36
+    CreateNewProfileOrganization.createOrganizationProfile(OrganizationProfile profile) line 45
+    CreateNewOrganizationProfile.ValidWhoCanPostField_CreatesProfile(String whoCanPost, Int32 index) line 101
+
+   Open additional output for this result
+
+   override this.Execute context test id: 0-1077
+Lock taken Log from testId: 0-1077 06-105044.352 index:1 ProcessId:10380
+BrowserSize {Width=1050, Height=1000}
+about to login using { userEmail = "tom@example.com"
+  userPassword = "unauna"
+  userName = "tom"
+  isAdmin = true }
+logged in using { userEmail = "tom@example.com"
+  userPassword = "unauna"
+  userName = "tom"
+  isAdmin = true }

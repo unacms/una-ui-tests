@@ -43,7 +43,7 @@ type CreateNewPersonalProfileTests () =
     [<Test>]
     [<Category("Negative")>]
     member this.YangerThan18YO_ShowsAgeError() =
-        setup user_eva 
+        setup user_eva
         createPersonProfile {defaultProfile with Birthday = Some (DateTime.Now.AddYears(-18).AddDays(1.0))}
         _birthdayError == "Your age should be in the range of 18 to 99 years"
     
@@ -85,7 +85,10 @@ type CreateNewPersonalProfileTests () =
     member this.FullName50characters_CreatesProfile() =
         setup user_karen
         createPersonProfile  {defaultProfile with FullName = Some "12345678901234567890123456789012345678901234567890"}
-        deleteProfile()  
+        click _deleteProfileButton
+        click _checkboxButton
+        click _deleteProfileSubmitButton
+
 
      
     [<UseDriver>]
