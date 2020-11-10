@@ -42,8 +42,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="84.0.4147.3001" />
-    <Reference Include="VCanopy">
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="86.0.4240.2200" />
+	  <Reference Include="VCanopy">
       <HintPath>Dependencies\VCanopy.dll</HintPath>
     </Reference>
   </ItemGroup>
