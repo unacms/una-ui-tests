@@ -21,3 +21,9 @@ while in fact the images are PNG.
 ```bash
 sudo chown -R $USER TestResults && find ./TestResults -depth -name "*.jpg" -exec sh -c 'mv "$1" "${1%.abc}.png"' _ {} \;
 ```
+
+### Debugging tests with VCanopy source
+
+- Get source of VCanopy 
+- Open `una-ui-tests.fsproj` and in Visual Studio menu in the `Solution Configurations` dropdown select configuration `DebugVCanopySourceYes`.
+- Build solution
