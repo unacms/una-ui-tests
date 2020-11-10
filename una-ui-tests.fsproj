@@ -43,8 +43,13 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="86.0.4240.2200" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(VCANOPYSOURCE)'=='YES'">
+    <ProjectReference Include="..\testingframework\VCanopy\VCanopy.fsproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(VCANOPYSOURCE)'!='YES'">
 	  <Reference Include="VCanopy">
-      <HintPath>Dependencies\VCanopy.dll</HintPath>
-    </Reference>
+        <HintPath>Dependencies\VCanopy.dll</HintPath>
+      </Reference>
   </ItemGroup>
 </Project>
