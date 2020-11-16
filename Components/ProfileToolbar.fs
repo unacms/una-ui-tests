@@ -55,10 +55,12 @@ let _editPersonalProfileVisibleTo = css "select[name='allow_view_to']"
 let _editPersonalProfileWhoCanPost = css "select[name='allow_post_to']"
 let _editPersonalProfileBirthday = css "input[name='birthday']"
 let _editPersonalProfileBirthdayError = css "#bx-form-element-birthday .bx-form-warn"
-let _visibleToSelectedFriendsCancelButton = css "button[name='do_cancel']"
+let _visibleToSelectedSearchCancelButton = css "button[name='do_cancel']"
 let _visibleToSelectedFriendsSubmitButton = css ".sys-privacy-users-select button[type='submit']"
-let _visibleToSelectedFriendsPopUpMenu = css "#sys-privacy-usp-bx-persons-allow-view-to-6 .sys-privacy-users-select-cnt"
-let _visibleToSelectedFriendsSearch = css "#sys-privacy-usp-bx-persons-allow-view-to-6 input[type='text']"
+//let _visibleToSelectedFriendsPopUpMenu = css "#sys-privacy-usp-bx-persons-allow-view-to-6 .sys-privacy-users-select-cnt"
+//let _visibleToSelectedFriendsPopUpMenu = xpath "//div[starts-with(@id, 'sys-privacy-usp-bx-persons-allow-view-to')]//div[contains(concat(' ',@class,' '),'sys-privacy-users-select ')]"
+let _visibleToSelectedSearchMenu = css "#bx-form-element-search .bx-form-caption"
+//let _visibleToSelectedRelationshipsSearchMenu
 
 let readReportCounter () =
     let sc = read _reportCounter

@@ -34,7 +34,7 @@ type TestsSetup () =
         upcast driver
 
     static let createRemoteDriver (testName:string):IWebDriver =
-        let browserUrl = "http://192.168.56.1:4444/wd/hub/" 
+        let browserUrl = "http://172.18.0.2:4444/wd/hub" // "http://192.168.56.1:4444/wd/hub/" 
         let browserName = "chrome"
 
         let capability = OpenQA.Selenium.Remote.DesiredCapabilities()
@@ -46,7 +46,9 @@ type TestsSetup () =
 
     [<OneTimeSetUp>]    
     member this.GlobalSetup () = 
-        setDriverFactory createChromeDriver
+        let useRemoteDriver = false // false for chrome, true for selenium grid
+        let factory = if (useRemoteDriver) then createRemoteDriver else createChromeDriver
+        setDriverFactory factory
         setConfig {WebDriverInstanceCount = 4; CompleteDriverRelease = true}
         VCanopy.Configuration.configuration1 <- {VCanopy.Configuration.configuration1 with ClickDelayMs=500; SaveScreenshotOnFailure = true
             
