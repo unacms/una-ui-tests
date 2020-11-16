@@ -1,6 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release;DebugVCanopySourceYes</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>0</WarningLevel>
+    <VCANOPYSOURCE>NO</VCANOPYSOURCE>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugVCanopySourceYes|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>0</WarningLevel>
+    <VCANOPYSOURCE>YES</VCANOPYSOURCE>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
@@ -42,9 +53,14 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="84.0.4147.3001" />
-    <Reference Include="VCanopy">
-      <HintPath>Dependencies\VCanopy.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="86.0.4240.2200" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(VCANOPYSOURCE)'=='YES'">
+    <ProjectReference Include="..\testingframework\VCanopy\VCanopy.fsproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(VCANOPYSOURCE)'!='YES'">
+	  <Reference Include="VCanopy">
+        <HintPath>Dependencies\VCanopy.dll</HintPath>
+      </Reference>
   </ItemGroup>
 </Project>

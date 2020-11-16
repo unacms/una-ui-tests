@@ -114,6 +114,26 @@ type EditPersonalProfileTests () =
         scrollTo _editPersonalProfileVisibleTo
         _editPersonalProfileVisibleTo == visibleTo  
 
+
+    [<UseDriver>]
+    [<Test>]
+    [<Category("Positive")>]
+    [<TestCase("Selected Friends...", 0)>]
+    [<TestCase("Selected Relationships...", 1)>]
+
+    member this.ChangingPersonalVisibleToSelectedSearch_SelectedSerchPopUpMenuAppiares visibleTo index = 
+        let user = [user_jack; user_karen].[index]
+        setup user
+        createPersonProfile defaultProfile
+        startEditPersonalProfile ()
+        scrollTo _editPersonalProfileVisibleTo
+        _editPersonalProfileVisibleTo << visibleTo
+        assertIsDisplayed _visibleToSelectedSearchMenu
+        click _visibleToSelectedSearchCancelButton
+        
+    
+   
+
     [<UseDriver>]
     [<Category("Positive")>]   
     [<TestCase("Me only", 0)>]

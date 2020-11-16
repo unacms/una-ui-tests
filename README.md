@@ -21,3 +21,45 @@ while in fact the images are PNG.
 ```bash
 sudo chown -R $USER TestResults && find ./TestResults -depth -name "*.jpg" -exec sh -c 'mv "$1" "${1%.abc}.png"' _ {} \;
 ```
+
+### Debugging tests with VCanopy source
+
+- Get source of VCanopy 
+- Open `una-ui-tests.fsproj` and in Visual Studio menu in the `Solution Configurations` dropdown select configuration `DebugVCanopySourceYes`.
+- Build solution
+
+### Running in Zalenium
+
+#### Run on a docker host
+
+```
+    docker pull elgalu/selenium
+    
+    # Pull Zalenium
+    docker pull dosel/zalenium
+    
+    # Run it!
+    docker run --rm -ti --name zalenium -p 4444:4444 \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v /tmp/videos:/home/seluser/videos \
+      --privileged dosel/zalenium start
+```
+
+#### Change `una-ui-tests\Tests\TestsSetup.fs`
+
+replace this `setDriverFactory createChromeDriver` with `setDriverFactory createRemoteDriver`
+update createRemoteDriver to point to proper Zalenium url. Which can be found in the output line like the one below
+
+```
+03:16:18.686 [main] INFO  org.openqa.grid.web.Hub - Clients should connect to http://172.17.0.3:4445/wd/hub
+```
+
+
+
+### powershell chrome stop process
+
+get-process -name ChromeDriver | stop-process
+
+### Run grid only
+
+docker-compose up --scale test=0

@@ -12,36 +12,43 @@ open System
 [<SetUpFixture>]
 type TestsSetup () =
 
-    let createChromeDriver():IWebDriver = 
-        //let driver = new ChromeDriver("/usr/bin")
+    static let setDriverProperties (driver:IWebDriver)=
+        //driver. to do set time out
+        driver.Manage().Window.Size <- System.Drawing.Size(1050,1000)        
+        printfn "BrowserSize %A" (driver.Manage().Window.Size)
+        driver.Manage().Timeouts().AsynchronousJavaScript <- TimeSpan.FromSeconds(54.)
+
+        //Be carefull with ImplicitWait as if you specify value more then ChromeDriver CommandTimeout which was passed to the ChromeDriver constructor
+        //Then tests will fail badly when no element is found. It will look similar like ChromeDriver hangs.
+        driver.Manage().Timeouts().ImplicitWait <- TimeSpan.FromSeconds(11.)
+        driver.Manage().Timeouts().PageLoad <- TimeSpan.FromSeconds(56.)
+
+
+    static let createChromeDriver(testName:string):IWebDriver = 
         let co = new ChromeOptions()
         co.AddArgument("no-sandbox")
         let a = ChromeDriverService.CreateDefaultService()
 
-        let driver = new ChromeDriver(a, co, TimeSpan.FromSeconds(179.))
-        //driver. to do set time out
-        driver.Manage().Window.Size <- System.Drawing.Size(1050,1000)        
-        printfn "BrowserSize %A" (driver.Manage().Window.Size)
-        driver.Manage().Timeouts().AsynchronousJavaScript <- TimeSpan.FromMinutes(3.0)
-        driver.Manage().Timeouts().ImplicitWait <- TimeSpan.FromMinutes(3.0)
-        driver.Manage().Timeouts().PageLoad <- TimeSpan.FromMinutes(3.0)
+        let driver = new ChromeDriver(a, co, TimeSpan.FromSeconds(59.))
+        setDriverProperties driver
         upcast driver
 
-    let createRemoteDriver():IWebDriver =
-        let browserUrl = "" //"http://testbrowser:4444/wd/hub/" 
+    static let createRemoteDriver (testName:string):IWebDriver =
+        let browserUrl = "http://172.18.0.2:4444/wd/hub" // "http://192.168.56.1:4444/wd/hub/" 
         let browserName = "chrome"
 
         let capability = OpenQA.Selenium.Remote.DesiredCapabilities()
         capability.SetCapability("browserName", browserName) 
-
-        let driver = new RemoteWebDriver(Uri(browserUrl), capability, TimeSpan.FromMinutes(3.0))
-        printfn "BrowserSize %A" (driver.Manage().Window.Size)
-
+        capability.SetCapability("name",  testName);
+        let driver = new RemoteWebDriver(Uri(browserUrl), capability, TimeSpan.FromSeconds(59.0))
+        setDriverProperties driver
         upcast driver
 
     [<OneTimeSetUp>]    
     member this.GlobalSetup () = 
-        setDriverFactory createChromeDriver
+        let useRemoteDriver = false // false for chrome, true for selenium grid
+        let factory = if (useRemoteDriver) then createRemoteDriver else createChromeDriver
+        setDriverFactory factory
         setConfig {WebDriverInstanceCount = 4; CompleteDriverRelease = true}
         VCanopy.Configuration.configuration1 <- {VCanopy.Configuration.configuration1 with ClickDelayMs=500; SaveScreenshotOnFailure = true
             
