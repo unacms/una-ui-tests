@@ -17,7 +17,7 @@ open PostToFeed
 open CanopyExtensions
 open AccountPopup
 
-[<Parallelizable(ParallelScope.Children)>]
+[<Parallelizable(ParallelScope.None)>]
 
 type ProfileToolbarTests1 () =
 
@@ -219,7 +219,7 @@ type ProfileToolbarTests1 () =
         click _personalProfileFollowButton
         _followingName == profileNatalia.FullName.Value
 
-[<Parallelizable(ParallelScope.Children)>]
+[<Parallelizable(ParallelScope.None)>]
 type ProfileToolbarTests2 () = 
 
     let mutable userCredential = user_luck

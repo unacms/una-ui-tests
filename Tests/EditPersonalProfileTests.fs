@@ -97,10 +97,8 @@ type EditPersonalProfileTests () =
     [<TestCase("Me only", 0)>]
     [<TestCase("Public", 1)>]
     [<TestCase("Friends", 2)>]
-    //[<TestCase("Selected Friends...", 3)>] to do...
     [<TestCase("Relationships",3)>]
-    //[<TestCase("Selected Relationships...", 5)>] to do...
-    
+       
    
     member this.ChangingPersonalVisibleTo_VisibleToGetsUpdated visibleTo index = 
         let user = [user_ella; user_viky; user_mila; user_eric].[index]
@@ -139,10 +137,8 @@ type EditPersonalProfileTests () =
     [<TestCase("Me only", 0)>]
     [<TestCase("Public", 1)>]
     [<TestCase("Friends", 2)>]
-    //[<TestCase("Selected Friends...", 3)>] to do...
     [<TestCase("Relationships", 3)>]
-    //[<TestCase("Selected Relationships...", 5)>] to do...
-   
+      
    
     member this.ChangingPersonalWhoCanPost_WhoCanPostGetsUpdated whoCanPost index = 
         let user = [user_tom; user_andy; user_ivan; user_luck].[index]
@@ -155,6 +151,25 @@ type EditPersonalProfileTests () =
         startEditPersonalProfile ()
         scrollTo _editPersonalProfileWhoCanPost
         _editPersonalProfileWhoCanPost == whoCanPost 
+
+
+    [<UseDriver>]
+       [<Category("Positive")>]   
+       [<TestCase("Selected Friends...", 0)>] 
+       [<TestCase("Selected Relationships...", 1)>] 
+            
+       member this.ChangingPersonalWhoCanPostSelection_SelectedSerchPopUpMenuAppiares whoCanPost index = 
+           let user = [user_lily; user_eva].[index]
+           setup user
+           createPersonProfile defaultProfile
+           startEditPersonalProfile ()
+           scrollTo _editPersonalProfileWhoCanPost
+           _editPersonalProfileWhoCanPost << whoCanPost
+           assertIsDisplayed _whoCanPostSelectedSearchMenu
+           click _whoCanPostSelectedSearchCancelButton
+
+
+
 
     [<UseDriver>]
     [<Test>]

@@ -60,7 +60,8 @@ let _visibleToSelectedFriendsSubmitButton = css ".sys-privacy-users-select butto
 //let _visibleToSelectedFriendsPopUpMenu = css "#sys-privacy-usp-bx-persons-allow-view-to-6 .sys-privacy-users-select-cnt"
 //let _visibleToSelectedFriendsPopUpMenu = xpath "//div[starts-with(@id, 'sys-privacy-usp-bx-persons-allow-view-to')]//div[contains(concat(' ',@class,' '),'sys-privacy-users-select ')]"
 let _visibleToSelectedSearchMenu = css "#bx-form-element-search .bx-form-caption"
-//let _visibleToSelectedRelationshipsSearchMenu
+let _whoCanPostSelectedSearchMenu = css "#bx-form-element-search .bx-form-caption"
+let _whoCanPostSelectedSearchCancelButton = css "button[name='do_cancel']" 
 
 let readReportCounter () =
     let sc = read _reportCounter
